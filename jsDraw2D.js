@@ -1,7 +1,7 @@
 /**********************************************************************************
 *
 * Project Name:		jsDraw2D (Graphics Library for JavaScript)
-* Version:		Beta 1.1.2 (22-March-2011) (Compressed)
+* Version:		Beta 1.1.2 (22-March-2011) (Uncompressed)
 * Project Homepage:	http://jsdraw2d.jsfiction.com
 * Author:		Sameer Burle
 * Copyright 2009-2012:	jsFiction.com (http://www.jsfiction.com)
@@ -22,4 +22,5013 @@
 *
 ************************************************************************************/
 
-function jsColor(){var c="#000000";switch(arguments.length){case 1:k(arguments[0]);break;case 3:var d=arguments[0];var f=arguments[1];var m=arguments[2];c=j(d,f,m);if(c==false){c="#000000"}break}this.setHex=k;function k(p){if(p.charAt(0)=="#"){c=p}else{if(isNaN(p)){a(p.toLowerCase())}else{c="#"+p}}var o=e(c);if(!o){c="#000000"}}this.getHex=n;function n(){return c}this.setRGB=h;function h(o,q,p){c=j(o,q,p);if(c==false){c="#000000"}}this.getRGB=l;function l(){return e(c)}this.getDarkerShade=b;function b(s){var p,r,q;var o=l();if(!isNaN(s)){p=parseInt(o[0]-s);r=parseInt(o[1]-s);q=parseInt(o[2]-s)}if(p<0){p=0}if(r<0){r=0}if(q<0){q=0}return new jsColor(p,r,q)}this.getLighterShade=g;function g(s){var p,r,q;var o=l();if(!isNaN(s)){p=parseInt(o[0]+s);r=parseInt(o[1]+s);q=parseInt(o[2]+s)}if(p>255){p=255}if(r>255){r=255}if(q>255){q=255}return new jsColor(p,r,q)}this.rgbToHex=j;function j(o,q,p){if(o<0||o>255||q<0||q>255||p<0||p>255){return false}var r=Math.round(p)+256*Math.round(q)+65536*Math.round(o);return"#"+i(r.toString(16),6)}this.hexToRgb=e;function e(r){var o,q,p;if(r.charAt(0)=="#"){r=r.substring(1,7)}o=parseInt(r.substring(0,2),16);q=parseInt(r.substring(2,4),16);p=parseInt(r.substring(4,6),16);if(o<0||o>255||q<0||q>255||p<0||p>255){return false}return new Array(o,q,p)}function a(o){switch(o){case"aqua":c="#00FFFF";break;case"black":c="#000000";break;case"blue":c="#0000FF";break;case"fuchsia":c="#FF00FF";break;case"green":c="#008000";break;case"gray":c="#808080";break;case"lime":c="#00FF00";break;case"maroon":c="#800000";break;case"navy":c="#000080";break;case"olive":c="#808000";break;case"purple":c="#800080";break;case"red":c="#FF0000";break;case"silver":c="#C0C0C0";break;case"teal":c="#008080";break;case"white":c="#FFFFFF";break;case"yellow":c="#FFFF00";break}}function i(q,o){var p=q+"";while(p.length<o){p="0"+p}return p}}function jsFont(d,e,b,c,a){this.family=null;this.weight=null;this.size=null;this.style=null;this.variant=null;if(d&&d!=""){this.family=d}if(e&&e!=""){this.weight=e}if(b&&b!=""){this.size=b}if(c&&c!=""){this.style=c}if(a&&a!=""){this.variant=a}}function jsPen(a,b){this.color=new jsColor();this.width="1px";if(arguments.length>0){this.color=a}if(arguments.length>=2){this.width=b}if(!isNaN(b)){this.width=b+"px"}}function jsPoint(a,b){this.x=0;this.y=0;if(arguments.length==2){this.x=a;this.y=b}}function jsGraphics(k){var L=new jsPoint(0,0);var F=1;var A="default";var m;if(k){m=k}else{m=document.body}var e=null;this.drawLine=G;this.drawRectangle=R;this.fillRectangle=S;this.drawCircle=g;this.drawEllipse=N;this.fillCircle=v;this.fillEllipse=I;this.fillArc=u;this.drawArc=D;this.drawPolyline=O;this.drawPolygon=n;this.fillPolygon=h;this.drawBezier=r;this.drawPolyBezier=Q;this.drawCurve=i;this.drawClosedCurve=j;this.fillClosedCurve=E;this.drawText=a;this.drawImage=f;this.clear=H;this.showGrid=C;this.hideGrid=b;this.setOrigin=z;this.getOrigin=s;this.setScale=w;this.getScale=B;this.setCoordinateSystem=K;this.getCoordinateSystem=P;this.logicalToPhysicalPoint=M;e=document.createElement("div");e.style.left="0px";e.style.top="0px";if(m.clientWidth>0&&m.clientHeight>0){e.style.width=(parseInt(m.clientWidth)-1)+"px";e.style.height=(parseInt(m.clientHeight)-1)+"px"}else{e.style.width="0px";e.style.height="0px"}e.style.zIndex=0;e.style.position="absolute";e.style.display="none";m.appendChild(e);function z(T){L=T}function s(){return L}function w(T){F=T}function B(){return F}function K(T){T=T.toLowerCase();if(T.toLowerCase()!="default"&&T.toLowerCase()!="cartecian"){A="default"}else{A=T}}function P(){return A=name}function M(T){if(A=="cartecian"){return new jsPoint(T.x*F+L.x,L.y-T.y*F)}else{return new jsPoint(T.x*F+L.x,T.y*F+L.y)}}function C(ad,an,ah){if(an==null){an=true}var am,ak,V,T;var W=false;var aj=false;e.innerHTML="";if(!ah){ah=new jsColor(200,200,200)}if(!ad){ad=Math.round(parseInt(e.style.width)/10)}else{ad=ad*F}var U=ah.getHex();if(parseInt(e.style.width)<=0||parseInt(e.style.height)<=0){return}else{e.style.display=""}am=parseInt(e.style.left);ak=parseInt(e.style.left)+parseInt(e.style.width);V=parseInt(e.style.top);T=parseInt(e.style.top)+parseInt(e.style.height);if(L.x-parseInt(e.style.left)<=parseInt(e.style.left)+e.offsetWidth-L.x){W=true}if(L.y-parseInt(e.style.top)<=parseInt(e.style.top)+e.offsetHeight-L.y){aj=true}var ac=new Array();var Y=new jsFont("arial",null,"9px");var X=ah.getDarkerShade(150);var ae=X.getHex();ac[ac.length]='<DIV style="position:absolute;overflow:hidden;z-index:-100;left:'+am+"px;top:"+V+"px;width:"+(ak-am+1)+"px;height:1px;background-color:"+U+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;z-index:-100;left:'+am+"px;top:"+T+"px;width:"+(ak-am+1)+"px;height:1px;background-color:"+U+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;z-index:-100;left:'+am+"px;top:"+V+"px;width:1px;height:"+(T-V+1)+"px;background-color:"+U+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;z-index:-100;left:'+ak+"px;top:"+V+"px;width:1px;height:"+(T-V+1)+"px;background-color:"+U+'"></DIV>';var ab=e.offsetHeight;var al=e.offsetWidth;var ai;var af;for(var aa=(L.x-am)%ad;aa<ak;aa+=ad){if(aa==L.x&&aa>=am){if(aa>=am&&aa<=ak){ac[ac.length]='<DIV style="position:absolute;overflow:hidden;z-index:-99;left:'+aa+"px;top:"+V+"px;width:1px;height:"+ab+"px;background-color:"+ae+'"></DIV>'}}else{ac[ac.length]='<DIV style="position:absolute;overflow:hidden;z-index:-100;left:'+aa+"px;top:"+V+"px;width:1px;height:"+ab+"px;background-color:"+U+'"></DIV>'}if(an&&aa>=am&&aa<ak){if(ai&&ai.offsetLeft+ai.offsetWidth+1<aa){if(ai.offsetWidth<ak-aa){af=ag(Math.round((aa-L.x)/F),new jsPoint(aa+2,V+1+L.y),Y,X)}}else{if(!ai){af=ag(Math.round((aa-L.x)/F),new jsPoint(aa+2,V+1+L.y),Y,X)}}if(af){if(!aj){if(parseInt(af.style.top)+af.offsetHeight>T){af.style.top=T-af.offsetHeight-1}}else{if(parseInt(af.style.top)-af.offsetHeight-1>V){af.style.top=parseInt(af.style.top)-af.offsetHeight-1}if(parseInt(af.style.top)<=V){af.style.top=V+1}}af.style.visibility="visible";ai=af}af=null}}ai=null;for(var Z=(L.y-V)%ad;Z<=T;Z+=ad){if(Z==L.y){if(Z>=V&&Z<=T){ac[ac.length]='<DIV style="position:absolute;overflow:hidden;z-index:-99;left:'+am+"px;top:"+Z+"px;width:"+al+"px;height:1px;background-color:"+ae+'"></DIV>'}}else{ac[ac.length]='<DIV style="position:absolute;overflow:hidden;z-index:-100;left:'+am+"px;top:"+Z+"px;width:"+al+"px;height:1px;background-color:"+U+'"></DIV>'}if(an&&Z!=L.y&&Z>=V&&Z<T){if(ai&&ai.offsetTop+ai.offsetHeight<Z){if(ai.offsetHeight<=T-Z){if(A=="cartecian"){af=ag(Math.round((L.y-Z)/F),new jsPoint(am+2+L.x,Z),Y,X)}else{af=ag(Math.round((Z-L.y)/F),new jsPoint(am+2+L.x,Z),Y,X)}}}else{if(!ai){if(A=="cartecian"){af=ag(Math.round((L.y-Z)/F),new jsPoint(am+2+L.x,Z),Y,X)}else{af=ag(Math.round((Z-L.y)/F),new jsPoint(am+2+L.x,Z),Y,X)}}}if(af){if(!W){if(parseInt(af.style.left)+1+af.offsetWidth<ak){af.style.left=parseInt(af.style.left)+1}else{af.style.left=ak-af.offsetWidth-3}}else{if(parseInt(af.style.left)-af.offsetWidth-2>am){af.style.left=parseInt(af.style.left)-af.offsetWidth-2}else{af.style.left=parseInt(af.style.left)+1}if(parseInt(af.style.left)<=am){af.style.left=am+1}}af.style.visibility="visible";if(aj&&parseInt(af.style.top)+af.offsetHeight>L.y-af.offsetHeight&&parseInt(af.style.top)<L.y){af.style.visibility="hidden"}if(aj&&parseInt(af.style.top)>L.y&&parseInt(af.style.top)<L.y+af.offsetHeight&&parseInt(af.style.top)>L.y){af.style.visibility="hidden"}if(L.y>T&&parseInt(af.style.top)+af.offsetHeight>T-af.offsetHeight){af.style.visibility="hidden"}if(!aj&&parseInt(af.style.top)<L.y+af.offsetHeight&&parseInt(af.style.top)>L.y){af.style.visibility="hidden"}if(!aj&&parseInt(af.style.top)<L.y&&parseInt(af.style.top)+af.offsetHeight>L.y&&parseInt(af.style.top)<L.y){alert(parseInt(af.style.top));af.style.visibility="hidden"}if(L.y<V&&parseInt(af.style.top)<V+af.offsetHeight){af.style.visibility="hidden"}ai=af}af=null}}e.innerHTML=e.innerHTML+ac.join("");function ag(at,ao,ar,aq,au){var ap=document.createElement("div");ap.style.position="absolute";ap.style.left=ao.x+"px";ap.style.top=ao.y+"px";ap.style.color=aq.getHex();ap.style.zIndex=-98;ap.style.visibility="hidden";e.appendChild(ap);if(ar.family){ap.style.fontFamily=ar.family}if(ar.weight){ap.style.fontWeight=ar.weight}if(ar.size){ap.style.fontSize=ar.size}if(ar.style){ap.style.fontStyle=ar.style}if(ar.variant){ap.style.fontVariant=ar.variant}if(au){ap.align=au}ap.innerHTML=at;return ap}}function b(){e.innerHTML="";e.style.display="none"}function G(au,aa,Z){if(!au||!aa||!Z){return false}var V=m.appendChild(document.createElement("div"));if(arguments[3]!="physical"){phPoint0=M(aa);phPoint1=M(Z)}else{phPoint0=new jsPoint(aa.x,aa.y);phPoint1=new jsPoint(Z.x,Z.y)}var ap,ao,Y,W;ap=phPoint0.x;ao=phPoint1.x;Y=phPoint0.y;W=phPoint1.y;var X=au.color.getHex();if(Y==W){if(ap<=ao){V.innerHTML='<DIV style="position:absolute;overflow:hidden;left:'+ap+"px;top:"+Y+"px;width:"+(ao-ap+1)+"px;height:"+au.width+";background-color:"+X+'"></DIV>'}else{if(ap>ao){V.innerHTML='<DIV style="position:absolute;overflow:hidden;left:'+ao+"px;top:"+Y+"px;width:"+(ap-ao+1)+"px;height:"+au.width+";background-color:"+X+'"></DIV>'}}return V}if(ap==ao){if(Y<=W){V.innerHTML='<DIV style="position:absolute;overflow:hidden;left:'+ap+"px;top:"+Y+"px;width:"+au.width+";height:"+(W-Y+1)+"px;background-color:"+X+'"></DIV>'}else{if(Y>W){V.innerHTML='<DIV style="position:absolute;overflow:hidden;left:'+ap+"px;top:"+W+"px;width:"+au.width+";height:"+(Y-W+1)+"px;background-color:"+X+'"></DIV>'}}return V}var aj=new Array();var ak=new Array();var ai=Math.abs(ao-ap);var ah=Math.abs(W-Y);var al,aq;var ad=parseInt(au.width);al=Math.round(Math.sqrt((ad*ad)/((ah*ah)/(ai*ai)+1)));aq=Math.round(Math.sqrt(ad*ad-al*al));if(aq==0){aq=1}if(al==0){al=1}var U=Math.abs(W-Y)>Math.abs(ao-ap);if(U){var ar=ap;ap=Y;Y=ar;ar=ao;ao=W;W=ar}if(ap>ao){var ar=ap;ap=ao;ao=ar;ar=Y;Y=W;W=ar}var ac=ao-ap;var ab=Math.abs(W-Y);var am=ac/2;var at;var ae=Y;if(Y<W){at=1}else{at=-1}var ag,an;var T=0;var af=0;if(U){T=aq}else{af=al}for(x=ap;x<=ao;x++){if(U){if(x==ap){ag=ae;an=x}else{if(ae==ag){af=af+1}else{af=af+al;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+ag+"px;top:"+an+"px;width:"+T+"px;height:"+af+"px;background-color:"+X+'"></DIV>';af=0;ag=ae;an=x}}if(x==ao){if(af!=0){af=af+al;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+ag+"px;top:"+an+"px;width:"+T+"px;height:"+af+"px;background-color:"+X+'"></DIV>'}else{af=al;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+ae+"px;top:"+x+"px;width:"+T+"px;height:"+af+"px;background-color:"+X+'"></DIV>'}}}else{if(x==ap){ag=x;an=ae}else{if(ae==an){T=T+1}else{T=T+aq;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+ag+"px;top:"+an+"px;width:"+T+"px;height:"+af+"px;background-color:"+X+'"></DIV>';T=0;ag=x;an=ae}}if(x==ao){if(T!=0){T=T+aq;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+ag+"px;top:"+an+"px;width:"+T+"px;height:"+af+"px;background-color:"+X+'"></DIV>'}else{T=aq;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+x+"px;top:"+ae+"px;width:"+T+"px;height:"+af+"px;background-color:"+X+'"></DIV>'}}}am=am-ab;if(am<0){ae=ae+at;am=am+ac}}V.innerHTML=aj.join("");return V}function o(ad,ac){function W(){this.xMax=0;this.xMin=0;this.isVertex=false}var U,T,af,ae;U=ad.x;T=ac.x;af=ad.y;ae=ac.y;var V=new Array();var aa=Math.abs(ae-af)>Math.abs(T-U);if(aa){var X=U;U=af;af=X;X=T;T=ae;ae=X}if(U>T){var X=U;U=T;T=X;X=af;af=ae;ae=X}var ah=T-U;var ag=Math.abs(ae-af);var Z=ah/2;var Y;var ab=af;if(af<ae){Y=1}else{Y=-1}for(x=U;x<=T;x++){if(aa){V[x]=new W();V[x].xMin=ab;V[x].xMax=ab;if(x==U&&ab==af){V[x].isVertex=true}}else{if(!V[ab]){V[ab]=new W();V[ab].xMin=x;V[ab].xMax=x;if(x==U&&ab==af){V[ab].isVertex=true}}else{V[ab].xMax=x}}Z=Z-ag;if(Z<0){ab=ab+Y;Z=Z+ah}}return V}function R(aa,U,Z,T){if(!aa||!U||!Z||!T){return false}Z=Math.round(Z*F);T=Math.round(T*F);var V=m.appendChild(document.createElement("div"));var Y=new Array();var X=parseInt(aa.width);var W=aa.color.getHex();if(X>=T||X>=Z){return this.fillRectangle(aa.color,U,Z,T)}phPoint=M(U);Y[Y.length]='<DIV style="position:absolute;overflow:hidden;left:'+phPoint.x+"px;top:"+phPoint.y+"px;width:"+Z+"px;height:"+X+"px;background-color:"+W+'"></DIV>';Y[Y.length]='<DIV style="position:absolute;overflow:hidden;left:'+phPoint.x+"px;top:"+(phPoint.y+T-X)+"px;width:"+Z+"px;height:"+X+"px;background-color:"+W+'"></DIV>';Y[Y.length]='<DIV style="position:absolute;overflow:hidden;left:'+phPoint.x+"px;top:"+(phPoint.y+X)+"px;width:"+X+"px;height:"+(T-2*X+1)+"px;background-color:"+W+'"></DIV>';Y[Y.length]='<DIV style="position:absolute;overflow:hidden;left:'+(phPoint.x+Z-X)+"px;top:"+(phPoint.y+X)+"px;width:"+X+"px;height:"+(T-2*X+1)+"px;background-color:"+W+'"></DIV>';V.innerHTML=Y.join("");return V}function S(W,U,Y,T){if(!W||!U||!Y||!T){return false}Y=Math.round(Y*F);T=Math.round(T*F);var V=m.appendChild(document.createElement("div"));phPoint=M(U);var X=W.getHex();V.innerHTML='<DIV style="position:absolute;overflow:hidden;left:'+phPoint.x+"px;top:"+phPoint.y+"px;width:"+Y+"px;height:"+T+"px;background-color:"+X+'"></DIV>';return V}function c(am,aj,af,ae){if(!am||!aj||!af||!ae){return false}var ad=m.appendChild(document.createElement("div"));var ac=new Array();var X=parseInt(am.width);var V=am.color.getHex();var ak=Math.round(af/2);var ai=Math.round(ae/2);var ag=aj.x;var U=aj.y;var Z=0;var Y=ai;var al=ak*ak;var W=ai*ai;var ah=Y;var ab=Z;var T;var aa;while(W*Z<al*Y){Z++;if((W*Z*Z+al*(Y-0.5)*(Y-0.5)-al*W)>=0){Y--}if(Z==1&&Y!=ah){ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+Z)+"px;top:"+(U+Y)+"px;width:1px;height:1px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+Z)+"px;top:"+(U-Y)+"px;width:1px;height:1px;background-color:"+V+'"></DIV>'}if(Y!=ah){T=Z-ab;ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+ab)+"px;top:"+(U+ah-X+1)+"px;height:"+X+"px;width:"+T+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag-ab-T+1)+"px;top:"+(U+ah-X+1)+"px;height:"+X+"px;width:"+T+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+ab)+"px;top:"+(U-ah)+"px;height:"+X+"px;width:"+T+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag-ab-T+1)+"px;top:"+(U-ah)+"px;height:"+X+"px;width:"+T+"px;background-color:"+V+'"></DIV>';ah=Y;ab=Z}if(W*Z>=al*Y){T=Z-ab+1;ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+ab)+"px;top:"+(U+ah-X+1)+"px;height:"+X+"px;width:"+T+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag-ab-T+1)+"px;top:"+(U+ah-X+1)+"px;height:"+X+"px;width:"+T+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+ab)+"px;top:"+(U-ah)+"px;height:"+X+"px;width:"+T+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag-ab-T+1)+"px;top:"+(U-ah)+"px;height:"+X+"px;width:"+T+"px;background-color:"+V+'"></DIV>'}}ah=Y;ab=Z;while(Y!=0){Y--;if((W*(Z+0.5)*(Z+0.5)+al*Y*Y-al*W)<=0){Z++}if(Z!=ab){aa=ah-Y;ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+ab-X+1)+"px;top:"+(U+ah-aa+1)+"px;width:"+X+"px;height:"+aa+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+ab-X+1)+"px;top:"+(U-ah)+"px;width:"+X+"px;height:"+aa+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag-ab)+"px;top:"+(U+ah-aa+1)+"px;width:"+X+"px;height:"+aa+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag-ab)+"px;top:"+(U-ah)+"px;width:"+X+"px;height:"+aa+"px;background-color:"+V+'"></DIV>';ab=Z;ah=Y}if(Y==0){aa=ah-Y+1;ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+ab-X+1)+"px;top:"+(U+ah-aa+1)+"px;width:"+X+"px;height:"+aa+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag+ab-X+1)+"px;top:"+(U-ah)+"px;width:"+X+"px;height:"+aa+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag-ab)+"px;top:"+(U+ah-aa+1)+"px;width:"+X+"px;height:"+aa+"px;background-color:"+V+'"></DIV>';ac[ac.length]='<DIV style="position:absolute;overflow:hidden;left:'+(ag-ab)+"px;top:"+(U-ah)+"px;width:"+X+"px;height:"+aa+"px;background-color:"+V+'"></DIV>';ab=Z;ah=Y}}ad.innerHTML=ac.join("");return ad}function N(az,au,am,al){if(!az||!au||!am||!al){return false}am*=F;al*=F;var ak=m.appendChild(document.createElement("div"));var aj=new Array();phCenter=M(au);var ab=parseInt(az.width);if(ab<=1){return c(az,phCenter,am,al)}var Y=az.color.getHex();var av=Math.round(am/2);var at=Math.round(al/2);var an=phCenter.x;var V=phCenter.y;var ao=av-ab+1;var W=at-ab+1;var ay=d(phCenter,ao*2,W*2);var ad=ay[0];var X=ay[1];var ax=W;var ac=ao*ao;var ar=W*W;var af=0;var ae=at;var aw=av*av;var aa=at*at;var ah,ap;ah=1;ap=ae;var aq=ax;var U;var T;var ag=1;while(aa*af<aw*ae){af++;if((aa*af*af+aw*(ae-0.5)*(ae-0.5)-aw*aa)>=0){ae--}if(ae+1<W){if(ae!=ap){U=an-af+1;T=(af-1)+1-ad[ap];aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V-ap)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V+ap)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';U=U+2*(af-1)+1-T;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V-ap)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V+ap)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';ap=ae;ah=af}if(aa*af>=aw*ae){U=an-af;T=af+1-ad[ap];aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V-ae)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V+ae)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';U=U+2*af+1-T;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V-ae)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V+ae)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>'}}else{if(af==1&&ae!=ap){aj[aj.length]='<DIV style="position:absolute;overflow:hidden;width:1px;height:1px;left:'+an+"px;top:"+(V+ap-1)+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;width:1px;height:1px;left:'+an+"px;top:"+(V-ap)+"px;background-color:"+Y+'"></DIV>'}if(ae!=ap){aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+(an-af+1)+"px;top:"+(V-ap)+"px;width:"+(2*(af-1)+1)+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+(an-af+1)+"px;top:"+(V+ap)+"px;width:"+(2*(af-1)+1)+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';ap=ae}if(ae==W||ae==0){aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+(an-af)+"px;top:"+(V-ae)+"px;width:"+(2*af+1)+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+(an-af)+"px;top:"+(V+ae)+"px;width:"+(2*af+1)+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>'}}}ah=af;ap=ae;ag=1;var Z=ad[ae];while(ae!=0){ae--;if((aa*(af+0.5)*(af+0.5)+aw*ae*ae-aw*aa)<=0){af++}if(ae+1<W){if(af!=ah||ad[ae]!=Z){ag=ap-ae;U=an-ah;T=ah+1-ad[ae+1];aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V-ap)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V+ae+1)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';U=U+2*ah+1-T;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V-ap)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V+ae+1)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';ah=af;ap=ae;Z=ad[ae]}if(ae==0){ag=ap-ae+1;U=an-af;T=af+1-ad[ae];aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V-ap)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V+ae)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';U=U+2*af+1-T;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V-ap)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+U+"px;top:"+(V+ae)+"px;width:"+T+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';ah=af;ap=ae;Z=ad[ae]}}else{if(af!=ah){ag=ap-ae;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+(an-ah)+"px;top:"+(V-ap)+"px;width:"+(2*ah+1)+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+(an-ah)+"px;top:"+(V+ae+1)+"px;width:"+(2*ah+1)+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';ah=af;ap=ae;Z=ad[ae]}if(ae==W||ae==0){ag=ap-ae+1;aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+(an-af)+"px;top:"+(V-ap)+"px;width:"+(2*af+1)+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';aj[aj.length]='<DIV style="position:absolute;overflow:hidden;left:'+(an-af)+"px;top:"+(V+ae)+"px;width:"+(2*af+1)+"px;height:"+ag+"px;background-color:"+Y+'"></DIV>';ah=af;ap=ae;Z=ad[ae]}}}ak.innerHTML=aj.join("");return ak}function d(T,ae,X){var ac=Math.round(ae/2);var ab=Math.round(X/2);var af=T.x;var Y=T.y;xArray=new Array();xArrayI=new Array();var ad=0;var aa=ab;var U=ac*ac;var Z=ab*ab;xArray[aa]=ad;xArrayI[aa]=ad;var V;var W;while(Z*ad<U*aa){ad++;if((Z*ad*ad+U*(aa-0.5)*(aa-0.5)-U*Z)>=0){aa--}if(!xArray[aa]){xArray[aa]=ad}xArrayI[aa]=ad}while(aa!=0){aa--;if((Z*(ad+0.5)*(ad+0.5)+U*aa*aa-U*Z)<=0){ad++}xArray[aa]=ad;xArrayI[aa]=ad}return new Array(xArray,xArrayI)}function g(V,U,T){if(!V||!U||!T){return false}return N(V,U,2*T,2*T)}function v(V,U,T){if(!V||!U||!T){return false}return I(V,U,2*T,2*T)}function I(ae,ai,ad,ac){if(!ae||!ai||!ad||!ac){return false}ad*=F;ac*=F;var ab=m.appendChild(document.createElement("div"));var aa=new Array();phCenter=M(ai);var aj=Math.round(ad/2);var ah=Math.round(ac/2);var af=phCenter.x;var T=phCenter.y;var U=ae.getHex();var X=0;var W=ah;var ak=aj*aj;var V=ah*ah;var Z,ag;Z=1;ag=W;while(V*X<ak*W){X++;if((V*X*X+ak*(W-0.5)*(W-0.5)-ak*V)>=0){W--}if(X==1&&W!=ag){aa[aa.length]='<DIV style="position:absolute;overflow:hidden;width:1px;height:1px;left:'+af+"px;top:"+(T+ag-1)+"px;background-color:"+U+'"></DIV>';aa[aa.length]='<DIV style="position:absolute;overflow:hidden;width:1px;height:1px;left:'+af+"px;top:"+(T-ag)+"px;background-color:"+U+'"></DIV>'}if(W!=ag){aa[aa.length]='<DIV style="position:absolute;overflow:hidden;height:1px;left:'+(af-X+1)+"px;top:"+(T-ag)+"px;width:"+(2*X-1)+"px;background-color:"+U+'"></DIV>';aa[aa.length]='<DIV style="position:absolute;overflow:hidden;height:1px;left:'+(af-X+1)+"px;top:"+(T+ag)+"px;width:"+(2*X-1)+"px;background-color:"+U+'"></DIV>';ag=W;Z=X}if(V*X>=ak*W){aa[aa.length]='<DIV style="position:absolute;overflow:hidden;height:1px;left:'+(af-X)+"px;top:"+(T-ag)+"px;width:"+(2*X+1)+"px;background-color:"+U+'"></DIV>';aa[aa.length]='<DIV style="position:absolute;overflow:hidden;height:1px;left:'+(af-X)+"px;top:"+(T+ag)+"px;width:"+(2*X+1)+"px;background-color:"+U+'"></DIV>'}}Z=X;ag=W;var Y=1;while(W!=0){W--;if((V*(X+0.5)*(X+0.5)+ak*W*W-ak*V)<=0){X++}if(X!=Z){Y=ag-W;aa[aa.length]='<DIV style="position:absolute;overflow:hidden;left:'+(af-Z)+"px;top:"+(T-ag)+"px;width:"+(2*Z+1)+"px;height:"+Y+"px;background-color:"+U+'"></DIV>';aa[aa.length]='<DIV style="position:absolute;overflow:hidden;left:'+(af-Z)+"px;top:"+(T+W+1)+"px;width:"+(2*Z+1)+"px;height:"+Y+"px;background-color:"+U+'"></DIV>';Z=X;ag=W}if(W==0){Y=ag-W+1;aa[aa.length]='<DIV style="position:absolute;overflow:hidden;left:'+(af-Z)+"px;top:"+(T-ag)+"px;width:"+(2*X+1)+"px;height:"+Y+"px;background-color:"+U+'"></DIV>';aa[aa.length]='<DIV style="position:absolute;overflow:hidden;left:'+(af-Z)+"px;top:"+(T+W)+"px;width:"+(2*X+1)+"px;height:"+Y+"px;background-color:"+U+'"></DIV>'}}ab.innerHTML=aa.join("");return ab}function u(aE,U,T,W,af,ax){if(!aE||!U||!T||!W||af==null||ax==null){return false}T*=F;W*=F;if(ax==0){return}var aa=m.appendChild(document.createElement("div"));var aK=new Array();phCenter=M(U);var al;if(af>360){al=af%360}else{al=af}var ab;if(ax>360){ab=ax%360}else{ab=ax}var aX;aX=parseFloat(al)+parseFloat(ab);if(aX>360){aX=aX%360}if(A=="cartecian"){al=360-al;aX=360-aX;var X;X=al;al=aX;aX=X}var am,a4,ak,a3;var ad=al*Math.PI/180;var a1=ab*Math.PI/180;var aP=aX*Math.PI/180;if((al<=45&&al>=0)||(al>=135&&al<=225)||(al>=315&&al<=360)){if(al>=90&&al<=270){a4=Math.round(phCenter.y-Math.tan(ad)*T/2);am=Math.round(phCenter.x-T/2)}else{a4=Math.round(phCenter.y+Math.tan(ad)*T/2);am=Math.round(phCenter.x+T/2)}}else{if(al>=0&&al<=180){am=Math.round(phCenter.x+(1/Math.tan(ad))*W/2);a4=Math.round(phCenter.y+W/2)}else{am=Math.round(phCenter.x-(1/Math.tan(ad))*W/2);a4=Math.round(phCenter.y-W/2)}}if((aX<=45&&aX>=0)||(aX>=135&&aX<=225)||(aX>=315&&aX<=360)){if(aX>=90&&aX<=270){a3=Math.round(phCenter.y-Math.tan(aP)*T/2);ak=Math.round(phCenter.x-T/2)}else{a3=Math.round(phCenter.y+Math.tan(aP)*T/2);ak=Math.round(phCenter.x+T/2)}}else{if(aX>=0&&aX<=180){ak=Math.round(phCenter.x+(1/Math.tan(aP))*W/2);a3=Math.round(phCenter.y+W/2)}else{ak=Math.round(phCenter.x-(1/Math.tan(aP))*W/2);a3=Math.round(phCenter.y-W/2)}}xDataArraySa=o(phCenter,new jsPoint(am,a4));xDataArrayEa=o(phCenter,new jsPoint(ak,a3));var aF=aE.getHex();var a0=Math.round(T/2);var aZ=Math.round(W/2);var aQ=phCenter.x;var aw=phCenter.y;var aO=0;var aN=aZ;var aR=a0*a0;var ay=aZ*aZ;var aJ,ap;var aU,ac,an,aS,V,ah,aA,az,Z,aM,Y,ao,aI,aT,aD,aL;var aW,av,au,at,ar,ae,aV,aB,ag,aH;var ai,aY,aG,aj;aJ=1;ap=aN;while(ay*aO<aR*aN){aO++;if((ay*aO*aO+aR*(aN-0.5)*(aN-0.5)-aR*ay)>=0){aN--}if(aO==1&&aN!=ap){aA=aw+ap-1;az=aw-ap;aW=1;av=aW;au=aW;at=aW;ar=aW;aU=aQ;if(al>=0&&al<180&&aX>=0&&aX<180){aq(true);if(aX<=al){aq(false)}}else{if(al>=180&&al<360&&aX>=180&&aX<=360){aq(false);if(aX<=al){aq(true)}}else{aq(true);aq(false)}}}else{if(aN!=ap){aA=aw+ap;az=aw-ap;aW=2*(aO-1)+1;av=aW;au=aW;at=aW;ar=aW;aU=aQ-aO+1;if(al>=0&&al<180&&aX>=0&&aX<180){aq(true);if(aX<=al){aq(false)}}else{if(al>=180&&al<360&&aX>=180&&aX<=360){aq(false);if(aX<=al){aq(true)}}else{aq(true);aq(false)}}ap=aN;aJ=aO}}if(ay*aO>=aR*aN){aA=aw+ap;az=aw-ap;aW=2*aO+1;av=aW;au=aW;at=aW;ar=aW;aU=aQ-aO;if(al>=0&&al<180&&aX>=0&&aX<180){aq(true);if(aX<=al){aq(false)}}else{if(al>=180&&al<360&&aX>=180&&aX<=360){aq(false);if(aX<=al){aq(true)}}else{aq(true);aq(false)}}}}aJ=aO;ap=aN;aH=1;aA=aw+aN;az=aw-aN;aW=2*aO+1;av=aW;au=aW;at=aW;ar=aW;aU=aQ-aO;if(al>=0&&al<180&&aX>=0&&aX<180){xDataArrayEa.pop();aC(true,true);if(aX<=al){aC(false,true)}}else{if(al>=180&&al<360&&aX>=180&&aX<=360){xDataArrayEa.pop();if(aN!=0){aC(false,true)}if(aX<=al){aC(true,true)}}else{if(al>=180&&al<360){xDataArraySa.pop()}else{xDataArrayEa.pop()}aC(true,true);if(aN!=0){aU=aQ-aO;aC(false,true)}}}while(aN!=0){aN--;if((ay*(aO+0.5)*(aO+0.5)+aR*aN*aN-aR*ay)<=0){aO++}aA=aw+aN;az=aw-aN;aW=2*aO+1;av=aW;au=aW;at=aW;ar=aW;aU=aQ-aO;if(al>=0&&al<180&&aX>=0&&aX<180){aC(true);if(aX<=al){aC(false)}}else{if(al>=180&&al<360&&aX>=180&&aX<=360){if(aN!=0){aC(false)}if(aX<=al){aC(true)}}else{aC(true);if(aN!=0){aU=aQ-aO;aC(false)}}}}aa.innerHTML=aK.join("");return aa;function aC(ba,bc){var be;var a7,a7;var bb=aW;var a9=aW;var a8=false;var bd=false;if(ba){var a6=false;var a2=false;be=aA;a7=xDataArraySa;xDataArray2=xDataArrayEa;saDvar=al;eaDvar=aX}else{var a5=false;var bf=false;be=az;xDataArray2=xDataArraySa;a7=xDataArrayEa;saDvar=360-aX;eaDvar=360-al}if(eaDvar>saDvar){if(xDataArray2[be]&&aU+aW>=xDataArray2[be].xMin&&aU<=xDataArray2[be].xMin){aM=xDataArray2[be].xMin;if(a7[be]&&aU+aW>=a7[be].xMax+1&&aU<=a7[be].xMax+1){Z=a7[be].xMax+1;bb=Z-aM}else{bb=aU+aW-aM}aU=aM;a8=true}else{if(a7[be]&&aU+aW>=a7[be].xMax+1&&aU<=a7[be].xMax+1){Z=a7[be].xMax+1;bb=Z-aU;a8=true}else{if(eaDvar>90&&saDvar<90){a8=true}}}}else{if(a7[be]&&aU+aW>=a7[be].xMax+1&&aU<=a7[be].xMax+1){Z=a7[be].xMax+1;bb=Z-aU;a8=true}else{if(eaDvar<90&&saDvar<90){a8=true}}if(xDataArray2[be]&&aU+aW>=xDataArray2[be].xMin&&aU<=xDataArray2[be].xMin){aS=xDataArray2[be].xMin;a9=aW-xDataArray2[be].xMin+aU;bd=true}else{if(eaDvar>90&&saDvar>90){aS=aU;a9=aW;bd=true}}}if(ba){if(a8){a6=true}if(bd){a2=true}av=bb;at=a9}else{if(a8){a5=true}if(bd){bf=true}au=bb;ar=a9}if(al>=0&&al<180&&aX>=0&&aX<180&&al>aX){a5=true}else{if(al>=180&&al<360&&aX>=180&&aX<360&&al>aX){a6=true}}if(!aS){aS=""}if(!aU){aU=""}if(!bc){if(ba){if(aO!=aI||ac!=aU||V!=aS||av!=ae||at!=aB){aH=aD-aN;if(aG){if(V!=null){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+V+"px;top:"+(aA+1)+"px;width:"+aB+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}if(ai){if(ac!=null){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+ac+"px;top:"+(aA+1)+"px;width:"+ae+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}if(ai||aG){ac=aU;ai=a6;aG=a2;aI=aO;aD=aN;ae=av;aB=at;V=aS}}}else{if(aO!=aT||an!=aU||ah!=aS||au!=aV||ar!=ag){aH=aL-aN;if(aj){if(ah!=null){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+ah+"px;top:"+(az-aH)+"px;width:"+ag+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}if(aY){if(an!=null){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+an+"px;top:"+(az-aH)+"px;width:"+aV+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}if(aY||aj){an=aU;aY=a5;aj=bf;aT=aO;aL=aN;aV=au;ag=ar;ah=aS}}}}if(bc){if(ba){ai=a6;aG=a2;if(ai){ac=aU}if(aG){V=aS}if(ai||aG){aD=aN;aI=aO}else{aD=0;aI=0}ae=av;aB=at}else{aY=a5;aj=bf;if(aY){an=aU}if(aj){ah=aS}if(aY||aj){aL=aN;aT=aO}else{aL=0;aT=0}aV=au;ag=ar}}if(!ba){aY=a5;aj=bf}else{ai=a6;aG=a2}if(aN==1&&!ba){aH=aL-aN+1;if(bf){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+aS+"px;top:"+(az+1-aH)+"px;width:"+ar+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}if(a5){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+aU+"px;top:"+(az+1-aH)+"px;width:"+au+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}if(aN==0&&ba){aH=aD-aN+1;if(a2){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+aS+"px;top:"+(aA)+"px;width:"+at+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}if(a6){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+aU+"px;top:"+(aA)+"px;width:"+av+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}}function aq(ba){var bd;var a7,a7;var bb=aW;var a9=aW;var a8=false;var bc=false;if(ba){var a6=false;var a2=false;bd=aA;a7=xDataArraySa;xDataArray2=xDataArrayEa;saDvar=al;eaDvar=aX}else{var a5=false;var be=false;bd=az;xDataArray2=xDataArraySa;a7=xDataArrayEa;saDvar=360-aX;eaDvar=360-al}if(eaDvar>saDvar){if(xDataArray2[bd]!=null&&aU+aW>=xDataArray2[bd].xMin&&aU<=xDataArray2[bd].xMin){aM=xDataArray2[bd].xMin;if(a7[bd]!=null&&aU+aW>=a7[bd].xMax+1&&aU<=a7[bd].xMax+1){Z=a7[bd].xMax+1;bb=Z-aM}else{bb=aU+aW-aM}aU=aM;a8=true}else{if(a7[bd]!=null&&aU+aW>=a7[bd].xMax+1&&aU<=a7[bd].xMax+1){Z=a7[bd].xMax+1;bb=Z-aU;a8=true}else{if(eaDvar>90&&saDvar<90){a8=true}}}}else{if(a7[bd]!=null&&aU+aW>=a7[bd].xMax+1&&aU<=a7[bd].xMax+1){Z=a7[bd].xMax+1;bb=Z-aU;a8=true}else{if(eaDvar<90&&saDvar<90){a8=true}}if(xDataArray2[bd]!=null&&aU+aW>=xDataArray2[bd].xMin&&aU<=xDataArray2[bd].xMin){aS=xDataArray2[bd].xMin;a9=aW-xDataArray2[bd].xMin+aU;bc=true}else{if(eaDvar>90&&saDvar>90){aS=aU;a9=aW;bc=true}}}if(ba){if(a8){a6=true}if(bc){a2=true}av=bb;at=a9}else{if(a8){a5=true}if(bc){be=true}au=bb;ar=a9}if(al>=0&&al<180&&aX>=0&&aX<180&&al>aX){a5=true}else{if(al>=180&&al<360&&aX>=180&&aX<360&&al>aX){a6=true}}if(aS==null){aS="X"}if(aU==null){aU="X"}if(ba){aH=1;if(a2){if(aS!="X"){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+aS+"px;top:"+aA+"px;width:"+at+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}if(a6){if(aU!="X"){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+aU+"px;top:"+aA+"px;width:"+av+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}}else{aH=1;if(be){if(aS!="X"){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+aS+"px;top:"+(az+1-aH)+"px;width:"+ar+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}if(a5){if(aU!="X"){aK[aK.length]='<DIV style="position:absolute;overflow:hidden;left:'+aU+"px;top:"+(az+1-aH)+"px;width:"+au+"px;height:"+aH+"px;background-color:"+aF+'"></DIV>'}}}}}function D(aQ,a1,bd,aj,aR,bl){if(!aQ||!a1||!bd||!aj||aR==null||bl==null){return false}bd*=F;aj*=F;if(bl==0){return}var aF=m.appendChild(document.createElement("div"));var ag=new Array();phCenter=M(a1);var ao;if(aR>360){ao=aR%360}else{ao=aR}var a9;if(bl>360){a9=bl%360}else{a9=bl}var ba;ba=parseFloat(ao)+parseFloat(a9);if(ba>360){ba=ba%360}if(A=="cartecian"){ao=360-ao;ba=360-ba;var aO;aO=ao;ao=ba;ba=aO}var an,Z,am,X;var ak=ao*Math.PI/180;var a0=a9*Math.PI/180;var a5=ba*Math.PI/180;if((ao<=45&&ao>=0)||(ao>=135&&ao<=225)||(ao>=315&&ao<=360)){if(ao>=90&&ao<=270){Z=Math.round(phCenter.y-Math.tan(ak)*bd/2);an=Math.round(phCenter.x-bd/2)}else{Z=Math.round(phCenter.y+Math.tan(ak)*bd/2);an=Math.round(phCenter.x+bd/2)}}else{if(ao>=0&&ao<=180){an=Math.round(phCenter.x+(1/Math.tan(ak))*aj/2);Z=Math.round(phCenter.y+aj/2)}else{an=Math.round(phCenter.x-(1/Math.tan(ak))*aj/2);Z=Math.round(phCenter.y-aj/2)}}if((ba<=45&&ba>=0)||(ba>=135&&ba<=225)||(ba>=315&&ba<=360)){if(ba>=90&&ba<=270){X=Math.round(phCenter.y-Math.tan(a5)*bd/2);am=Math.round(phCenter.x-bd/2)}else{X=Math.round(phCenter.y+Math.tan(a5)*bd/2);am=Math.round(phCenter.x+bd/2)}}else{if(ba>=0&&ba<=180){am=Math.round(phCenter.x+(1/Math.tan(a5))*aj/2);X=Math.round(phCenter.y+aj/2)}else{am=Math.round(phCenter.x-(1/Math.tan(a5))*aj/2);X=Math.round(phCenter.y-aj/2)}}xDataArraySa=o(phCenter,new jsPoint(an,Z));xDataArrayEa=o(phCenter,new jsPoint(am,X));var aT=aQ.color.getHex();var aM=Math.round(bd/2);var aK=Math.round(aj/2);var T=phCenter.x;var bg=phCenter.y;var aw=0;var av=aK;var bp=aM*aM;var bf=aK*aK;var aT=aQ.color.getHex();var a8=aM-parseInt(aQ.width)+1;var aU=aK-parseInt(aQ.width)+1;var aD=d(phCenter,a8*2,aU*2);var aP=aD[0];var ae=aD[1];aP.pop();ae.pop();var bm,bc;var a4,aJ,aV,a3,aG,aS,aN,aL,af,aY,W,bb,aX,a7,aW,a6,aZ,aH,aa,bj,ad,bk;var ac,aB,aA,az,ax,aE,al,Y,bn,V,aI,ap,ab,bo,aC,ay,at,aq;var au,ah,U,bh;bm=1;bc=av;while(bf*aw<bp*av){aw++;if((bf*aw*aw+bp*(av-0.5)*(av-0.5)-bp*bf)>=0){av--}if(aw==1&&av!=bc){aN=bg+bc-1;aL=bg-bc;ac=1;aB=ac;aA=ac;az=ac;ax=ac;a4=T;if(ao>=0&&ao<180&&ba>=0&&ba<180){ar(true);if(ba<=ao){ar(false)}}else{if(ao>=180&&ao<360&&ba>=180&&ba<=360){ar(false);if(ba<=ao){ar(true)}}else{ar(true);ar(false)}}}else{if(av!=bc){aN=bg+bc;aL=bg-bc;ac=2*(aw-1)+1;aB=ac;aA=ac;az=ac;ax=ac;a4=T-aw+1;if(ao>=0&&ao<180&&ba>=0&&ba<180){ar(true);if(ba<=ao){ar(false)}}else{if(ao>=180&&ao<360&&ba>=180&&ba<=360){ar(false);if(ba<=ao){ar(true)}}else{ar(true);ar(false)}}bc=av;bm=aw}}if(bf*aw>=bp*av){aN=bg+bc;aL=bg-bc;ac=2*aw+1;aB=ac;aA=ac;az=ac;ax=ac;a4=T-aw;if(ao>=0&&ao<180&&ba>=0&&ba<180){ar(true);if(ba<=ao){ar(false)}}else{if(ao>=180&&ao<360&&ba>=180&&ba<=360){ar(false);if(ba<=ao){ar(true)}}else{ar(true);ar(false)}}}}bm=aw;bc=av;V=1;aN=bg+av;aL=bg-av;ac=2*aw+1;aB=ac;aA=ac;az=ac;ax=ac;a4=T-aw;if(ao>=0&&ao<180&&ba>=0&&ba<180){xDataArrayEa.pop();be(true,true);if(ba<=ao){be(false,true)}}else{if(ao>=180&&ao<360&&ba>=180&&ba<=360){xDataArrayEa.pop();if(av!=0){be(false,true)}if(ba<=ao){be(true,true)}}else{if(ao>=180&&ao<360){xDataArraySa.pop()}else{xDataArrayEa.pop()}be(true,true);if(av!=0){a4=T-aw;be(false,true)}}}while(av!=0){av--;if((bf*(aw+0.5)*(aw+0.5)+bp*av*av-bp*bf)<=0){aw++}aN=bg+av;aL=bg-av;ac=2*aw+1;aB=ac;aA=ac;az=ac;ax=ac;a4=T-aw;if(ao>=0&&ao<180&&ba>=0&&ba<180){be(true);if(ba<=ao){be(false)}}else{if(ao>=180&&ao<360&&ba>=180&&ba<=360){if(av!=0){be(false)}if(ba<=ao){be(true)}}else{be(true);if(av!=0){a4=T-aw;be(false)}}}}aF.innerHTML=ag.join("");return aF;function be(bt,bv){var bx;var bq,bq;var bu=ac;var bs=ac;var br=false;var bw=false;var by;if(bt){var bi=false;var ai=false;bx=aN;bq=xDataArraySa;xDataArray2=xDataArrayEa;saDvar=ao;eaDvar=ba}else{var a2=false;var bz=false;bx=aL;xDataArray2=xDataArraySa;bq=xDataArrayEa;saDvar=360-ba;eaDvar=360-ao}if(eaDvar>saDvar){if(xDataArray2[bx]!=null&&a4+ac>=xDataArray2[bx].xMin&&a4<=xDataArray2[bx].xMin){aY=xDataArray2[bx].xMin;if(bq[bx]!=null&&a4+ac>=bq[bx].xMax+1&&a4<=bq[bx].xMax+1){af=bq[bx].xMax+1;bu=af-aY}else{bu=a4+ac-aY}a4=aY;br=true}else{if(bq[bx]!=null&&a4+ac>=bq[bx].xMax+1&&a4<=bq[bx].xMax+1){af=bq[bx].xMax+1;bu=af-a4;br=true}else{if(eaDvar>90&&saDvar<90){br=true}}}}else{if(bq[bx]!=null&&a4+ac>=bq[bx].xMax+1&&a4<=bq[bx].xMax+1){af=bq[bx].xMax+1;bu=af-a4;br=true}else{if(eaDvar<90&&saDvar<90){br=true}}if(xDataArray2[bx]!=null&&a4+ac>=xDataArray2[bx].xMin&&a4<=xDataArray2[bx].xMin){a3=xDataArray2[bx].xMin;bs=ac-xDataArray2[bx].xMin+a4;bw=true}else{if(eaDvar>90&&saDvar>90){a3=a4;bs=ac;bw=true}}}if(bt){if(br){bi=true}if(bw){ai=true}aB=bu;az=bs}else{if(br){a2=true}if(bw){bz=true}aA=bu;ax=bs}if(ao>=0&&ao<180&&ba>=0&&ba<180&&ao>ba){a2=true}else{if(ao>=180&&ao<360&&ba>=180&&ba<360&&ao>ba){bi=true}}if(bi){if(aP[aN-bg]!=null&&a4!=null){if(T+aP[aN-bg]<=a4+aB){if(aB>a4+aB-T-aP[aN-bg]){aZ=T+aP[aN-bg];aI=a4+aB-T-aP[aN-bg]}}else{aZ=null}if(a4<=T-aP[aN-bg]+1){if(aB>T-aP[aN-bg]-a4+1){aB=T-aP[aN-bg]-a4+1}}else{if(aB>=a4+aB-T-aP[aN-bg]+1){a4=null}}}}if(ai){if(aP[aN-bg]!=null&&a3!=null){if(T+aP[aN-bg]<=a3+az){if(az>a3+az-T-aP[aN-bg]){aH=T+aP[aN-bg];ab=a3+az-T-aP[aN-bg]}}else{aH=null}if(a3<=T-aP[aN-bg]+1){if(az>T-aP[aN-bg]-a3+1){az=T-aP[aN-bg]-a3+1}}else{if(az>=a3+az-T-aP[aN-bg]+1){a3=null}}}}if(a2){if(aP[aN-bg]!=null&&a4!=null){if(T+aP[aN-bg]<=a4+aA){if(aA>a4+aA-T-aP[aN-bg]){aZ=T+aP[aN-bg];ap=a4+aA-T-aP[aN-bg]}}else{aZ=null}if(a4<=T-aP[aN-bg]+1){if(aA>T-aP[aN-bg]-a4+1){aA=T-aP[aN-bg]-a4+1}}else{if(aA>=a4+aA-T-aP[aN-bg]+1){a4=null}}}}if(bz){if(aP[aN-bg]!=null&&a3!=null){if(T+aP[aN-bg]<=a3+ax){if(ax>a3+ax-T-aP[aN-bg]){aH=T+aP[aN-bg];bo=a3+ax-T-aP[aN-bg]}}else{aH=null}if(a3<=T-aP[aN-bg]+1){if(ax>T-aP[aN-bg]-a3+1){ax=T-aP[aN-bg]-a3+1}}else{if(ax>=a3+ax-T-aP[aN-bg]+1){a3=null}}}}if(a3==null){a3=""}if(a4==null){a4=""}if(!bv){if(bt){if(aw!=aX||aJ!=a4||aa!=aZ||aG!=a3||ad!=aH||aB!=aE||az!=Y||aI!=aC||ab!=at){V=aW-av;if(U){if(aG!=null&&aG!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aG+"px;top:"+(aN+1)+"px;width:"+Y+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(ad!=null&&ad!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+ad+"px;top:"+(aN+1)+"px;width:"+at+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}if(au){if(aJ!=null&&aJ!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aJ+"px;top:"+(aN+1)+"px;width:"+aE+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(aa!=null&&aa!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aa+"px;top:"+(aN+1)+"px;width:"+aC+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}if(au||U){aJ=a4;aa=aZ;au=bi;U=ai;aX=aw;aW=av;aE=aB;Y=az;aG=a3;ad=aH;aC=aI;at=ab}}}else{if(aw!=a7||aV!=a4||bj!=aZ||aS!=a3||aA!=al||ap!=ay||ax!=bn||bo!=aq){V=a6-av;if(bh){if(aS!=null&&aS!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aS+"px;top:"+(aL-V)+"px;width:"+bn+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(bk!=null&&bk!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+bk+"px;top:"+(aL-V)+"px;width:"+aq+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}if(ah){if(aV!=null&&aV!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aV+"px;top:"+(aL-V)+"px;width:"+al+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(bj!=null&&bj!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+bj+"px;top:"+(aL-V)+"px;width:"+ay+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}if(ah||bh){aV=a4;bj=aZ;ah=a2;bh=bz;a7=aw;a6=av;al=aA;bn=ax;aS=a3;bk=aH;ay=ap;aq=bo}}}}if(bv){if(bt){au=bi;U=ai;if(au){aJ=a4;aa=aZ}if(U){aG=a3;ad=aH}if(au||U){aW=av;aX=aw}else{aW=0;aX=0}aE=aB;Y=az;aC=aI;at=ab}else{ah=a2;bh=bz;if(ah){aV=a4;bj=aZ}if(bh){aS=a3;bk=aH}if(ah||bh){a6=av;a7=aw}else{a6=0;a7=0}al=aA;bn=ax;ay=ap;aq=bo}}if(!bt){ah=a2;bh=bz}else{au=bi;U=ai}if(av==1&&!bt){V=a6-av+1;if(bz){if(a3!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+a3+"px;top:"+(aL+1-V)+"px;width:"+ax+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(aH!=null){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aH+"px;top:"+(aL+1-V)+"px;width:"+bo+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}if(a2){if(a4!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+a4+"px;top:"+(aL+1-V)+"px;width:"+aA+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(aZ!=null){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aZ+"px;top:"+(aL+1-V)+"px;width:"+ap+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}}if(av==0&&bt){V=aW-av+1;if(ai){if(a3!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+a3+"px;top:"+aN+"px;width:"+az+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(aH!=null){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aH+"px;top:"+aN+"px;width:"+ab+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}if(bi){if(a4!=""){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+a4+"px;top:"+aN+"px;width:"+aB+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(aZ!=null){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aZ+"px;top:"+aN+"px;width:"+aI+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}}}function ar(bt){var bw;var bq,bq;var bu=ac;var bs=ac;var br=false;var bv=false;if(bt){var bi=false;var ai=false;bw=aN;bq=xDataArraySa;xDataArray2=xDataArrayEa;saDvar=ao;eaDvar=ba}else{var a2=false;var bx=false;bw=aL;xDataArray2=xDataArraySa;bq=xDataArrayEa;saDvar=360-ba;eaDvar=360-ao}if(eaDvar>saDvar){if(xDataArray2[bw]!=null&&a4+ac>=xDataArray2[bw].xMin&&a4<=xDataArray2[bw].xMin){aY=xDataArray2[bw].xMin;if(bq[bw]&&a4+ac>=bq[bw].xMax+1&&a4<=bq[bw].xMax+1){af=bq[bw].xMax+1;bu=af-aY}else{bu=a4+ac-aY}a4=aY;br=true}else{if(bq[bw]!=null&&a4+ac>=bq[bw].xMax+1&&a4<=bq[bw].xMax+1){af=bq[bw].xMax+1;bu=af-a4;br=true}else{if(eaDvar>90&&saDvar<90){br=true}}}}else{if(bq[bw]!=null&&a4+ac>=bq[bw].xMax+1&&a4<=bq[bw].xMax+1){af=bq[bw].xMax+1;bu=af-a4;br=true}else{if(eaDvar<90&&saDvar<90){br=true}}if(xDataArray2[bw]!=null&&a4+ac>=xDataArray2[bw].xMin&&a4<=xDataArray2[bw].xMin){a3=xDataArray2[bw].xMin;bs=ac-xDataArray2[bw].xMin+a4;bv=true}else{if(eaDvar>90&&saDvar>90){a3=a4;bs=ac;bv=true}}}if(bt){if(br){bi=true}if(bv){ai=true}aB=bu;az=bs}else{if(br){a2=true}if(bv){bx=true}aA=bu;ax=bs}if(ao>=0&&ao<180&&ba>=0&&ba<180&&ao>ba){a2=true}else{if(ao>=180&&ao<360&&ba>=180&&ba<360&&ao>ba){bi=true}}if(bi){if(aP[aN-bg]&&a4!=null){if(T+aP[aN-bg]<=a4+aB){if(aB>a4+aB-T-aP[aN-bg]){aZ=T+aP[aN-bg];aI=a4+aB-T-aP[aN-bg]}}else{aZ="X"}if(a4<T-aP[aN-bg]+1){if(aB>T-aP[aN-bg]-a4+1){aB=T-aP[aN-bg]-a4+1}}else{if(aB>=a4+aB-T-aP[aN-bg]+1){a4="X"}}}}if(ai){if(aP[aN-bg]&&a3!=null){if(T+aP[aN-bg]<=a3+az){if(az>a3+az-T-aP[aN-bg]){aH=T+aP[aN-bg];ab=a3+az-T-aP[aN-bg]}}else{aH="X"}if(a3<=T-aP[aN-bg]+1){if(az>T-aP[aN-bg]-a3+1){az=T-aP[aN-bg]-a3+1}}else{if(az>=a3+az-T-aP[aN-bg]+1){a3="X"}}}}if(a2){if(aP[aN-bg]&&a4!=null){if(T+aP[aN-bg]<=a4+aA){if(aA>a4+aA-T-ae[aN-bg]){aZ=T+aP[aN-bg];ap=a4+aA-T-aP[aN-bg]}}else{aZ="X"}if(a4<=T-aP[aN-bg]+1){if(aA>T-aP[aN-bg]-a4+1){aA=T-aP[aN-bg]-a4+1}}else{if(aA>=a4+aA-T-aP[aN-bg]+1){a4="X"}}}}if(bx){if(ae[aN-bg]&&a3!=null){if(T+aP[aN-bg]<=a3+ax){if(ax>a3+ax-T-aP[aN-bg]){aH=T+aP[aN-bg];bo=a3+ax-T-aP[aN-bg]}}else{aH="X"}if(a3<=T-aP[aN-bg]+1){if(ax>T-aP[aN-bg]-a3+1){ax=T-aP[aN-bg]-a3+1}}else{if(ax>=a3+ax-T-aP[aN-bg]+1){a3="X"}}}}if(a3==null){a3="X"}if(a4==null){a4="X"}if(aH==null){aH="X"}if(aZ==null){aZ="X"}if(bt){V=1;if(ai){if(a3!="X"){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+a3+"px;top:"+aN+"px;width:"+az+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(aH!="X"){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aH+"px;top:"+aN+"px;width:"+ab+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}if(bi){if(a4!="X"){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+a4+"px;top:"+aN+"px;width:"+aB+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(aZ!="X"){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aZ+"px;top:"+aN+"px;width:"+aI+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}}else{V=1;if(bx){if(a3!="X"){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+a3+"px;top:"+(aL+1-V)+"px;width:"+ax+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(aH!="X"){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aH+"px;top:"+(aL+1-V)+"px;width:"+bo+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}if(a2){if(a4!="X"){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+a4+"px;top:"+(aL+1-V)+"px;width:"+aA+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}if(aZ!="X"){ag[ag.length]='<DIV style="position:absolute;overflow:hidden;left:'+aZ+"px;top:"+(aL+1-V)+"px;width:"+ap+"px;height:"+V+"px;background-color:"+aT+'"></DIV>'}}}}}function O(V,U){if(!V||!U){return false}var W=m.appendChild(document.createElement("div"));for(var T=1;T<U.length;T++){W.appendChild(this.drawLine(V,U[T-1],U[T]))}return W}function n(V,U){if(!V||!U){return false}var W=m.appendChild(document.createElement("div"));var T;for(T=1;T<U.length;T++){W.appendChild(this.drawLine(V,U[T-1],U[T]))}W.appendChild(this.drawLine(V,U[T-1],U[0]))}function h(ak,an){if(!ak||!an){return false}var ab=new Array();var ao;for(ao=0;ao<an.length;ao++){ab[ao]=M(an[ao])}var V=m.appendChild(document.createElement("div"));var ac=new Array();var W=ak.getHex();var af=new Array();var T=ab[0].y;var U=ab[0].y;var ar=new Array();var aj,ah,ag;var ad;ad=ab.length;for(ao=0;ao<ab.length;ao++){if(ao!=0){ah=ao-1}else{ah=ad-1}if(!(ab[ah].x==ab[ao].x&&ab[ah].y==ab[ao].y)){ar[ar.length]=ab[ao]}}ab=ar;ar=new Array();ad=ab.length;for(ao=0;ao<ab.length;ao++){if(ao!=0){ah=ao-1}else{ah=ad-1}if(ao!=ad-1){ag=ao+1}else{ag=0}if(!(ab[ao].y==ab[ag].y&&ab[ao].y==ab[ah].y)){ar[ar.length]=ab[ao]}else{if(ab[ah].x<=ab[ao].x){ac[ac.length]='<DIV style="position:absolute;height:1px;overflow:hidden;left:';ac[ac.length]=ab[ah].x;ac[ac.length]="px;top:";ac[ac.length]=ab[ao].y;ac[ac.length]="px;width:";ac[ac.length]=ab[ao].x-ab[ah].x;ac[ac.length]="px;background-color:";ac[ac.length]=W;ac[ac.length]='"></DIV>'}else{ac[ac.length]='<DIV style="position:absolute;height:1px;overflow:hidden;left:';ac[ac.length]=ab[ao].x;ac[ac.length]="px;top:";ac[ac.length]=ab[ao].y;ac[ac.length]="px;width:";ac[ac.length]=ab[ah].x-ab[ao].x;ac[ac.length]="px;background-color:";ac[ac.length]=W;ac[ac.length]='"></DIV>'}}}ab=ar;for(ao=1;ao<ab.length;ao++){if(T>ab[ao-1].y){T=ab[ao-1].y}if(U<ab[ao-1].y){U=ab[ao-1].y}af[ao-1]=o(ab[ao-1],ab[ao]);if(ao<ab.length-1){if((ab[ao-1].y<ab[ao].y&&ab[ao].y<ab[ao+1].y)||(ab[ao-1].y>ab[ao].y&&ab[ao].y>ab[ao+1].y)){af[ao-1][ab[ao].y]=null}}else{if((ab[ao-1].y<ab[ao].y&&ab[ao].y<ab[0].y)||(ab[ao-1].y>ab[ao].y&&ab[ao].y>ab[0].y)){af[ao-1][ab[ao].y]=null}}}if(T>ab[ao-1].y){T=ab[ao-1].y}if(U<ab[ao-1].y){U=ab[ao-1].y}af[ao-1]=o(ab[ao-1],ab[0]);if((ab[ao-1].y<ab[0].y&&ab[0].y<ab[1].y)||(ab[ao-1].y>ab[0].y&&ab[0].y>ab[1].y)){af[ao-1][ab[0].y]=null}var aa;var X="";var am;ad=ab.length;var ai;var aq,at;var Z,Y,ap;for(aa=T;aa<=U;aa++){am=0;var ae=new Array();for(ao=0;ao<ad;ao++){ai=af[ao];if(ao!=0){ah=ao-1}else{ah=ad-1}if(ao!=1&&ao!=0){aj=ao-2}else{if(ao==0){aj=ad-2}else{aj=ad-1}}if(ao!=ad-1){ag=ao+1}else{ag=0}if((aa==ab[ao].y&&aa==ab[ah].y&&aa<ab[aj].y&&aa<ab[ag].y&&ai[aa])||(aa==ab[ao].y&&aa==ab[ah].y&&aa>ab[aj].y&&aa>ab[ag].y&&ai[aa])){ae[am]=ai[aa];am++}if(ai[aa]){ae[am]=ai[aa];am++}}ae.sort(al);Y=aa;for(ao=0;ao<ae.length;ao+=2){if(ae[ao+1]){Z=ae[ao].xMin;if(ae[ao+1].xMax>ae[ao].xMax){ap=ae[ao+1].xMax-ae[ao].xMin+1}else{ap=ae[ao].xMax-ae[ao].xMin+1}}else{Z=ae[ae.length-1].xMin;ap=ae[ae.length-1].xMax-ae[ae.length-1].xMin+1}ac[ac.length]='<DIV style="position:absolute;height:1px;overflow:hidden;left:';ac[ac.length]=Z;ac[ac.length]="px;top:";ac[ac.length]=Y;ac[ac.length]="px;width:";ac[ac.length]=ap;ac[ac.length]="px;background-color:";ac[ac.length]=W;ac[ac.length]='"></DIV>'}}V.innerHTML=ac.join("");return V;function al(av,au){return av.xMin-au.xMin}}function r(aB,ao){if(!aB||!ao){return false}var Z=new Array();var aA;for(aA=0;aA<ao.length;aA++){Z[aA]=M(ao[aA])}if(Z.length>4){Z=new Array(Z[0],Z[1],Z[2],Z[3])}else{if(Z.length<4){return false}}var aE=m.appendChild(document.createElement("div"));var al=new Array();var aC=Z[0].x;var ae=Z[0].x;for(aA=1;aA<Z.length;aA++){if(aC>Z[aA-1].x){aC=Z[aA-1].x}if(ae<Z[aA-1].x){ae=Z[aA-1].x}}var av,ag,W,ax,ar,af,V,aw;av=Z[0].x;ar=Z[0].y;ag=Z[1].x;af=Z[1].y;W=Z[2].x;V=Z[2].y;ax=Z[3].x;aw=Z[3].y;var aq,ap,X,au;var an=av-1;var ad=ar-1;var ak,ac;au=0;var aD=1;var ah=parseInt(aB.width);var ai=aB.color.getHex();var at=ah;var aj=ah;ak=av;ac=ar;var am=false;var Y=false;var az=1.1;var ay=new Array();var aG,aF,ab,aa;aG=ac;aF=ac;ab=ak;aa=ak;while(au<=1){aq=0;ap=0;aq=(1-au)*(1-au)*(1-au)*av+3*(1-au)*(1-au)*au*ag+3*(1-au)*au*au*W+au*au*au*ax;ap=(1-au)*(1-au)*(1-au)*ar+3*(1-au)*(1-au)*au*af+3*(1-au)*au*au*V+au*au*au*aw;aq=Math.round(aq);ap=Math.round(ap);if(aq!=an||ap!=ad){if(aq-an>1||ap-ad>1||an-aq>1||ad-ap>1){au-=aD;aD=aD/az}else{ay[ay.length]=new jsPoint(aq,ap);an=aq;ad=ap}}else{au-=aD;aD=aD*az}au+=aD}var U=new Array();for(var aA=0;aA<ay.length;aA++){var T=false;aq=ay[aA].x;ap=ay[aA].y;if(aA!=0&&aA+1<ay.length){if(Math.abs(ay[aA-1].x-ay[aA+1].x)==1&&Math.abs(ay[aA-1].y-ay[aA+1].y)==1){if(!U[aA-1]){T=true;U[aA]=true}}}if(!T){if(ap==ac&&!Y){am=true}if(aq==ak&&!am){Y=true}if(aq!=ak&&!am){if(aF==aG){al[al.length]='<DIV style="position:absolute;overflow:hidden;left:';al[al.length]=ak;al[al.length]="px;top:";al[al.length]=aG;al[al.length]="px;width:";al[al.length]=ah;al[al.length]="px;height:";al[al.length]=ah;al[al.length]="px;background-color:";al[al.length]=ai;al[al.length]='"></DIV>'}else{al[al.length]='<DIV style="position:absolute;overflow:hidden;left:';al[al.length]=ak;al[al.length]="px;top:";al[al.length]=aG;al[al.length]="px;width:";al[al.length]=ah;al[al.length]="px;height:";al[al.length]=aF-aG+ah;al[al.length]="px;background-color:";al[al.length]=ai;al[al.length]='"></DIV>'}ak=aq;ac=ap;aG=ac;aF=ac;Y=false}if(ap!=ac&&!Y){if(aa==ab){al[al.length]='<DIV style="position:absolute;overflow:hidden;left:';al[al.length]=ab;al[al.length]="px;top:";al[al.length]=ac;al[al.length]="px;width:";al[al.length]=ah;al[al.length]="px;height:";al[al.length]=ah;al[al.length]="px;background-color:";al[al.length]=ai;al[al.length]='"></DIV>'}else{al[al.length]='<DIV style="position:absolute;overflow:hidden;left:';al[al.length]=ab;al[al.length]="px;top:";al[al.length]=ac;al[al.length]="px;width:";al[al.length]=aa-ab+ah;al[al.length]="px;height:";al[al.length]=ah;al[al.length]="px;background-color:";al[al.length]=ai;al[al.length]='"></DIV>'}ak=aq;ac=ap;ab=ak;aa=ak;am=false}if(Y&&!am){if(ap<=aG){aG=ap}if(ap>aF){aF=ap}}else{aG=ap;aF=ap}if(am&&!Y){if(aq<=ab){ab=aq}if(aq>aa){aa=aq}}else{ab=aq;aa=aq}if(aA==ay.length-1){if(!Y){if(aa==ab){al[al.length]='<DIV style="position:absolute;overflow:hidden;left:';al[al.length]=ab;al[al.length]="px;top:";al[al.length]=ac;al[al.length]="px;width:";al[al.length]=ah;al[al.length]="px;height:";al[al.length]=ah;al[al.length]="px;background-color:";al[al.length]=ai;al[al.length]='"></DIV>'}else{al[al.length]='<DIV style="position:absolute;overflow:hidden;left:';al[al.length]=ab;al[al.length]="px;top:";al[al.length]=ac;al[al.length]="px;width:";al[al.length]=aa-ab+ah;al[al.length]="px;height:";al[al.length]=ah;al[al.length]="px;background-color:";al[al.length]=ai;al[al.length]='"></DIV>'}}if(!am){if(aF==aG){al[al.length]='<DIV style="position:absolute;overflow:hidden;left:';al[al.length]=ak;al[al.length]="px;top:";al[al.length]=aG;al[al.length]="px;width:";al[al.length]=ah;al[al.length]="px;height:";al[al.length]=ah;al[al.length]="px;background-color:";al[al.length]=ai;al[al.length]='"></DIV>'}else{al[al.length]='<DIV style="position:absolute;overflow:hidden;left:';al[al.length]=ak;al[al.length]="px;top:";al[al.length]=aG;al[al.length]="px;width:";al[al.length]=aa-ab+ah;al[al.length]="px;height:";al[al.length]=aF-aG+ah;al[al.length]="px;background-color:";al[al.length]=ai;al[al.length]='"></DIV>'}}}}}aE.innerHTML=al.join("");return aE}function Q(ay,an){if(!ay||!an){return false}if(an.length<2){return false}var X=new Array();for(var ax=0;ax<an.length;ax++){X[ax]=M(an[ax])}var aA=m.appendChild(document.createElement("div"));var ak=new Array();var aC=new Array();var aB=new Array();var au=X.length-1;for(var ax=0;ax<=au;ax++){aC[ax]=X[ax].x*V(au)/(V(ax)*V(au-ax));aB[ax]=X[ax].y*V(au)/(V(ax)*V(au-ax))}var am=X[0].x-1;var ab=X[0].y-1;var aj,aa;t=0;var az=1;var ae=parseInt(ay.width);var af=ay.color.getHex();var aq=ae;var ah=ae;aj=X[0].x;aa=X[0].y;var al=false;var W=false;var ad=0;var ag;var ai=0;var ap;var ao;var aw;var ar,ac;var av=1.1;var at=new Array();var aE,aD,Z,Y;aE=aa;aD=aa;Z=aj;Y=aj;while(t<=1){ap=0;ao=0;for(var ax=0;ax<=au;ax++){ai=Math.pow(1-t,au-ax)*Math.pow(t,ax);ap=ap+aC[ax]*ai;ao=ao+aB[ax]*ai}var ar;var ac;ar=ap;ac=ao;ap=Math.round(ap);ao=Math.round(ao);if(ap!=am||ao!=ab){if(ap-am>1||ao-ab>1||am-ap>1||ab-ao>1){t-=az;az=az/av}else{at[at.length]=new jsPoint(ap,ao);am=ap;ab=ao}}else{t-=az;az=az*av}t+=az}var U=new Array();for(var ax=0;ax<at.length;ax++){var T=false;ap=at[ax].x;ao=at[ax].y;if(ax!=0&&ax+1<at.length){if(Math.abs(at[ax-1].x-at[ax+1].x)==1&&Math.abs(at[ax-1].y-at[ax+1].y)==1){if(!U[ax-1]){T=true;U[ax]=true}}}if(!T){if(ao==aa&&!W){al=true}if(ap==aj&&!al){W=true}if(ap!=aj&&!al){if(aD==aE){ak[ak.length]='<DIV style="position:absolute;overflow:hidden;left:';ak[ak.length]=aj;ak[ak.length]="px;top:";ak[ak.length]=aE;ak[ak.length]="px;width:";ak[ak.length]=ae;ak[ak.length]="px;height:";ak[ak.length]=ae;ak[ak.length]="px;background-color:";ak[ak.length]=af;ak[ak.length]='"></DIV>'}else{ak[ak.length]='<DIV style="position:absolute;overflow:hidden;left:';ak[ak.length]=aj;ak[ak.length]="px;top:";ak[ak.length]=aE;ak[ak.length]="px;width:";ak[ak.length]=ae;ak[ak.length]="px;height:";ak[ak.length]=aD-aE+ae;ak[ak.length]="px;background-color:";ak[ak.length]=af;ak[ak.length]='"></DIV>'}aj=ap;aa=ao;aE=aa;aD=aa;W=false}if(ao!=aa&&!W){if(Y==Z){ak[ak.length]='<DIV style="position:absolute;overflow:hidden;left:';ak[ak.length]=Z;ak[ak.length]="px;top:";ak[ak.length]=aa;ak[ak.length]="px;width:";ak[ak.length]=ae;ak[ak.length]="px;height:";ak[ak.length]=ae;ak[ak.length]="px;background-color:";ak[ak.length]=af;ak[ak.length]='"></DIV>'}else{ak[ak.length]='<DIV style="position:absolute;overflow:hidden;left:';ak[ak.length]=Z;ak[ak.length]="px;top:";ak[ak.length]=aa;ak[ak.length]="px;width:";ak[ak.length]=Y-Z+ae;ak[ak.length]="px;height:";ak[ak.length]=ae;ak[ak.length]="px;background-color:";ak[ak.length]=af;ak[ak.length]='"></DIV>'}aj=ap;aa=ao;Z=aj;Y=aj;al=false}if(W&&!al){if(ao<=aE){aE=ao}if(ao>aD){aD=ao}}else{aE=ao;aD=ao}if(al&&!W){if(ap<=Z){Z=ap}if(ap>Y){Y=ap}}else{Z=ap;Y=ap}if(ax==at.length-1){if(!W){if(Y==Z){ak[ak.length]='<DIV style="position:absolute;overflow:hidden;left:';ak[ak.length]=Z;ak[ak.length]="px;top:";ak[ak.length]=aa;ak[ak.length]="px;width:";ak[ak.length]=ae;ak[ak.length]="px;height:";ak[ak.length]=ae;ak[ak.length]="px;background-color:";ak[ak.length]=af;ak[ak.length]='"></DIV>'}else{ak[ak.length]='<DIV style="position:absolute;overflow:hidden;left:';ak[ak.length]=Z;ak[ak.length]="px;top:";ak[ak.length]=aa;ak[ak.length]="px;width:";ak[ak.length]=Y-Z+ae;ak[ak.length]="px;height:";ak[ak.length]=ae;ak[ak.length]="px;background-color:";ak[ak.length]=af;ak[ak.length]='"></DIV>'}}if(!al){if(aD==aE){ak[ak.length]='<DIV style="position:absolute;overflow:hidden;left:';ak[ak.length]=aj;ak[ak.length]="px;top:";ak[ak.length]=aE;ak[ak.length]="px;width:";ak[ak.length]=ae;ak[ak.length]="px;height:";ak[ak.length]=ae;ak[ak.length]="px;background-color:";ak[ak.length]=af;ak[ak.length]='"></DIV>'}else{ak[ak.length]='<DIV style="position:absolute;overflow:hidden;left:';ak[ak.length]=aj;ak[ak.length]="px;top:";ak[ak.length]=aE;ak[ak.length]="px;width:";ak[ak.length]=Y-Z+ae;ak[ak.length]="px;height:";ak[ak.length]=aD-aE+ae;ak[ak.length]="px;background-color:";ak[ak.length]=af;ak[ak.length]='"></DIV>'}}}}}aA.innerHTML=ak.join("");return aA;function V(aH){var aG=1;for(var aF=1;aF<=aH;aF++){aG=aG*aF}return aG}}function j(V,U,T){return this.drawCurve(V,U,T,true)}function i(Y,ac,ab,T){if(!Y||!ac){return false}if(!ab){ab=0}if(!T){T=false}var W=new Array();for(var Z=0;Z<ac.length;Z++){W[Z]=M(ac[Z])}var ad=new Array();if(!T||!(W[0].x==W[W.length-1].x&&W[0].y==W[W.length-1].y)){ad[ad.length]=W[0]}for(var Z=1;Z<W.length;Z++){if(!(W[Z].x==W[Z-1].x&&W[Z].y==W[Z-1].y)){ad[ad.length]=W[Z]}}W=ad;if(W.length<2){return false}else{if(W.length==2){return this.drawLine(Y,W[0],W[1],"physical")}}var X=m.appendChild(document.createElement("div"));var aa=new Array();var V=new Array();var U=W.length-1;if(!T){for(var Z=0;Z<=U-1;Z++){if(Z==0){p(new Array(W[0],W[0],W[1],W[2]),ab,V)}else{if(Z==U-1){p(new Array(W[U-2],W[U-1],W[U],W[U]),ab,V)}else{p(new Array(W[Z-1],W[Z],W[Z+1],W[Z+2]),ab,V)}}}J(Y,V,aa)}else{for(var Z=0;Z<=U-1;Z++){if(Z==0){p(new Array(W[U],W[0],W[1],W[2]),ab,V)}else{if(Z==U-1){p(new Array(W[U-2],W[U-1],W[U],W[0]),ab,V)}else{p(new Array(W[Z-1],W[Z],W[Z+1],W[Z+2]),ab,V)}}}p(new Array(W[U-1],W[U],W[0],W[1]),ab,V);J(Y,V,aa)}X.innerHTML=aa.join("");return X}function p(aa,af,V){var ae=0;var ad=0;var ac=aa[1].x-1;var W=aa[1].y-1;var ag=0;var ab=1;var X=1.1;var Z=(1-af)*(aa[2].x-aa[0].x)/2;var U=(1-af)*(aa[3].x-aa[1].x)/2;var Y=(1-af)*(aa[2].y-aa[0].y)/2;var T=(1-af)*(aa[3].y-aa[1].y)/2;while(ag<=1){ae=0;ad=0;ae=(2*ag*ag*ag-3*ag*ag+1)*aa[1].x+(ag*ag*ag-2*ag*ag+ag)*Z+(-2*ag*ag*ag+3*ag*ag)*aa[2].x+(ag*ag*ag-ag*ag)*U;ad=(2*ag*ag*ag-3*ag*ag+1)*aa[1].y+(ag*ag*ag-2*ag*ag+ag)*Y+(-2*ag*ag*ag+3*ag*ag)*aa[2].y+(ag*ag*ag-ag*ag)*T;ae=Math.round(ae);ad=Math.round(ad);if(ae!=ac||ad!=W){if(ae-ac>1||ad-W>1||ac-ae>1||W-ad>1){ag-=ab;ab=ab/X}else{V[V.length]=new jsPoint(ae,ad);ac=ae;W=ad;if(ag+ab>1){ag=1-ab}}}else{ab=ab*X}ag+=ab}}function J(ak,ab,ae){var ac=ab[0].x;var aj=ab[0].y;var aa=false;var Y=false;var ai,ah,V,U;ai=ac;ah=ac;V=aj;U=aj;var Z=parseInt(ak.width);var W=ak.color.getHex();var T=Z;var ad=Z;var X=new Array();for(var ag=0;ag<ab.length;ag++){var af=false;x=ab[ag].x;y=ab[ag].y;if(ag!=0&&ag+1<ab.length){if(Math.abs(ab[ag-1].x-ab[ag+1].x)==1&&Math.abs(ab[ag-1].y-ab[ag+1].y)==1){if(!X[ag-1]){af=true;X[ag]=true}}}if(!af){if(y==aj&&!Y){aa=true}if(x==ac&&!aa){Y=true}if(x!=ac&&!aa){if(U==V){ae[ae.length]='<DIV style="position:absolute;overflow:hidden;left:';ae[ae.length]=ac;ae[ae.length]="px;top:";ae[ae.length]=V;ae[ae.length]="px;width:";ae[ae.length]=Z;ae[ae.length]="px;height:";ae[ae.length]=Z;ae[ae.length]="px;background-color:";ae[ae.length]=W;ae[ae.length]='"></DIV>'}else{ae[ae.length]='<DIV style="position:absolute;overflow:hidden;left:';ae[ae.length]=ac;ae[ae.length]="px;top:";ae[ae.length]=V;ae[ae.length]="px;width:";ae[ae.length]=Z;ae[ae.length]="px;height:";ae[ae.length]=U-V+Z;ae[ae.length]="px;background-color:";ae[ae.length]=W;ae[ae.length]='"></DIV>'}ac=x;aj=y;V=aj;U=aj;Y=false}if(y!=aj&&!Y){if(ah==ai){ae[ae.length]='<DIV style="position:absolute;overflow:hidden;left:';ae[ae.length]=ai;ae[ae.length]="px;top:";ae[ae.length]=aj;ae[ae.length]="px;width:";ae[ae.length]=Z;ae[ae.length]="px;height:";ae[ae.length]=Z;ae[ae.length]="px;background-color:";ae[ae.length]=W;ae[ae.length]='"></DIV>'}else{ae[ae.length]='<DIV style="position:absolute;overflow:hidden;left:';ae[ae.length]=ai;ae[ae.length]="px;top:";ae[ae.length]=aj;ae[ae.length]="px;width:";ae[ae.length]=ah-ai+Z;ae[ae.length]="px;height:";ae[ae.length]=Z;ae[ae.length]="px;background-color:";ae[ae.length]=W;ae[ae.length]='"></DIV>'}ac=x;aj=y;ai=ac;ah=ac;aa=false}if(Y&&!aa){if(y<=V){V=y}if(y>U){U=y}}else{V=y;U=y}if(aa&&!Y){if(x<=ai){ai=x}if(x>ah){ah=x}}else{ai=x;ah=x}if(ag==ab.length-1){if(!Y){if(ah==ai){ae[ae.length]='<DIV style="position:absolute;overflow:hidden;left:';ae[ae.length]=ai;ae[ae.length]="px;top:";ae[ae.length]=aj;ae[ae.length]="px;width:";ae[ae.length]=Z;ae[ae.length]="px;height:";ae[ae.length]=Z;ae[ae.length]="px;background-color:";ae[ae.length]=W;ae[ae.length]='"></DIV>'}else{ae[ae.length]='<DIV style="position:absolute;overflow:hidden;left:';ae[ae.length]=ai;ae[ae.length]="px;top:";ae[ae.length]=aj;ae[ae.length]="px;width:";ae[ae.length]=ah-ai+Z;ae[ae.length]="px;height:";ae[ae.length]=Z;ae[ae.length]="px;background-color:";ae[ae.length]=W;ae[ae.length]='"></DIV>'}}if(!aa){if(U==V){ae[ae.length]='<DIV style="position:absolute;overflow:hidden;left:';ae[ae.length]=ac;ae[ae.length]="px;top:";ae[ae.length]=V;ae[ae.length]="px;width:";ae[ae.length]=Z;ae[ae.length]="px;height:";ae[ae.length]=Z;ae[ae.length]="px;background-color:";ae[ae.length]=W;ae[ae.length]='"></DIV>'}else{ae[ae.length]='<DIV style="position:absolute;overflow:hidden;left:';ae[ae.length]=ac;ae[ae.length]="px;top:";ae[ae.length]=V;ae[ae.length]="px;width:";ae[ae.length]=ah-ai+Z;ae[ae.length]="px;height:";ae[ae.length]=U-V+Z;ae[ae.length]="px;background-color:";ae[ae.length]=W;ae[ae.length]='"></DIV>'}}}}}}function E(al,ao,Y){if(!al||!ao){return false}if(!Y){Y=0}var ac=new Array();for(var ap=0;ap<ao.length;ap++){ac[ap]=M(ao[ap])}var ar=new Array();if(!(ac[0].x==ac[ac.length-1].x&&ac[0].y==ac[ac.length-1].y)){ar[ar.length]=ac[0]}for(var ap=1;ap<ac.length;ap++){if(!(ac[ap].x==ac[ap-1].x&&ac[ap].y==ac[ap-1].y)){ar[ar.length]=ac[ap]}}ac=ar;if(ac.length<2){return false}else{if(ac.length==2){return this.drawLine(pen,ac[0],ac[1],"physical")}}var ag=m.appendChild(document.createElement("div"));var ad=new Array();var V=al.getHex();var aj=new Array();var Z=new Array();var ae=new Array();var T;var U;var ai=ac.length-1;var ap;for(var ap=0;ap<=ai-1;ap++){if(ap==0){l(new Array(ac[ai],ac[0],ac[1],ac[2]),Y,Z)}else{if(ap==ai-1){l(new Array(ac[ai-2],ac[ai-1],ac[ai],ac[0]),Y,Z)}else{l(new Array(ac[ap-1],ac[ap],ac[ap+1],ac[ap+2]),Y,Z)}}}l(new Array(ac[ai-1],ac[ai],ac[0],ac[1]),Y,Z);var at=q(aj,ae,Z);T=at[0];U=at[1];var ab;var ak;var W="";var an;var af=ac.length;var aa,X,aq;for(ab=T;ab<=U;ab++){an=0;var ah=aj[ab];ah.sort(am);X=ab;for(ap=0;ap<ah.length;ap+=2){if(ah[ap+1]){aa=ah[ap].xMin;if(ah[ap+1].xMax>ah[ap].xMax){aq=ah[ap+1].xMax-ah[ap].xMin+1}else{aq=ah[ap].xMax-ah[ap].xMin+1}}else{aa=ah[ah.length-1].xMin;aq=ah[ah.length-1].xMax-ah[ah.length-1].xMin+1}ad[ad.length]='<DIV style="position:absolute;height:1px;overflow:hidden;left:';ad[ad.length]=aa;ad[ad.length]="px;top:";ad[ad.length]=X;ad[ad.length]="px;width:";ad[ad.length]=aq;ad[ad.length]="px;background-color:";ad[ad.length]=V;ad[ad.length]='"></DIV>'}}ag.innerHTML=ad.join("");return ag;function am(av,au){return av.xMin-au.xMin}}function l(ad,ai,W){var ah=0;var ag=0;var af=ad[1].x-1;var X=ad[1].y-1;var aj=0;var ae=1;var Y=1.1;var ac=1;var V=1;var aa=1;var ab=(1-ai)*(ad[2].x-ad[0].x)/2;var U=(1-ai)*(ad[3].x-ad[1].x)/2;var Z=(1-ai)*(ad[2].y-ad[0].y)/2;var T=(1-ai)*(ad[3].y-ad[1].y)/2;while(aj<=1){ah=0;ag=0;ah=(2*aj*aj*aj-3*aj*aj+1)*ad[1].x+(aj*aj*aj-2*aj*aj+aj)*ab+(-2*aj*aj*aj+3*aj*aj)*ad[2].x+(aj*aj*aj-aj*aj)*U;ag=(2*aj*aj*aj-3*aj*aj+1)*ad[1].y+(aj*aj*aj-2*aj*aj+aj)*Z+(-2*aj*aj*aj+3*aj*aj)*ad[2].y+(aj*aj*aj-aj*aj)*T;ah=Math.round(ah);ag=Math.round(ag);if(ah!=af||ag!=X){if(ah-af>1||ag-X>1||af-ah>1||X-ag>1){aj-=ae;ae=ae/Y}else{W[W.length]=new jsPoint(ah,ag);af=ah;X=ag;if(aj+ae>1){aj=1-ae}}}else{ae=ae*Y}aj+=ae}}function q(ai,ae,aa){function X(){this.xMax=0;this.xMin=0;this.i=0}var W=new Array();var T;var U;var Y;var ac;var ab=true;var Z;var ad=-1;var ah,af;for(var aj=0;aj<aa.length;aj++){var ag=false;x=aa[aj].x;y=aa[aj].y;if(aj!=0&&aj+1<aa.length){if((aa[aj-1].x-aa[aj+1].x==1||aa[aj+1].x-aa[aj-1].x==1)&&(aa[aj-1].y-aa[aj+1].y==1||aa[aj+1].y-aa[aj-1].y==1)){if(!W[aj-1]){ag=true;W[aj]=true}}}if(!ag){if(!ac){ac=y}if(!T){T=y}if(!U){U=y}if(y<T){T=y}if(y>U){U=y}if(!ai[y]){ai[y]=new Array();ai[y][0]=new X();ai[y][0].xMin=x;ai[y][0].xMax=x;ai[y][0].i=aj}else{Z=ai[y][ai[y].length-1];if(aj-Z.i==1){if(Z.xMin>x){Z.xMin=x}if(Z.xMax<x){Z.xMax=x}Z.i=aj}else{ai[y][ai[y].length]=new X();ai[y][ai[y].length-1].xMin=x;ai[y][ai[y].length-1].xMax=x;ai[y][ai[y].length-1].i=aj}}ah=ae[ae.length-1];af=ae[ae.length-2];if(ah&&af){if((ah>y&&af<ah)||(ah<y&&af>ah)){ai[ah][ai[ah].length]=ai[ah][ai[ah].length-1]}}if(!ae[0]){ae[0]=y}else{if(ae[ae.length-1]!=y){ae[ae.length]=y}}Y=y}}ah=ae[0];af=ah;var aj=1;while(ah==af){af=ae[ae.length-aj];aj++}if(ah&&af){if((ah>ae[1]&&af<ah)||(ah<ae[1]&&af>ah)){ai[ah][ai[ah].length]=ai[ah][ai[ah].length-1]}}if(ac==Y){var ak=ai[ac][0];var V=ai[Y][ai[Y].length-1];if(V.xMax>ak.xMax){ai[ac][0].xMax=V.xMax}if(V.xMin<ak.xMin){ai[ac][0].xMin=V.xMin}if(ai[Y].length>1){ai[Y].pop()}else{ai.pop()}}return new Array(T,U)}function a(Y,T,W,V,X,Z){if(!Y||!T){return false}phPoint=M(T);if(X!=null){X=Math.round(X*F)+"px"}var U=m.appendChild(document.createElement("div"));U.style.position="absolute";U.style.left=phPoint.x+"px";U.style.top=phPoint.y+"px";if(V){U.style.color=V.getHex()}if(W){if(W.family){U.style.fontFamily=W.family}if(W.weight){U.style.fontWeight=W.weight}if(W.size){U.style.fontSize=W.size}if(W.style){U.style.fontStyle=W.style}if(W.variant){U.style.fontVariant=W.variant}}if(X){U.style.width=X}if(Z){U.style.textAlign=Z}U.innerHTML=Y;return U}function f(W,U,X,T){if(!W||!U){return false}phPoint=M(U);if(X!=null){X=Math.round(X*F)+"px"}if(T!=null){T=Math.round(T*F)+"px"}var Y=m.appendChild(document.createElement("div"));Y.style.position="absolute";Y.style.left=phPoint.x+"px";Y.style.top=phPoint.y+"px";var V=Y.appendChild(document.createElement("img"));V.src=W;if(X!=null){V.style.width=X;Y.style.width=X}if(T!=null){V.style.height=T;Y.style.height=T}return Y}function H(){m.innerHTML=""}};
+//jsColor class holds the color information and provides some color related basic functions.
+function jsColor()
+{
+	//Member variables
+	var hex="#000000";
+	
+	switch(arguments.length)
+	{
+		//Hexadecimal Color
+		case 1:
+            setHex(arguments[0]);			
+			break;
+		//RGB Color
+		case 3:
+			var red=arguments[0];
+			var green=arguments[1];
+			var blue=arguments[2];
+			hex=rgbToHex(red,green,blue);
+			if(hex==false)
+				hex="#000000";
+			break;
+	}
+	
+	//Public Methods
+	
+	//Set color by specifying the hexa-decimal value. 
+	this.setHex=setHex;
+	function setHex(hexColor)
+	{
+	    if(hexColor.charAt(0)=="#")
+		{
+			hex=hexColor;
+		}
+		else
+		{
+            if(isNaN(hexColor))
+            {
+                setNamedColor(hexColor.toLowerCase());
+            }
+            else
+            {			
+				hex="#" + hexColor;
+		    }    
+		}
+			
+		var rgbArray=hexToRgb(hex);
+		if(!rgbArray)
+		{
+		    hex="#000000"
+		}
+	}
+	//Get the hexa-decimal value of the object
+	this.getHex=getHex;
+	function getHex()
+	{
+	    return hex;
+	}
+	
+	//Set color by specifying the RGB values.
+	this.setRGB=setRGB;
+	function setRGB(redValue,greenValue,blueValue)
+	{
+		hex=rgbToHex(redValue,greenValue,blueValue);
+		if(hex==false)
+			hex="#000000";
+	}
+	
+	//Get the RGB values of the object
+	this.getRGB=getRGB;
+	function getRGB()
+	{
+	    return hexToRgb(hex);
+	}
+	
+	//Returns new jsColor object with darker color shade 
+	this.getDarkerShade=getDarkerShade;
+	function getDarkerShade(value)
+	{
+		var redValue,greenValue,blueValue;
+		var resArray=getRGB();
+		
+		if(!isNaN(value))
+		{
+			redValue=parseInt(resArray[0]-value);
+			greenValue=parseInt(resArray[1]-value);
+			blueValue=parseInt(resArray[2]-value);
+		}
+		
+		if(redValue<0)
+			redValue=0;
+		if(greenValue<0)
+			greenValue=0;
+		if(blueValue<0)
+			blueValue=0;
+			
+		return new jsColor(redValue,greenValue,blueValue);	
+	}
+
+	//Returns new jsColor object with lighter color shade 
+	this.getLighterShade=getLighterShade;	
+	function getLighterShade(value)
+	{
+		var redValue,greenValue,blueValue;
+		var resArray=getRGB();
+		
+		if(!isNaN(value))
+		{
+			redValue=parseInt(resArray[0]+value);
+			greenValue=parseInt(resArray[1]+value);
+			blueValue=parseInt(resArray[2]+value);
+		}
+		
+		if(redValue>255)
+			redValue=255;
+		if(greenValue>255)
+			greenValue=255;
+		if(blueValue>255)
+			blueValue=255;
+		
+		return new jsColor(redValue,greenValue,blueValue);	
+	}
+
+	//Static-Shared Utility Methods
+	
+	//Convert RGB color to Hex color
+	this.rgbToHex=rgbToHex;
+	function rgbToHex(redValue, greenValue, blueValue)
+	{
+		//Check argument values
+		if(redValue<0 || redValue>255 || greenValue<0 || greenValue>255 || blueValue<0 || blueValue>255)
+		{
+			return false;
+		}
+		                        		
+   		var colorDec = Math.round(blueValue) + 256 * Math.round(greenValue) + 65536 * Math.round(redValue);
+   		return "#" + zeroPad(colorDec.toString(16),6);
+	}
+	
+	//Convert Hex color to RGB color
+	this.hexToRgb=hexToRgb;
+	function hexToRgb(hexValue)
+	{
+		var redValue,greenValue,blueValue;
+		if(hexValue.charAt(0)=="#")
+		{
+			hexValue=hexValue.substring(1,7);
+		}
+		
+		redValue=parseInt(hexValue.substring(0,2),16);
+		greenValue=parseInt(hexValue.substring(2,4),16);
+		blueValue=parseInt(hexValue.substring(4,6),16);
+		
+		//Check argument values
+		if(redValue<0 || redValue>255 || greenValue<0 || greenValue>255 || blueValue<0 || blueValue>255)
+		{
+			return false;
+		}
+
+		return new Array(redValue,greenValue,blueValue);
+	}
+
+	//Private Methods
+	//Set the color using specified name of the color out of 16 web colors.
+	function setNamedColor(colorName)
+	{
+	    switch(colorName)
+        {   
+            case "aqua":
+                hex="#00FFFF";
+                break;
+            case "black":
+                hex="#000000";
+                break;
+            case "blue":
+                hex="#0000FF";
+                break;
+            case "fuchsia":
+                hex="#FF00FF";
+                break;
+            case "green":
+                hex="#008000";
+                break;
+            case "gray":
+                hex="#808080";
+                break;
+            case "lime":
+                hex="#00FF00";
+                break;
+            case "maroon":
+                hex="#800000";
+                break;
+            case "navy":
+                hex="#000080";
+                break;
+            case "olive":
+                hex="#808000";
+                break;
+            case "purple":
+                hex="#800080";
+                break;
+            case "red":
+                hex="#FF0000";
+                break;
+            case "silver":
+                hex="#C0C0C0";
+                break;
+            case "teal":
+                hex="#008080";
+                break;
+            case "white":
+                hex="#FFFFFF";
+                break;
+            case "yellow":
+                hex="#FFFF00";
+                break;
+        }
+	}
+	
+	//Add zero padding to the left. Used for building hexa-decimal string.	
+	function zeroPad(val,count)
+	{ 
+		var valZeropad = val + "";
+		while(valZeropad.length < count) 
+		{
+			valZeropad = "0" + valZeropad; 
+		}
+		return valZeropad;
+	}
+
+}
+
+//jsFont class holds the font information which can be used by other objects in object oriented way.
+function jsFont(family,weight,size,style,variant)
+{
+    //Properties: family, weight, size, style and varient with default value null
+    this.family=null;
+    this.weight=null;
+    this.size=null;
+    this.style=null;
+    this.variant=null;
+    
+    if(family && family!="")
+        this.family=family;
+    
+    if(weight && weight!="")
+        this.weight=weight;
+
+    if(size && size!="")
+        this.size=size;
+        
+    if(style && style!="")
+        this.style=style;
+    
+    if(variant && variant!="")
+        this.variant=variant;
+}
+
+//jsPen class holds the drawing pen/stroke information. Mainly it holds the color and width values to be used for 2D drawing. 
+//All draw methods take jsPen object as a parameter. Acts like a pen for drawing.
+function jsPen(color,width)
+{
+	this.color=new jsColor();	//color proprty of jsColor type
+	this.width="1px";			//width property with 1px default value
+	
+	if(arguments.length>0)
+	{
+		this.color=color;	
+	}
+	if(arguments.length>=2)
+	{
+		this.width=width;
+	}
+	if(!isNaN(width))
+	{
+		this.width=width+"px";
+	}
+}
+
+//jsPoint class holds the 2D drawing point information. It holds values of x and y coordinates of the point.
+function jsPoint(x,y)
+{
+	this.x=0;
+	this.y=0;
+
+	if(arguments.length==2)
+	{
+		this.x=x;
+		this.y=y;
+	}
+}
+
+function jsGraphics(canvasDivElement)
+{
+	//Private member variables
+	var origin=new jsPoint(0,0);
+	var scale=1;
+	var coordinateSystem="default";	//Possible values "default" or "cartecian"
+	var canvasDiv;
+	
+	if(canvasDivElement)
+		canvasDiv=canvasDivElement;
+	else
+		canvasDiv=document.body;	//Document will be used directly for drawing
+	
+	var gridDiv=null;
+	
+	//Public Methods
+	this.drawLine=drawLine;
+	this.drawRectangle=drawRectangle;
+	this.fillRectangle=fillRectangle;
+	this.drawCircle=drawCircle;
+	this.drawEllipse=drawEllipse;
+	this.fillCircle=fillCircle;
+	this.fillEllipse=fillEllipse;
+	this.fillArc=fillArc;
+	this.drawArc=drawArc;
+	this.drawPolyline=drawPolyline;
+	this.drawPolygon=drawPolygon;
+	this.fillPolygon=fillPolygon;
+	this.drawBezier=drawBezier;
+	this.drawPolyBezier=drawPolyBezier;
+	this.drawCurve=drawCurve;
+	this.drawClosedCurve=drawClosedCurve;
+	this.fillClosedCurve=fillClosedCurve;
+	this.drawText=drawText;
+	this.drawImage=drawImage;
+	this.clear=clear;
+	this.showGrid=showGrid;
+	this.hideGrid=hideGrid;
+	this.setOrigin=setOrigin;
+	this.getOrigin=getOrigin;
+	this.setScale=setScale;
+	this.getScale=getScale;
+	this.setCoordinateSystem=setCoordinateSystem;
+	this.getCoordinateSystem=getCoordinateSystem;
+	this.logicalToPhysicalPoint=logicalToPhysicalPoint;
+	
+	//Initialization
+	
+	//Grid initialization
+	gridDiv=document.createElement("div");
+	gridDiv.style.left="0px";
+	gridDiv.style.top="0px";
+	if(canvasDiv.clientWidth>0 && canvasDiv.clientHeight>0)
+	{
+	    gridDiv.style.width=(parseInt(canvasDiv.clientWidth)-1) + "px";
+	    gridDiv.style.height=(parseInt(canvasDiv.clientHeight)-1) + "px";
+	}
+	else
+	{
+	    gridDiv.style.width="0px";
+	    gridDiv.style.height="0px";
+	}    
+	gridDiv.style.zIndex=0;
+	gridDiv.style.position="absolute";
+	gridDiv.style.display="none";
+	canvasDiv.appendChild(gridDiv);
+
+	//Origin
+	function setOrigin(point)
+	{
+		origin=point;	
+	}
+	
+	function getOrigin()
+	{
+		return origin;
+	}
+
+	//Scale
+	function setScale(value)
+	{
+		scale=value;	
+	}
+	
+	function getScale()
+	{
+		return scale;
+	}
+	
+	//Coordinate System
+	function setCoordinateSystem(name)
+	{
+		name=name.toLowerCase()
+		if(name.toLowerCase() != "default" && name.toLowerCase() != "cartecian")
+		{
+			coordinateSystem="default";
+		}
+		else
+		{
+			coordinateSystem=name;
+		}
+	}
+	
+	function getCoordinateSystem()
+	{
+		return coordinateSystem=name;
+	}
+	
+	//Conversion of logical point to physical point based on coordinate system, origin and scale.
+	function logicalToPhysicalPoint(point)
+	{
+		if(coordinateSystem=="cartecian")
+		{
+			return new jsPoint(point.x*scale+origin.x,origin.y-point.y*scale)
+		}
+		else
+		{
+			return new jsPoint(point.x*scale+origin.x,point.y*scale+origin.y)
+		}
+	}
+	
+	//Display background grid
+	function showGrid(range,showRange,color)
+	{
+		if(showRange==null)	
+			showRange=true;	//range is grid interval. The values will be shown if showRange is true.
+			
+		var x0,x1,y0,y1;
+		var isLeft=false; //range display on left side of y-axis if true otherwise right side.
+		var isUp=false;	//range display above the x-axis if true otherwise below.
+		gridDiv.innerHTML="";
+
+		if(!color)
+			color=new jsColor(200,200,200);
+			
+		if(!range)
+			range=Math.round(parseInt(gridDiv.style.width)/10);	//If range not specified, use grid with devided by 10 as range.
+		else	
+			range=range*scale;
+			
+		var hexColor=color.getHex();
+		
+		//If grid height or width is not available, the grid will not be displayed.
+		if(parseInt(gridDiv.style.width)<=0 || parseInt(gridDiv.style.height)<=0)
+		    return;
+		else
+		    gridDiv.style.display="";
+		    
+		x0=parseInt(gridDiv.style.left)
+		x1=parseInt(gridDiv.style.left)+parseInt(gridDiv.style.width);
+		y0=parseInt(gridDiv.style.top);
+		y1=parseInt(gridDiv.style.top)+parseInt(gridDiv.style.height);
+
+		//On which side of the axis the range to be displayed is decided based on position of the origin in the canvas.
+		//Range is displyed on opposite side of the largest section(out of 4 section divided by the 2 axis)  
+		if(origin.x-parseInt(gridDiv.style.left)<=parseInt(gridDiv.style.left)+gridDiv.offsetWidth-origin.x)
+			isLeft=true
+			
+		if(origin.y-parseInt(gridDiv.style.top)<=parseInt(gridDiv.style.top)+gridDiv.offsetHeight-origin.y)
+			isUp=true
+			
+		var iHtml=new Array();	//Holds inner html
+		var rangeFont=new jsFont("arial",null,"9px");
+		var rangeColor=color.getDarkerShade(150);
+		var hexRangeColor=rangeColor.getHex(); 
+
+		//Draw the border grids
+ 		iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;z-index:-100;left:" + x0 + "px;top:" + y0 + "px;width:" + (x1-x0+1) + "px;height:1px;background-color:" + hexColor + "\"></DIV>";
+ 		iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;z-index:-100;left:" + x0 + "px;top:" + y1 + "px;width:" + (x1-x0+1) + "px;height:1px;background-color:" + hexColor + "\"></DIV>";
+ 		iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;z-index:-100;left:" + x0 + "px;top:" + y0 + "px;width:1px;height:" + (y1-y0+1) + "px;background-color:" + hexColor + "\"></DIV>";
+ 		iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;z-index:-100;left:" + x1 + "px;top:" + y0 + "px;width:1px;height:" + (y1-y0+1) + "px;background-color:" + hexColor + "\"></DIV>";
+
+		var gridHeight=gridDiv.offsetHeight;
+		var gridWidth=gridDiv.offsetWidth;
+		var lastRangeDiv; //previous range div
+		var currentRangeDiv //current range div
+	
+		//Draw vertical grid lines
+		for(var x=(origin.x-x0)%range;x<x1;x+=range)
+		{
+			if(x==origin.x && x>=x0)
+			{
+				if(x>=x0 && x<=x1)
+		 			iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;z-index:-99;left:" + x + "px;top:" + y0 + "px;width:1px;height:" + gridHeight + "px;background-color:" + hexRangeColor + "\"></DIV>";
+	 		}	
+			else
+			{
+	 			iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;z-index:-100;left:" + x + "px;top:" + y0 + "px;width:1px;height:" + gridHeight + "px;background-color:" + hexColor + "\"></DIV>";
+	 		}	
+	 			
+			if(showRange && x>=x0 && x<x1)
+			{	 		
+	 			if(lastRangeDiv && lastRangeDiv.offsetLeft + lastRangeDiv.offsetWidth + 1 < x)
+	 			{
+	 				if(lastRangeDiv.offsetWidth < x1-x)
+	 					currentRangeDiv = drawRange(Math.round((x-origin.x)/scale),new jsPoint(x+2,y0+1+origin.y),rangeFont,rangeColor);
+	 			}	
+	 			else if(!lastRangeDiv)
+	 				currentRangeDiv = drawRange(Math.round((x-origin.x)/scale),new jsPoint(x+2,y0+1+origin.y),rangeFont,rangeColor);
+	 			
+				if(currentRangeDiv)
+				{
+	 				if(!isUp)
+					{
+						if(parseInt(currentRangeDiv.style.top)+currentRangeDiv.offsetHeight > y1)
+		 					currentRangeDiv.style.top=y1-currentRangeDiv.offsetHeight-1;
+					}
+					else
+					{
+						if(parseInt(currentRangeDiv.style.top)-currentRangeDiv.offsetHeight-1>y0)
+		 					currentRangeDiv.style.top=parseInt(currentRangeDiv.style.top)-currentRangeDiv.offsetHeight-1;
+		 				
+						if(parseInt(currentRangeDiv.style.top)<=y0)
+							currentRangeDiv.style.top=y0 + 1;
+					}	
+				
+					currentRangeDiv.style.visibility="visible";
+					lastRangeDiv = currentRangeDiv;
+				}
+				currentRangeDiv=null;	
+
+	 		}		
+		}
+		lastRangeDiv = null;
+
+		//Draw horizontal grid lines
+		for(var y=(origin.y-y0)%range;y<=y1;y+=range)
+		{
+			if(y==origin.y)
+			{
+				if(y>=y0 && y<=y1)
+					iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;z-index:-99;left:" + x0 + "px;top:" + y + "px;width:" + gridWidth + "px;height:1px;background-color:" + hexRangeColor + "\"></DIV>";
+			}	
+			else
+		 		iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;z-index:-100;left:" + x0 + "px;top:" + y + "px;width:" + gridWidth + "px;height:1px;background-color:" + hexColor + "\"></DIV>";
+	 		
+			if(showRange && y!=origin.y && y>=y0 && y<y1)
+			{	 		
+	 			if(lastRangeDiv && lastRangeDiv.offsetTop + lastRangeDiv.offsetHeight < y)
+	 			{
+	 				if(lastRangeDiv.offsetHeight <= y1-y)
+	 				{
+	 					if(coordinateSystem=="cartecian")
+		 					currentRangeDiv = drawRange(Math.round((origin.y-y)/scale),new jsPoint(x0+2+origin.x,y),rangeFont,rangeColor);
+		 				else
+		 					currentRangeDiv = drawRange(Math.round((y-origin.y)/scale),new jsPoint(x0+2+origin.x,y),rangeFont,rangeColor);
+		 			}	
+	 			}	
+	 			else if(!lastRangeDiv)
+	 			{
+	 				if(coordinateSystem=="cartecian")
+		 				currentRangeDiv = drawRange(Math.round((origin.y-y)/scale),new jsPoint(x0+2+origin.x,y),rangeFont,rangeColor);
+		 			else	
+		 				currentRangeDiv = drawRange(Math.round((y-origin.y)/scale),new jsPoint(x0+2+origin.x,y),rangeFont,rangeColor);
+				}
+				
+				if(currentRangeDiv)
+				{
+					if(!isLeft)
+					{
+						if(parseInt(currentRangeDiv.style.left)+1+currentRangeDiv.offsetWidth < x1)
+			 				currentRangeDiv.style.left=parseInt(currentRangeDiv.style.left)+1;
+			 			else
+							currentRangeDiv.style.left=x1-currentRangeDiv.offsetWidth-3;
+					}
+					else
+					{
+						if(parseInt(currentRangeDiv.style.left)-currentRangeDiv.offsetWidth-2 > x0)
+			 				currentRangeDiv.style.left=parseInt(currentRangeDiv.style.left)-currentRangeDiv.offsetWidth-2;
+			 			else
+			 				currentRangeDiv.style.left=parseInt(currentRangeDiv.style.left)+1;
+			 				
+						if(parseInt(currentRangeDiv.style.left)<=x0)
+							currentRangeDiv.style.left=x0 + 1;
+					}
+				
+					currentRangeDiv.style.visibility="visible";
+					
+					//Hide the overlapping range.
+					if(isUp && parseInt(currentRangeDiv.style.top)+currentRangeDiv.offsetHeight>origin.y-currentRangeDiv.offsetHeight && parseInt(currentRangeDiv.style.top)<origin.y)
+						currentRangeDiv.style.visibility="hidden";
+
+					if(isUp && parseInt(currentRangeDiv.style.top)>origin.y && parseInt(currentRangeDiv.style.top)<origin.y+currentRangeDiv.offsetHeight && parseInt(currentRangeDiv.style.top)>origin.y)
+						currentRangeDiv.style.visibility="hidden";
+
+					if(origin.y>y1 && parseInt(currentRangeDiv.style.top)+currentRangeDiv.offsetHeight>y1-currentRangeDiv.offsetHeight)
+						currentRangeDiv.style.visibility="hidden";	
+
+					if(!isUp && parseInt(currentRangeDiv.style.top)<origin.y+currentRangeDiv.offsetHeight && parseInt(currentRangeDiv.style.top)>origin.y)
+						currentRangeDiv.style.visibility="hidden";
+						
+					if(!isUp && parseInt(currentRangeDiv.style.top)<origin.y && parseInt(currentRangeDiv.style.top)+currentRangeDiv.offsetHeight>origin.y && parseInt(currentRangeDiv.style.top)<origin.y)
+					{
+						alert(parseInt(currentRangeDiv.style.top));
+						currentRangeDiv.style.visibility="hidden";
+					}
+					if(origin.y<y0 && parseInt(currentRangeDiv.style.top)<y0+currentRangeDiv.offsetHeight)
+						currentRangeDiv.style.visibility="hidden";
+
+					lastRangeDiv=currentRangeDiv;
+				}
+				currentRangeDiv = null;	
+
+			}
+		}
+
+		gridDiv.innerHTML=gridDiv.innerHTML + iHtml.join("");
+		
+		//Internal function only to be used by showGrid method to draw the range value.
+		function drawRange(text,point,font,color,align)
+		{
+	        var textDiv=document.createElement("div");
+
+    	    textDiv.style.position="absolute";
+        	textDiv.style.left=point.x + "px";
+        	textDiv.style.top=point.y + "px";
+        	textDiv.style.color=color.getHex();
+        	textDiv.style.zIndex=-98;
+			textDiv.style.visibility="hidden";
+
+        	gridDiv.appendChild(textDiv);
+                
+        	//set font
+        	if(font.family)
+            	textDiv.style.fontFamily=font.family;
+
+        	if(font.weight)
+            	textDiv.style.fontWeight=font.weight;
+        
+        	if(font.size)
+            	textDiv.style.fontSize=font.size;
+        
+        	if(font.style)
+            	textDiv.style.fontStyle=font.style;
+        
+        	if(font.variant)
+            	textDiv.style.fontVariant=font.variant;
+
+            if(align) 
+                textDiv.align=align;
+        
+	        textDiv.innerHTML=text;
+    	    return textDiv;
+    	}
+	}
+
+	//Clear the grid.
+	function hideGrid()
+	{
+		gridDiv.innerHTML="";
+		gridDiv.style.display="none";
+	}
+	
+	//Draw Line between the 2 specified points based on Mid point Algorithm.
+	function drawLine(pen,point0,point1)
+	{
+		//Check arguments for null values
+		if(!pen || !point0 || !point1)
+			return false;
+			
+	    var lineDiv=canvasDiv.appendChild(document.createElement("div"));
+	    
+	    //Some library functions use drawLine method and need to pass physical points only. So the following check.
+	    if(arguments[3]!="physical") 
+	    {
+	    	phPoint0=logicalToPhysicalPoint(point0);
+	   	    phPoint1=logicalToPhysicalPoint(point1);
+   	    }
+   	    else
+   	    {
+   	    	phPoint0=new jsPoint(point0.x,point0.y);
+   	    	phPoint1=new jsPoint(point1.x,point1.y);
+   	    }
+
+	 	var x0, x1, y0, y1;
+	 	x0=phPoint0.x;
+	 	x1=phPoint1.x;
+	 	y0=phPoint0.y;
+	 	y1=phPoint1.y;
+	 	
+	 	var hexColor=pen.color.getHex();
+   	 	//For Horizontal line
+	 	if(y0==y1)
+	 	{
+	 		if(x0<=x1)
+		 		lineDiv.innerHTML="<DIV style=\"position:absolute;overflow:hidden;left:" + x0 + "px;top:" + y0 + "px;width:" + (x1-x0+1) + "px;height:" + pen.width + ";background-color:" + hexColor + "\"></DIV>";
+	 		else if(x0>x1)
+		 		lineDiv.innerHTML="<DIV style=\"position:absolute;overflow:hidden;left:" + x1 + "px;top:" + y0 + "px;width:" + (x0-x1+1) + "px;height:" + pen.width + ";background-color:" + hexColor + "\"></DIV>";
+		 		
+	 		return lineDiv;
+	 	}
+	 	
+	 	//For Vertical line
+	 	if(x0==x1)
+	 	{
+	 		if(y0<=y1)
+		 		lineDiv.innerHTML="<DIV style=\"position:absolute;overflow:hidden;left:" + x0 + "px;top:" + y0 + "px;width:" + pen.width + ";height:" + (y1-y0+1) + "px;background-color:" + hexColor + "\"></DIV>";
+	 		else if(y0>y1)
+		 		lineDiv.innerHTML="<DIV style=\"position:absolute;overflow:hidden;left:" + x0 + "px;top:" + y1 + "px;width:" + pen.width + ";height:" + (y0-y1+1) + "px;background-color:" + hexColor + "\"></DIV>";
+		 		
+	 		return lineDiv;
+	 	}
+		
+	    var iHtml=new Array();
+	 	var yArray=new Array();
+	 	
+	 	///Pixel Height Width Start
+		var dx=Math.abs(x1-x0);
+	 	var dy=Math.abs(y1-y0);
+	 	var pixHeight,pixWidth;
+	 	var penWidth=parseInt(pen.width);
+	 	
+	 	pixHeight=Math.round(Math.sqrt((penWidth*penWidth)/((dy*dy)/(dx*dx)+1)));
+	 	pixWidth=Math.round(Math.sqrt(penWidth*penWidth-pixHeight*pixHeight));
+	
+	 	if(pixWidth==0)
+	 	{
+	 		pixWidth=1;
+	 	}
+	 	if(pixHeight==0)
+	 	{
+	 		pixHeight=1;
+	 	}
+	 	///Pixel Height Width End
+
+	 	var steep = Math.abs(y1 - y0) > Math.abs(x1 - x0); 
+		if (steep)
+		{   
+			// swap   
+			var tmp=x0;
+			x0=y0;
+			y0=tmp;
+			tmp=x1;
+			x1=y1;
+			y1=tmp;
+		}
+
+		if (x0 > x1)
+		{   
+			// swap   
+			var tmp=x0;
+			x0=x1;
+			x1=tmp;
+			tmp=y0;
+			y0=y1;
+			y1=tmp;
+		}
+		
+		var deltax = x1 - x0;
+		var deltay = Math.abs(y1 - y0);
+		var error  = deltax/2;
+		var ystep;
+		var y = y0;
+		
+		if (y0<y1) 
+			ystep = 1; 
+		else 
+			ystep = -1;
+			
+		var xp,yp;
+		var divWidth=0;
+ 		var divHeight=0;
+ 		if(steep)
+ 		{
+ 			divWidth=pixWidth;
+ 		}
+ 		else
+ 		{
+ 			divHeight=pixHeight;
+ 		}
+		for (x=x0;x<=x1;x++)
+		{
+   			if (steep)
+   			{ 
+   				if(x==x0)
+   				{
+   					xp=y;
+   					yp=x;
+   				}
+   				else
+   				{
+   					if(y==xp)
+   					{
+   						divHeight=divHeight+ 1;
+   					}
+   					else
+   					{
+   						divHeight=divHeight+pixHeight;
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xp + "px;top:" + yp + "px;width:" + divWidth+ "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+ 						divHeight=0;		
+ 						xp=y;
+	   					yp=x;		
+ 					}
+ 				}
+ 				
+ 				if(x==x1)
+ 				{
+ 					if(divHeight!=0)
+ 					{
+ 						divHeight=divHeight+pixHeight;
+ 						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xp + "px;top:" + yp + "px;width:" + divWidth+ "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+ 					}
+ 					else
+ 					{
+ 						divHeight=pixHeight;
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + y + "px;top:" + x + "px;width:" + divWidth+ "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+ 					}
+ 				}
+ 			}
+			else
+			{ 
+				if(x==x0)
+   				{
+   					xp=x;
+   					yp=y;
+   				}
+   				else
+   				{
+   					if(y==yp)
+   					{
+   						divWidth=divWidth + 1;
+   					}
+   					else
+   					{
+   						divWidth=divWidth+pixWidth;
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xp + "px;top:" + yp + "px;width:" + divWidth+ "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+	 					divWidth=0;
+ 						xp=x;
+ 						yp=y;			
+ 					}
+ 				}	
+ 				if(x==x1)
+ 				{
+ 					if(divWidth!=0)
+ 					{
+   						divWidth=divWidth+pixWidth;
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xp + "px;top:" + yp + "px;width:" + divWidth+ "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+ 					}
+ 					else
+ 					{
+ 						divWidth=pixWidth;
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + x + "px;top:" + y + "px;width:" + divWidth+ "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+ 					}
+ 				}
+ 			}
+
+   			error = error - deltay;
+   			if (error < 0)
+			{     
+				y = y + ystep;
+     			error = error + deltax;
+   			}
+ 		}
+ 		
+ 		lineDiv.innerHTML=iHtml.join("");
+ 		return lineDiv;
+	}
+	
+	//Private function returns array of x coordinates for y values
+	//for a line (algorithm same as drawLine method). 
+	//Used by drawArc, fillArc and fillPolygon methods.
+	function getLinePixels(point0,point1)
+	{
+		function xData()
+		{
+			this.xMax=0;
+			this.xMin=0;
+			this.isVertex=false;
+		}
+		
+	 	var x0, x1, y0, y1;
+	 	x0=point0.x;
+	 	x1=point1.x;
+	 	y0=point0.y;
+	 	y1=point1.y;
+	 	var xDataArray=new Array();
+	 	var steep = Math.abs(y1 - y0) > Math.abs(x1 - x0); 
+		if (steep)
+		{   
+			// swap   
+			var tmp=x0;
+			x0=y0;
+			y0=tmp;
+			tmp=x1;
+			x1=y1;
+			y1=tmp;
+		}
+
+		if (x0 > x1)
+		{   
+			// swap   
+			var tmp=x0;
+			x0=x1;
+			x1=tmp;
+			tmp=y0;
+			y0=y1;
+			y1=tmp;
+		}
+
+		var deltax = x1 - x0;
+		var deltay = Math.abs(y1 - y0);
+		var error  = deltax/2;
+		var ystep;
+		var y = y0;
+		
+		if (y0<y1) 
+			ystep = 1; 
+		else 
+			ystep = -1;
+			
+		for (x=x0;x<=x1;x++)
+		{
+   			if (steep)
+   			{ 
+		   		xDataArray[x]=new xData();
+		   		xDataArray[x].xMin=y;
+		   		xDataArray[x].xMax=y;
+		   		
+		   		if(x==x0 && y==y0)
+		   			xDataArray[x].isVertex=true;	
+ 			}
+			else
+			{ 
+				if(!xDataArray[y])
+				{
+					xDataArray[y]=new xData();
+					xDataArray[y].xMin=x;
+			   		xDataArray[y].xMax=x;
+			   		
+			   		if(x==x0 && y==y0)
+			   			xDataArray[y].isVertex=true;	
+				}
+				else
+				{
+					xDataArray[y].xMax=x;
+				}
+ 			}
+
+   			error = error - deltay;
+   			if (error < 0)
+			{     
+				y = y + ystep;
+     			error = error + deltax;
+   			}
+ 		}
+		return xDataArray;
+	}
+
+    //Draw rectangle at specified point with specified width and height.	
+    function drawRectangle(pen,point,width,height)
+    {
+	    //Check arguments for null values
+	    if(!pen || !point || !width || !height)
+		    return false;
+    		
+	    width=Math.round(width*scale);
+	    height=Math.round(height*scale);
+    	
+        var rectDiv=canvasDiv.appendChild(document.createElement("div"));
+        var iHtml=new Array();
+        
+        var penWidth=parseInt(pen.width);
+        var hexColor=pen.color.getHex(); 
+        
+        //If pen width is less than height or width specified use fillRectangle method
+        if(penWidth>=height || penWidth>=width)
+    	    return this.fillRectangle(pen.color,point,width,height);
+        	
+        phPoint=logicalToPhysicalPoint(point);
+        
+        //Draw 4 sides of the rectangle.
+        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + phPoint.x + "px;top:" + phPoint.y + "px;width:" + width +  "px;height:" + penWidth + "px;background-color:" + hexColor + "\"></DIV>";
+        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + phPoint.x + "px;top:" + (phPoint.y+height-penWidth) + "px;width:" + width +  "px;height:" + penWidth + "px;background-color:" + hexColor + "\"></DIV>";
+        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + phPoint.x + "px;top:" + (phPoint.y+penWidth) + "px;width:" + penWidth +  "px;height:" + (height-2*penWidth+1) + "px;background-color:" + hexColor + "\"></DIV>";
+        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (phPoint.x+width-penWidth) + "px;top:" + (phPoint.y+penWidth) + "px;width:" + penWidth +  "px;height:" + (height-2*penWidth+1) + "px;background-color:" + hexColor + "\"></DIV>";
+        
+  	    rectDiv.innerHTML=iHtml.join("");
+  	    return rectDiv;
+    }
+
+    //Draw color filled rectangle at specified point with specified color, width and height
+    function fillRectangle(color,point,width,height)
+    {
+	    //Check arguments for null values
+	    if(!color || !point || !width || !height)
+		    return false;
+
+	    width=Math.round(width*scale);
+	    height=Math.round(height*scale);
+    	
+        var rectDiv=canvasDiv.appendChild(document.createElement("div"));
+        phPoint=logicalToPhysicalPoint(point);
+
+        var hexColor=color.getHex();
+        
+        //Draw a single div element
+  	    rectDiv.innerHTML="<DIV style=\"position:absolute;overflow:hidden;left:" + phPoint.x + "px;top:" + phPoint.y + "px;width:" + width +  "px;height:" + height + "px;background-color:" + hexColor + "\"></DIV>";
+  	    return rectDiv;
+    }
+
+    //This is a private function to draw an ellipse with width 1px.
+    //It is used by drawEllipse method. 
+    //Mid point algorithm is used for the drawing
+    function drawEllipseSingle(pen,center,width,height)
+    {
+   	    //Check arguments for null values
+	    if(!pen || !center || !width || !height)
+		    return false;
+        
+        var ellipseDiv=canvasDiv.appendChild(document.createElement("div"));
+        var iHtml=new Array();
+
+        var penWidth=parseInt(pen.width);
+        var hexColor=pen.color.getHex();
+        
+	    var a=Math.round(width/2);
+	    var b=Math.round(height/2);
+	    var xc=center.x;
+	    var yc=center.y;
+
+	    var x=0;
+	    var y=b;
+	    var a2=a*a;
+	    var b2=b*b;
+    	
+	    var yp=y;
+	    var xp=x;
+	    var divWidth;
+	    var divHeight;
+    	
+ 	    while(b2*x < a2*y)
+  	    {     
+  		    x++;    
+ 		    if((b2*x*x + a2*(y-0.5)*(y-0.5) - a2*b2) >=0)  
+ 			    y--;    
+    		
+		    if(x==1 && y!=yp)
+		    {
+		        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+x) + "px;top:" + (yc+y) + "px;width:1px;height:1px;background-color:" + hexColor + "\"></DIV>";
+		        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+x) + "px;top:" + (yc-y) + "px;width:1px;height:1px;background-color:" + hexColor + "\"></DIV>";
+		    }
+      	    if(y!=yp)
+      	    {
+			    divWidth=x-xp;
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+xp) + "px;top:" + (yc+yp-penWidth+1) + "px;height:" + penWidth + "px;width:" + divWidth + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp-divWidth+1) + "px;top:" + (yc+yp-penWidth+1) + "px;height:" + penWidth + "px;width:" + divWidth + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+xp) + "px;top:" + (yc-yp) + "px;height:" + penWidth + "px;width:" + divWidth + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp-divWidth+1) + "px;top:" + (yc-yp) + "px;height:" + penWidth + "px;width:" + divWidth + "px;background-color:" + hexColor + "\"></DIV>";
+
+			    yp=y;
+			    xp=x;
+		    }
+    		
+		    if(b2*x >= a2*y)
+		    {
+			    divWidth=x-xp+1;
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+xp) + "px;top:" + (yc+yp-penWidth+1) + "px;height:" + penWidth + "px;width:" + divWidth + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp-divWidth+1) + "px;top:" + (yc+yp-penWidth+1) + "px;height:" + penWidth + "px;width:" + divWidth + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+xp) + "px;top:" + (yc-yp) + "px;height:" + penWidth + "px;width:" + divWidth + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp-divWidth+1) + "px;top:" + (yc-yp) + "px;height:" + penWidth + "px;width:" + divWidth + "px;background-color:" + hexColor + "\"></DIV>";
+		    }
+	    }
+
+  	    yp=y;
+	    xp=x;
+    	
+	    while(y!=0)  
+	    {
+		    y--;   
+  		    if((b2*(x+0.5)*(x+0.5) + a2*y*y - a2*b2)<=0)   
+     		    x++;
+    		
+     	    if(x!=xp)
+     	    {
+			    divHeight=yp-y;
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+xp-penWidth+1) + "px;top:" + (yc+yp-divHeight+1) + "px;width:" + penWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+xp-penWidth+1) + "px;top:" + (yc-yp) + "px;width:" + penWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc+yp-divHeight+1) + "px;width:" + penWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc-yp) + "px;width:" + penWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    			
+			    xp=x;
+			    yp=y;
+		    }
+    		
+     	    if(y==0)
+     	    {
+			    divHeight=yp-y+1;
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+xp-penWidth+1) + "px;top:" + (yc+yp-divHeight+1) + "px;width:" + penWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc+xp-penWidth+1) + "px;top:" + (yc-yp) + "px;width:" + penWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc+yp-divHeight+1) + "px;width:" + penWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc-yp) + "px;width:" + penWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    			
+			    xp=x;
+			    yp=y;
+		    }
+
+ 	    }
+     	
+ 	    ellipseDiv.innerHTML=iHtml.join("");
+ 	    return ellipseDiv;
+    }
+
+    //Draw ellipse with specified center, width and height.
+    //Mid point algorithm is used for basic drawing.  
+    function drawEllipse(pen,center,width,height)
+    {
+	    //Check arguments for null values
+	    if(!pen || !center || !width || !height)
+		    return false;
+    		
+	    width*=scale;
+	    height*=scale;
+
+        var ellipseDiv=canvasDiv.appendChild(document.createElement("div"));
+        var iHtml=new Array();
+        
+        phCenter=logicalToPhysicalPoint(center);
+
+	    var penWidth=parseInt(pen.width);
+	    if(penWidth<=1)
+	    {
+		    return drawEllipseSingle(pen,phCenter,width,height);
+	    }
+    	
+	    var hexColor=pen.color.getHex();
+    	
+	    var a=Math.round(width/2);
+	    var b=Math.round(height/2);
+	    var xc=phCenter.x;
+	    var yc=phCenter.y;
+    	
+	    //For inner ellipse
+	    var ai=a-penWidth + 1;
+	    var bi=b-penWidth + 1;
+    	
+	    //For drawing ellipse having width more than 1px, inner ellipse is required to be considered
+	    var res=getInnerEllipse(phCenter,ai*2,bi*2)
+    	
+	    var xArray=res[0];
+	    var xArrayI=res[1];
+    	
+	    var yi=bi;
+	    var ai2=ai*ai;
+	    var bi2=bi*bi;
+    	
+	    var x=0;
+	    var y=b;
+	    var a2=a*a;
+	    var b2=b*b;
+    	
+	    var xp,yp;
+    	
+	    xp=1;
+	    yp=y;
+	    var ypi=yi;
+    	
+	    var xT;
+	    var divWidth;
+	    var divHeight=1;
+    	
+ 	    while(b2*x < a2*y)
+  	    {     
+  		    x++;    
+ 		    if((b2*x*x + a2*(y-0.5)*(y-0.5) - a2*b2) >=0)  
+ 			    y--;    
+    		
+		    if(y+1<bi)
+		    {
+ 			    if(y!=yp)
+			    {
+				    xT=xc-x+1;
+				    divWidth=(x-1)+1-xArray[yp];
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc-yp) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc+yp) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+
+				    xT=xT+2*(x-1)+1-divWidth;
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc-yp) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc+yp) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				
+				    yp=y;		
+				    xp=x;
+			    }
+			    //Last step in loop
+			    if(b2*x >= a2*y)
+			    {
+				    xT=xc-x;
+				    divWidth=x+1-xArray[yp];
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc-y) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc+y) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				
+				    xT=xT+2*x+1-divWidth;
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc-y) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc+y) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+		    }	 		
+		    else
+		    {
+      		    if(x==1 && y!=yp) //Topmost and bottom most points, to be tested
+      		    {
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;width:1px;height:1px;left:" + xc + "px;top:" + (yc+yp-1) + "px;background-color:" + hexColor + "\"></DIV>";
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;width:1px;height:1px;left:" + xc + "px;top:" + (yc-yp) + "px;background-color:" + hexColor + "\"></DIV>";      		
+			    }
+			    if(y!=yp)
+			    {
+   				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-x+1) + "px;top:" + (yc-yp) + "px;width:" + (2*(x-1)+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-x+1) + "px;top:" + (yc+yp) + "px;width:" + (2*(x-1)+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+				    yp=y;
+			    }
+    					
+			    //Last step in loop
+			    if(y==bi || y==0)
+			    {
+  				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-x) + "px;top:" + (yc-y) + "px;width:" + (2*x+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-x) + "px;top:" + (yc+y) + "px;width:" + (2*x+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+		    }
+	    }
+    	  
+	    xp=x;
+	    yp=y;
+	    divHeight=1;
+	    var xpi=xArray[y];
+
+	    while(y!=0)  
+	    {     
+		    y--;   
+  		    if((b2*(x+0.5)*(x+0.5) + a2*y*y - a2*b2)<=0)   
+     		    x++;
+    		
+			    if(y+1<bi)
+			    {
+				    if(x!=xp || xArray[y]!=xpi)
+				    {
+					    divHeight=yp-y;
+    					
+					    xT=xc-xp;
+					    divWidth=xp+1-xArray[y+1];
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc-yp) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc+y+1) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				
+					    xT=xT+2*xp+1-divWidth;
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc-yp) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc+y+1) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				
+					    xp=x;
+					    yp=y;
+					    xpi=xArray[y];
+				    }
+    		
+				    //Last step in loop
+				    if(y==0)
+				    {
+					    divHeight=yp-y+1;
+
+					    xT=xc-x;
+					    divWidth=x+1-xArray[y];
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc-yp) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc+y) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				
+					    xT=xT+2*x+1-divWidth;
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc-yp) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + xT + "px;top:" + (yc+y) + "px;width:" + divWidth + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+        				
+    				    xp=x;
+					    yp=y;
+					    xpi=xArray[y];
+				    }
+			    }
+			    else
+			    {
+				    if(x!=xp)
+				    {
+					    divHeight=yp-y;
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc-yp) + "px;width:" + (2*xp+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc+y+1) + "px;width:" + (2*xp+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+
+					    xp=x;
+					    yp=y;
+					    xpi=xArray[y];
+				    }
+    		
+				    //Last step in loop
+				    if(y==bi || y==0)
+				    {
+				        divHeight=yp-y+1;
+    				    
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-x) + "px;top:" + (yc-yp) + "px;width:" + (2*x+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-x) + "px;top:" + (yc+y) + "px;width:" + (2*x+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+        				
+					    xp=x;
+					    yp=y;
+					    xpi=xArray[y];
+				    }
+			    }	
+ 		    }
+     		
+ 		    ellipseDiv.innerHTML=iHtml.join("");
+ 		    return ellipseDiv;
+    }
+
+    //For ellipse having width more than 1 px, get the coordinates for inner ellipse.
+    function getInnerEllipse(center,w,h)
+    {
+	    var a=Math.round(w/2);
+	    var b=Math.round(h/2);
+	    var xc=center.x;
+	    var yc=center.y;
+    	
+	    xArray=new Array();
+	    xArrayI=new Array();
+
+	    var x=0;
+	    var y=b;
+	    var a2=a*a;
+	    var b2=b*b;
+    	
+	    xArray[y]=x;
+	    xArrayI[y]=x;
+    	
+	    var divWidth;
+	    var divHeight;
+    	
+	    //Upper and Lower portions of the ellipse
+ 	    while(b2*x < a2*y)
+  	    {     
+  		    x++;    
+ 		    if((b2*x*x + a2*(y-0.5)*(y-0.5) - a2*b2) >=0)  
+ 			    y--;    
+      	    if(!xArray[y])
+		    xArray[y]=x;
+    		
+		    xArrayI[y]=x;
+	    }
+    	
+	    //Left and Right portions of the ellipse
+	    while(y!=0)  
+	    {     
+		    y--;   
+  		    if((b2*(x+0.5)*(x+0.5) + a2*y*y - a2*b2)<=0)   
+     		    x++;
+
+   		    xArray[y]=x;
+   		    xArrayI[y]=x;
+ 	    }
+ 	    return new Array(xArray,xArrayI);
+    }
+
+    //Draw circle with specified center and radius.
+    //Uses drawEllipse method only.
+    function drawCircle(pen,center,radius)
+    {
+   	    //Check arguments for null values
+	    if(!pen || !center || !radius)
+		    return false;
+    		
+        return drawEllipse(pen,center,2*radius,2*radius);
+    }
+
+    //Draw circle filled with the specified color alongwith specified center and radius.
+    //Uses drawEllipse method only.
+    function fillCircle(color,center,radius)
+    {
+   	    //Check arguments for null values
+	    if(!color || !center || !radius)
+		    return false;
+    		
+        return fillEllipse(color,center,2*radius,2*radius);
+    }
+
+    //Draw ellipse filled with specified color and other parameters, center, width and height.
+    //Mid point algorithm is used for basic ellipse drawing.  
+    function fillEllipse(color,center,width,height)
+    {
+	    //Check arguments for null values
+	    if(!color || !center || !width || !height)
+		    return false;
+    		
+	    width*=scale;
+	    height*=scale;
+
+        var ellipseDiv=canvasDiv.appendChild(document.createElement("div"));
+        var iHtml=new Array();
+
+        phCenter=logicalToPhysicalPoint(center);
+
+	    var a=Math.round(width/2);
+	    var b=Math.round(height/2);
+	    var xc=phCenter.x;
+	    var yc=phCenter.y;
+	    var hexColor=color.getHex();
+    	
+	    var x=0;
+	    var y=b;
+	    var a2=a*a;
+	    var b2=b*b;
+    	
+	    var xp,yp;
+    	
+	    xp=1;
+	    yp=y;
+    	
+	    //Upper and Lower portion of the ellipse
+ 	    while(b2*x < a2*y)
+  	    {     
+  		    x++;    
+ 		    if((b2*x*x + a2*(y-0.5)*(y-0.5) - a2*b2) >=0)  
+ 			    y--;    
+     			
+      	    if(x==1 && y!=yp) //Topmost and bottom most points, to be tested
+      	    {
+          	
+      		    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;width:1px;height:1px;left:" + xc + "px;top:" + (yc+yp-1) + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;width:1px;height:1px;left:" + xc + "px;top:" + (yc-yp) + "px;background-color:" + hexColor + "\"></DIV>";
+
+      	    }
+		    if(y!=yp)
+		    {
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;height:1px;left:" + (xc-x+1) + "px;top:" + (yc-yp) + "px;width:" + (2*x-1) + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;height:1px;left:" + (xc-x+1) + "px;top:" + (yc+yp) + "px;width:" + (2*x-1) + "px;background-color:" + hexColor + "\"></DIV>";
+
+			    yp=y;
+			    xp=x;		
+		    }
+    			
+    		
+		    //Last step in loop
+		    if(b2*x >= a2*y)
+		    {
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;height:1px;left:" + (xc-x) + "px;top:" + (yc-yp) + "px;width:" + (2*x+1) + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;height:1px;left:" + (xc-x) + "px;top:" + (yc+yp) + "px;width:" + (2*x+1) + "px;background-color:" + hexColor + "\"></DIV>";
+		    }
+	    }
+    	  
+	    xp=x;
+	    yp=y;
+	    var divHeight=1;
+
+	    //Left and Right portion of the ellipse
+	    while(y!=0)  
+	    {     
+		    y--;   
+  		    if((b2*(x+0.5)*(x+0.5) + a2*y*y - a2*b2)<=0)   
+     		    x++;
+    		
+		    if(x!=xp)
+		    {
+			    divHeight=yp-y;
+    			
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc-yp) + "px;width:" + (2*xp+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc+y+1) + "px;width:" + (2*xp+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    			
+			    xp=x;
+			    yp=y;
+		    }
+    		
+		    //Last step in loop
+		    if(y==0)
+		    {
+			    divHeight=yp-y+1;
+    			
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc-yp) + "px;width:" + (2*x+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + (xc-xp) + "px;top:" + (yc+y) + "px;width:" + (2*x+1) + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+		    }
+ 	    }
+     	
+ 	    ellipseDiv.innerHTML=iHtml.join("");
+ 	    return ellipseDiv;
+    }
+
+    //Draw arc filled with specified color, center, width, height, start angle and swap angle. 
+    function fillArc(color,center,width,height,startAngle,swapAngle)
+    {
+	    //Check arguments for null values 
+	    if(!color || !center || !width || !height || startAngle==null || swapAngle==null)
+		    return false;
+
+	    width*=scale;
+	    height*=scale;
+      
+        if(swapAngle==0)
+        return;
+        
+        var arcDiv=canvasDiv.appendChild(document.createElement("div"));
+        var iHtml=new Array();
+        
+        phCenter=logicalToPhysicalPoint(center);
+        
+	    var saD; //arc start angle degrees.
+	    if(startAngle>360)
+	        saD=startAngle%360;
+	    else
+	        saD=startAngle;
+    	 
+	    var swD; //swap angle in degrees.
+	    if(swapAngle>360)
+	        swD=swapAngle%360;
+	    else
+	        swD=swapAngle;
+    	    
+	    var eaD; //arc end angle degrees.
+	    eaD=parseFloat(saD)+parseFloat(swD);
+	    if(eaD>360)
+	        eaD=eaD%360; 
+
+	    //For cartecian coordinate system.
+	    if(coordinateSystem=="cartecian")    
+	    {
+		    saD=360-saD;
+		    eaD=360-eaD;
+		    var tempAD;
+		    tempAD=saD;
+		    saD=eaD;
+		    eaD=tempAD;
+	    }
+
+	    var x1,y1,x2,y2;
+	    var saR=saD*Math.PI/180;
+	    var swR=swD*Math.PI/180;
+	    var eaR=eaD*Math.PI/180;
+    	
+	    //For start angle
+	    if((saD<=45 && saD>=0) || (saD>=135 && saD<=225) || (saD>=315 && saD<=360))
+	    {
+	        if(saD>=90 && saD<=270) 
+	        {
+	            y1=Math.round(phCenter.y-Math.tan(saR)*width/2);
+		    x1=Math.round(phCenter.x-width/2);
+		}
+		else 
+		{
+		    y1=Math.round(phCenter.y+Math.tan(saR)*width/2);
+		    x1=Math.round(phCenter.x+width/2);
+		}
+	    }
+	    else
+	    {
+	        if(saD>=0 && saD<=180) 
+	        {
+	            x1=Math.round(phCenter.x+(1/Math.tan(saR))*height/2);
+		    y1= Math.round(phCenter.y+height/2);
+		}
+		else 
+		{
+		    x1=Math.round(phCenter.x-(1/Math.tan(saR))*height/2);
+		    y1=Math.round(phCenter.y-height/2);
+		 }
+	    }
+    	
+	    //For end angle
+	    if((eaD<=45 && eaD>=0) || (eaD>=135 && eaD<=225) || (eaD>=315 && eaD<=360))
+	    {
+	        if (eaD>= 90 && eaD<=270) 
+	        {
+	            y2=Math.round(phCenter.y-Math.tan(eaR)*width/2);
+	            x2=Math.round(phCenter.x-width/2);
+	        }
+	        else 
+	        {
+	            y2=Math.round(phCenter.y+Math.tan(eaR)*width/2);
+	            x2=Math.round(phCenter.x+width/2);
+	        }
+	    }
+	    else {
+	        if(eaD>=0 && eaD<=180) 
+	        {
+	            x2=Math.round(phCenter.x+(1/Math.tan(eaR))*height/2);
+	            y2=Math.round(phCenter.y+height/2);
+	        }
+	        else 
+	        {
+	            x2=Math.round(phCenter.x-(1/Math.tan(eaR))*height/2);
+	            y2=Math.round(phCenter.y-height/2);
+	        }
+	    }
+    	
+	    //Get the pixel arrays for the lines croping the ellipse to form an arc.
+	    xDataArraySa=getLinePixels(phCenter,new jsPoint(x1,y1));
+	    xDataArrayEa=getLinePixels(phCenter,new jsPoint(x2,y2));
+    	
+	    var hexColor=color.getHex();
+
+	    var a=Math.round(width/2);
+	    var b=Math.round(height/2);
+	    var xc=phCenter.x;
+	    var yc=phCenter.y;
+    	
+	    var x=0;
+	    var y=b;
+	    var a2=a*a;
+	    var b2=b*b;
+    	
+	    var xp,yp;
+	    var divX1,divX1pU,divX1pD,divX2,divX2pU,divX2pD,divY1,divY2,saX,eaX,saXp,eaXp,xpU,xpD,ypU,ypD;
+	    var divWidthOrg,divWidth1,divWidth2,divWidth3,divWidth4,divWidth1p,divWidth2p,divWidth3p,divWidth4p,divHeight;
+	    var draw1p,draw2p,draw3p,draw4p;
+    	
+	    xp=1;
+	    yp=y;
+    	
+	    //Upper and lower portion of the ellipse constutuing the arc
+ 	    while(b2*x < a2*y)
+  	    {     
+  		    x++;    
+ 		    if((b2*x*x + a2*(y-0.5)*(y-0.5) - a2*b2) >=0)  
+ 			    y--;    
+     			
+      	    if(x==1 && y!=yp) //Topmost and bottom most points, to be tested
+      	    {
+      		    divY1=yc+yp-1;
+			    divY2=yc-yp;
+			    divWidthOrg=1;
+			    divWidth1=divWidthOrg;
+			    divWidth2=divWidthOrg;
+			    divWidth3=divWidthOrg;
+			    divWidth4=divWidthOrg;
+			    divX1=xc;
+    			
+			    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+			    {
+				    fillArcSegOut(true);
+				    if(eaD<=saD)
+				    fillArcSegOut(false);
+			    }
+			    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+			    {
+				    fillArcSegOut(false);
+				    if(eaD<=saD)
+				    fillArcSegOut(true);
+			    }
+			    else
+			    {
+				    fillArcSegOut(true);
+				    fillArcSegOut(false);
+			    }
+      	    }
+		    else if(y!=yp)
+		    {
+			    divY1=yc+yp;
+			    divY2=yc-yp;
+			    divWidthOrg=2*(x-1)+1;
+			    divWidth1=divWidthOrg;
+			    divWidth2=divWidthOrg;
+			    divWidth3=divWidthOrg;
+			    divWidth4=divWidthOrg;
+			    divX1=xc-x+1;
+    			
+			    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+			    {
+				    fillArcSegOut(true);
+				    if(eaD<=saD)
+				    fillArcSegOut(false);
+			    }
+			    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+			    {
+				    fillArcSegOut(false);
+				    if(eaD<=saD)
+				    fillArcSegOut(true);
+			    }
+			    else
+			    {
+				    fillArcSegOut(true);
+				    fillArcSegOut(false);
+			    }	
+    			
+			    yp=y;
+			    xp=x;
+		    }
+    				
+    		
+		    //Last step in loop
+		    if(b2*x >= a2*y)
+		    {
+			    divY1=yc+yp;
+			    divY2=yc-yp;
+			    divWidthOrg=2*x+1;
+			    divWidth1=divWidthOrg;
+			    divWidth2=divWidthOrg;
+			    divWidth3=divWidthOrg;
+			    divWidth4=divWidthOrg;
+			    divX1=xc-x;
+    			
+			    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+			    {
+				    fillArcSegOut(true);
+				    if(eaD<=saD)
+				    fillArcSegOut(false);
+			    }
+			    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+			    {
+				    fillArcSegOut(false);
+				    if(eaD<=saD)
+				    fillArcSegOut(true);
+			    }
+			    else
+			    {
+				    fillArcSegOut(true);
+				    fillArcSegOut(false);
+			    }
+		    }
+    		
+	    }
+    	  
+        xp=x;
+	    yp=y;
+	    divHeight=1;
+
+	    //Similar code as in next while loop for first y before the loop. Only values are retrieved and no drawing.
+    	    			
+	    divY1=yc+y;
+	    divY2=yc-y;
+	    divWidthOrg=2*x+1;
+	    divWidth1=divWidthOrg;
+	    divWidth2=divWidthOrg;
+	    divWidth3=divWidthOrg;
+	    divWidth4=divWidthOrg;
+	    divX1=xc-x;
+    	
+	    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+	    {
+		    xDataArrayEa.pop();				
+		    fillArcSegIn(true,true);
+		    if(eaD<=saD)
+		    fillArcSegIn(false,true);
+	    }				
+	    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+	    {
+		    xDataArrayEa.pop();				
+		    if(y!=0)
+			    fillArcSegIn(false,true);
+		    if(eaD<=saD)
+		        fillArcSegIn(true,true);
+	    }
+	    else
+	    {
+		    if(saD>=180 && saD<360)
+			    xDataArraySa.pop();
+		    else
+			    xDataArrayEa.pop();
+    		
+
+		    fillArcSegIn(true,true);
+		    if(y!=0)
+		    {
+			    divX1=xc-x;
+			    fillArcSegIn(false,true);
+		    }
+	    }
+
+	    //Left and Right portion of the ellipse ellipse constutuing the arc.
+	    while(y!=0)  
+	    {
+		    y--;   
+		    if((b2*(x+0.5)*(x+0.5) + a2*y*y - a2*b2)<=0)   
+ 			    x++;
+     
+		    divY1=yc+y;
+		    divY2=yc-y;
+		    divWidthOrg=2*x+1;
+		    divWidth1=divWidthOrg;
+		    divWidth2=divWidthOrg;
+		    divWidth3=divWidthOrg;
+		    divWidth4=divWidthOrg;
+		    divX1=xc-x;
+			
+		    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+		    {
+			    fillArcSegIn(true);
+			    if(eaD<=saD)
+			    fillArcSegIn(false);
+		    }				
+		    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+		    {
+			    if(y!=0)
+				    fillArcSegIn(false);
+			    if(eaD<=saD)
+				    fillArcSegIn(true);
+		    }
+		    else
+		    {
+			    fillArcSegIn(true);
+			    if(y!=0)
+			    {
+				    divX1=xc-x;
+				    fillArcSegIn(false);
+			    }	
+		    }
+ 	    }
+     	
+ 	    arcDiv.innerHTML=iHtml.join("");
+ 	    return arcDiv;
+
+	    //Internal function: Arc segment for left and right portion of the ellipse constutuing the arc.
+	    function fillArcSegIn(isUpperHalf,valueOnly)
+	    {
+		    var divY;
+		    var xDataArray1,xDataArray1;
+		    var divWidthFirst=divWidthOrg;
+		    var divWidthSecond=divWidthOrg;
+		    var drawFirst=false;
+		    var drawSecond=false;
+    		
+		    if(isUpperHalf)
+		    {
+			    var draw1=false; //upper half (in all comments upper & lower are in context of cartecian system)
+			    var draw3=false; //upper half second
+			    divY=divY1;
+			    xDataArray1=xDataArraySa;
+			    xDataArray2=xDataArrayEa;
+			    saDvar=saD;
+			    eaDvar=eaD;
+		    }
+		    else
+		    {
+			    var draw2=false; //lower half
+			    var draw4=false; //lower half second
+			    divY=divY2;
+			    xDataArray2=xDataArraySa;
+			    xDataArray1=xDataArrayEa;
+			    saDvar=360-eaD;
+			    eaDvar=360-saD;
+		    }
+		    if(eaDvar>saDvar)
+		    {
+			    if(xDataArray2[divY] && divX1+divWidthOrg>=xDataArray2[divY].xMin && divX1<=xDataArray2[divY].xMin)
+			    {
+				    eaX=xDataArray2[divY].xMin;
+				    if(xDataArray1[divY] && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+				    {
+					    saX=xDataArray1[divY].xMax+1;
+					    divWidthFirst=saX-eaX;
+				    }
+				    else
+				    {
+					    divWidthFirst=divX1+divWidthOrg-eaX;
+				    }
+				    divX1=eaX;
+				    drawFirst=true;
+			    }
+			    else if(xDataArray1[divY] && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+			    {
+				    saX=xDataArray1[divY].xMax+1;
+				    divWidthFirst=saX-divX1;
+				    drawFirst=true;
+			    }
+			    else if(eaDvar>90 && saDvar<90)
+			    {
+				    drawFirst=true;
+			    }
+		    }
+		    else //saDvar>=eaDvar
+		    {
+			    if(xDataArray1[divY] && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+			    {
+				    saX=xDataArray1[divY].xMax+1;
+				    divWidthFirst=saX-divX1;
+				    drawFirst=true;
+			    }
+			    else if(eaDvar<90 && saDvar<90)
+			    {
+				    drawFirst=true;
+			    }
+    	
+			    if(xDataArray2[divY] && divX1+divWidthOrg>=xDataArray2[divY].xMin && divX1<=xDataArray2[divY].xMin)
+			    {
+				    divX2=xDataArray2[divY].xMin;
+				    divWidthSecond=divWidthOrg-xDataArray2[divY].xMin+divX1;
+				    drawSecond=true;
+			    }
+			    else if(eaDvar>90 && saDvar>90)
+			    {
+				    divX2=divX1;
+				    divWidthSecond=divWidthOrg;
+				    drawSecond=true;
+			    }
+		    }
+    		
+		    if(isUpperHalf)
+		    {
+			    if(drawFirst)
+				    draw1=true;
+    			
+			    if(drawSecond)
+				    draw3=true;
+    				
+			    divWidth1=divWidthFirst;
+			    divWidth3=divWidthSecond;	
+		    }
+		    else
+		    {
+			    if(drawFirst)
+				    draw2=true;
+    			
+			    if(drawSecond)
+				    draw4=true;
+    				
+			    divWidth2=divWidthFirst;
+			    divWidth4=divWidthSecond;	
+		    }
+    		
+		    if(saD>=0 && saD<180 && eaD>=0 && eaD<180 && saD>eaD)
+		    {
+			    draw2=true;
+		    }				
+		    else if(saD>=180 && saD<360 && eaD>=180 && eaD<360 && saD>eaD)
+		    {
+			    draw1=true;
+		    }
+    		
+		    if(!divX2)
+		    divX2="";
+		    if(!divX1)
+		    divX1="";
+    		
+		    if(!valueOnly)
+		    {
+			    if(isUpperHalf)
+			    {
+				    if(x!=xpU || divX1pU!=divX1 || divX2pU!=divX2 || divWidth1!=divWidth1p || divWidth3!=divWidth3p)
+				    {
+					    divHeight=ypU-y;
+					    if(draw3p)
+					    {
+						    if(divX2pU!=null)
+							    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2pU + "px;top:" + (divY1+1) + "px;width:" + divWidth3p + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					    }
+					    if(draw1p)
+					    {
+						    if(divX1pU!=null)
+							    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1pU + "px;top:" + (divY1+1) + "px;width:" + divWidth1p + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					    }
+    					
+					    if(draw1p||draw3p)	
+					    {
+						    divX1pU=divX1;
+    					
+						    draw1p=draw1;
+						    draw3p=draw3;
+						    xpU=x;
+						    ypU=y;
+    					
+						    divWidth1p=divWidth1;
+						    divWidth3p=divWidth3;
+						    divX2pU=divX2;
+					    }
+				    }
+			    }	
+			    else
+			    {
+				    if(x!=xpD || divX1pD!=divX1 || divX2pD!=divX2 || divWidth2!=divWidth2p || divWidth4!=divWidth4p)
+				    {
+					    divHeight=ypD-y;
+					    if(draw4p)
+					    {
+						    if(divX2pD!=null)
+							    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2pD + "px;top:" + (divY2-divHeight) + "px;width:" + divWidth4p + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					    }
+					    if(draw2p)
+					    {
+						    if(divX1pD!=null) 
+							    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1pD + "px;top:" + (divY2-divHeight) + "px;width:" + divWidth2p + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					    }
+					    if(draw2p||draw4p)
+					    {
+						    divX1pD=divX1;
+    					
+						    draw2p=draw2;
+						    draw4p=draw4;
+
+						    xpD=x;
+						    ypD=y;
+    					
+						    divWidth2p=divWidth2;
+						    divWidth4p=divWidth4;
+						    divX2pD=divX2;
+					    }
+				    }
+			    }			
+		    }
+    		
+		    //To get only values; used for first y value before loop. 
+		    if(valueOnly)
+		    {
+			    if(isUpperHalf)
+			    {
+				    draw1p=draw1;
+				    draw3p=draw3;
+    				
+				    if(draw1p)
+				    divX1pU=divX1;
+    				
+				    if(draw3p)
+				    divX2pU=divX2;
+    				
+				    if(draw1p||draw3p)
+				    {
+				        ypU=y;
+				        xpU=x;
+				    }
+				    else
+				    {
+				        ypU=0;
+				        xpU=0;
+				    }
+    				
+				    divWidth1p=divWidth1;
+				    divWidth3p=divWidth3;
+			    }
+			    else
+			    {
+				    draw2p=draw2;
+				    draw4p=draw4;
+
+				    if(draw2p)
+				    divX1pD=divX1;
+    				
+				    if(draw4p)
+				    divX2pD=divX2;
+    				
+				    if(draw2p||draw4p)
+				    {
+				        ypD=y;
+				        xpD=x;
+				    }
+				    else
+				    {
+				        ypD=0;
+				        xpD=0;
+				    }
+    				
+				    divWidth2p=divWidth2;
+				    divWidth4p=divWidth4;
+			    }
+		    }
+    		
+		    if(!isUpperHalf)
+		    {
+			    draw2p=draw2;
+			    draw4p=draw4;
+		    }
+		    else
+		    {
+			    draw1p=draw1;
+			    draw3p=draw3;
+		    }
+    		
+		    if(y==1 && !isUpperHalf)
+		    {
+			    divHeight=ypD-y+1;
+			    if(draw4)
+			    {
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2 + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth4 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+			    if(draw2)
+			    {
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1 + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth2 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+		    }
+		    if(y==0 && isUpperHalf)
+		    {	
+			    divHeight=ypU-y+1;
+			    if(draw3)
+			    {
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2 + "px;top:" + (divY1) + "px;width:" + divWidth3 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+			    if(draw1)
+			    {
+				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1 + "px;top:" + (divY1) + "px;width:" + divWidth1 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+		    }		
+	    }
+    	
+	    //Internal function: Arc segment for upper and lower portion of the ellipse constutuing the arc.
+	    function fillArcSegOut(isUpperHalf)
+	    {
+		    var divY;
+		    var xDataArray1,xDataArray1;
+		    var divWidthFirst=divWidthOrg;
+		    var divWidthSecond=divWidthOrg;
+		    var drawFirst=false;
+		    var drawSecond=false;
+    		
+		    if(isUpperHalf)
+		    {
+			    var draw1=false; //upper half
+			    var draw3=false; //upper half second
+			    divY=divY1;
+			    xDataArray1=xDataArraySa;
+			    xDataArray2=xDataArrayEa;
+			    saDvar=saD;
+			    eaDvar=eaD;
+		    }
+		    else
+		    {
+			    var draw2=false; //lower half
+			    var draw4=false; //lower half second
+			    divY=divY2;
+			    xDataArray2=xDataArraySa;
+			    xDataArray1=xDataArrayEa;
+			    saDvar=360-eaD;
+			    eaDvar=360-saD;
+		    }
+		    if(eaDvar>saDvar)
+		    {
+			    if(xDataArray2[divY]!=null && divX1+divWidthOrg>=xDataArray2[divY].xMin && divX1<=xDataArray2[divY].xMin)
+			    {
+				    eaX=xDataArray2[divY].xMin;
+				    if(xDataArray1[divY]!=null && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+				    {
+					    saX=xDataArray1[divY].xMax+1;
+					    divWidthFirst=saX-eaX;
+				    }
+				    else
+				    {
+					    divWidthFirst=divX1+divWidthOrg-eaX;
+				    }
+				    divX1=eaX;
+				    drawFirst=true;
+			    }
+			    else if(xDataArray1[divY]!=null && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+			    {
+				    saX=xDataArray1[divY].xMax+1;
+				    divWidthFirst=saX-divX1;
+				    drawFirst=true;
+			    }
+			    else if(eaDvar>90 && saDvar<90)
+			    {
+				    drawFirst=true;
+			    }
+		    }
+		    else //saDvar>eaDvar
+		    {
+			    if(xDataArray1[divY]!=null && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+			    {
+				    saX=xDataArray1[divY].xMax+1;
+				    divWidthFirst=saX-divX1;
+				    drawFirst=true;
+			    }
+			    else if(eaDvar<90 && saDvar<90)
+			    {
+				    drawFirst=true;
+			    }
+    	
+			    if(xDataArray2[divY]!=null && divX1+divWidthOrg>=xDataArray2[divY].xMin && divX1<=xDataArray2[divY].xMin)
+			    {
+				    divX2=xDataArray2[divY].xMin;
+				    divWidthSecond=divWidthOrg-xDataArray2[divY].xMin+divX1;
+				    drawSecond=true;
+			    }
+			    else if(eaDvar>90 && saDvar>90)
+			    {
+				    divX2=divX1;
+				    divWidthSecond=divWidthOrg;
+				    drawSecond=true;
+			    }
+		    }
+    		
+		    if(isUpperHalf)
+		    {
+			    if(drawFirst)
+				    draw1=true;
+    			
+			    if(drawSecond)
+				    draw3=true;
+    				
+			    divWidth1=divWidthFirst;
+			    divWidth3=divWidthSecond;	
+		    }
+		    else
+		    {
+			    if(drawFirst)
+				    draw2=true;
+    			
+			    if(drawSecond)
+				    draw4=true;
+    				
+			    divWidth2=divWidthFirst;
+			    divWidth4=divWidthSecond;	
+		    }
+    		
+		    if(saD>=0 && saD<180 && eaD>=0 && eaD<180 && saD>eaD)
+		    {
+			    draw2=true;
+		    }				
+		    else if(saD>=180 && saD<360 && eaD>=180 && eaD<360 && saD>eaD)
+		    {
+			    draw1=true;
+		    }
+    		
+		    if(divX2==null)
+		    divX2="X";
+		    if(divX1==null)
+		    divX1="X";
+    		
+		    if(isUpperHalf)
+		    {
+			    divHeight=1;
+			    if(draw3)
+			    {
+				    if(divX2!="X")
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2 + "px;top:" + divY1 + "px;width:" + divWidth3 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+			    if(draw1)
+			    {
+				    if(divX1!="X")
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1 + "px;top:" + divY1 + "px;width:" + divWidth1 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+		    }	
+		    else
+		    {
+			    divHeight=1;
+			    if(draw4)
+			    {
+				    if(divX2!="X")
+    				    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2 + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth4 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+			    if(draw2)
+			    {
+				    if(divX1!="X") 
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1 + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth2 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+		    }			
+	    }
+    }
+
+    //Draw arc with specified center, width, height, start angle and swap angle. 
+    function drawArc(pen,center,width,height,startAngle,swapAngle)
+    {
+	    //Check arguments for null values
+	    if(!pen || !center || !width || !height || startAngle==null || swapAngle==null)
+		    return false;
+
+	    width*=scale;
+	    height*=scale;
+       
+        if(swapAngle==0)
+        return;
+
+        var arcDiv=canvasDiv.appendChild(document.createElement("div"));
+        var iHtml=new Array();
+        
+        phCenter=logicalToPhysicalPoint(center);
+
+	    var saD; //arc start angle degrees.
+	    if(startAngle>360)
+	        saD=startAngle%360;
+	    else
+	        saD=startAngle;
+    	 
+	    var swD; //swap angle in degrees.
+	    if(swapAngle>360)
+	        swD=swapAngle%360;
+	    else
+	        swD=swapAngle;
+    	
+	    var eaD; //arc end angle degrees.
+	    eaD=parseFloat(saD)+parseFloat(swD);
+	    if(eaD>360)
+	        eaD=eaD%360; 
+    	
+	    //For cartecian coordinate system.
+	    if(coordinateSystem=="cartecian")    
+	    {
+		    saD=360-saD;
+		    eaD=360-eaD;
+		    var tempAD;
+		    tempAD=saD;
+		    saD=eaD;
+		    eaD=tempAD;
+	    }
+    	
+	    var x1,y1,x2,y2;
+	    var saR=saD*Math.PI/180;
+	    var swR=swD*Math.PI/180;
+	    var eaR=eaD*Math.PI/180;
+    	
+	    //For start angle
+	    if((saD<=45 && saD>=0) || (saD>=135 && saD<=225) || (saD>=315 && saD<=360))
+	    {
+	        if(saD>=90 && saD<=270) 
+	        {
+	            y1=Math.round(phCenter.y-Math.tan(saR)*width/2);
+		    x1=Math.round(phCenter.x-width/2);
+		}
+		else 
+		{
+		    y1=Math.round(phCenter.y+Math.tan(saR)*width/2);
+		    x1=Math.round(phCenter.x+width/2);
+		}
+	    }
+	    else
+	    {
+	        if(saD>=0 && saD<=180) 
+	        {
+	            x1=Math.round(phCenter.x+(1/Math.tan(saR))*height/2);
+		    y1= Math.round(phCenter.y+height/2);
+		}
+		else 
+		{
+		    x1=Math.round(phCenter.x-(1/Math.tan(saR))*height/2);
+		    y1=Math.round(phCenter.y-height/2);
+		}
+	    }
+    	
+	    //For end angle
+	    if((eaD<=45 && eaD>=0) || (eaD>=135 && eaD<=225) || (eaD>=315 && eaD<=360))
+	    {
+	        if (eaD>= 90 && eaD<=270) 
+	        {
+	            y2=Math.round(phCenter.y-Math.tan(eaR)*width/2);
+	            x2=Math.round(phCenter.x-width/2);
+	        }
+	        else 
+	        {
+	            y2=Math.round(phCenter.y+Math.tan(eaR)*width/2);
+	            x2=Math.round(phCenter.x+width/2);
+	        }
+	    }
+	    else {
+	        if(eaD>=0 && eaD<=180) 
+	        {
+	            x2=Math.round(phCenter.x+(1/Math.tan(eaR))*height/2);
+	            y2=Math.round(phCenter.y+height/2);
+	        }
+	        else 
+	        {
+	            x2=Math.round(phCenter.x-(1/Math.tan(eaR))*height/2);
+	            y2=Math.round(phCenter.y-height/2);
+	        }
+	    }
+	    
+        //Get the pixel arrays for the lines croping the ellipse to form an arc.
+	    xDataArraySa=getLinePixels(phCenter,new jsPoint(x1,y1));
+	    xDataArrayEa=getLinePixels(phCenter,new jsPoint(x2,y2));
+    	
+	    var hexColor=pen.color.getHex();
+
+	    var a=Math.round(width/2);
+	    var b=Math.round(height/2);
+	    var xc=phCenter.x;
+	    var yc=phCenter.y;
+    	
+	    var x=0;
+	    var y=b;
+	    var a2=a*a;
+	    var b2=b*b;
+    	
+	    var hexColor=pen.color.getHex();
+    	
+        //For Inner Ellipse
+	    var ai=a-parseInt(pen.width)+1;
+	    var bi=b-parseInt(pen.width)+1;
+    	
+	    var res=getInnerEllipse(phCenter,ai*2,bi*2)
+	    var xArray=res[0];
+	    var xArrayI=res[1];
+	    xArray.pop();
+	    xArrayI.pop();
+
+	    var xp,yp;
+	    var divX1,divX1pU,divX1pD,divX2,divX2pU,divX2pD,divY1,divY2,saX,eaX,saXp,eaXp,xpU,xpD,ypU,ypD,divX1i,divX2i,divX1pUi,divX1pDi,divX2pUi,divX2pDi;
+	    var divWidthOrg,divWidth1,divWidth2,divWidth3,divWidth4,divWidth1p,divWidth2p,divWidth3p,divWidth4p,divHeight,divWidth1i,divWidth2i,divWidth3i,divWidth4i,divWidth1pi,divWidth2pi,divWidth3pi,divWidth4pi;
+	    var draw1p,draw2p,draw3p,draw4p;
+    	
+	    xp=1;
+	    yp=y;
+    	
+	    //Upper and lower portion of the ellipse constutuing the arc
+ 	    while(b2*x < a2*y)
+  	    {     
+  		    x++;    
+ 		    if((b2*x*x + a2*(y-0.5)*(y-0.5) - a2*b2) >=0)  
+ 			    y--;    
+     			
+      	    if(x==1 && y!=yp) //Topmost and bottom most points, to be tested
+      	    {
+      		    divY1=yc+yp-1;
+			    divY2=yc-yp;
+			    divWidthOrg=1;
+			    divWidth1=divWidthOrg;
+			    divWidth2=divWidthOrg;
+			    divWidth3=divWidthOrg;
+			    divWidth4=divWidthOrg;
+			    divX1=xc;
+    			
+			    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+			    {
+				    drawArcSegOut(true);
+				    if(eaD<=saD)
+				    drawArcSegOut(false);
+			    }
+			    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+			    {
+				    drawArcSegOut(false);
+				    if(eaD<=saD)
+				    drawArcSegOut(true);
+			    }
+			    else
+			    {
+				    drawArcSegOut(true);
+				    drawArcSegOut(false);
+			    }
+      	    }
+		    else if(y!=yp)
+		    {
+			    divY1=yc+yp;
+			    divY2=yc-yp;
+			    divWidthOrg=2*(x-1)+1;
+			    divWidth1=divWidthOrg;
+			    divWidth2=divWidthOrg;
+			    divWidth3=divWidthOrg;
+			    divWidth4=divWidthOrg;
+			    divX1=xc-x+1;
+    			
+			    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+			    {
+				    drawArcSegOut(true);
+				    if(eaD<=saD)
+				    drawArcSegOut(false);
+			    }
+			    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+			    {
+				    drawArcSegOut(false);
+				    if(eaD<=saD)
+				    drawArcSegOut(true);
+			    }
+			    else
+			    {
+				    drawArcSegOut(true);
+				    drawArcSegOut(false);
+			    }	
+    			
+			    yp=y;
+			    xp=x;
+		    }
+    				
+    		
+		    //Last step in loop
+		    if(b2*x >= a2*y)
+		    {
+			    divY1=yc+yp;
+			    divY2=yc-yp;
+			    divWidthOrg=2*x+1;
+			    divWidth1=divWidthOrg;
+			    divWidth2=divWidthOrg;
+			    divWidth3=divWidthOrg;
+			    divWidth4=divWidthOrg;
+			    divX1=xc-x;
+    			
+			    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+			    {
+				    drawArcSegOut(true);
+				    if(eaD<=saD)
+				    drawArcSegOut(false);
+			    }
+			    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+			    {
+				    drawArcSegOut(false);
+				    if(eaD<=saD)
+				    drawArcSegOut(true);
+			    }
+			    else
+			    {
+				    drawArcSegOut(true);
+				    drawArcSegOut(false);
+			    }
+		    }
+	    }
+    	  
+        xp=x;
+	    yp=y;
+	    divHeight=1;
+
+	    //Similar code as in next while loop for first y before the loop. Only values are retrieved and no drawing.
+         			
+	    divY1=yc+y;
+	    divY2=yc-y;
+	    divWidthOrg=2*x+1;
+	    divWidth1=divWidthOrg;
+	    divWidth2=divWidthOrg;
+	    divWidth3=divWidthOrg;
+	    divWidth4=divWidthOrg;
+	    divX1=xc-x;
+    	
+	    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+	    {
+		    xDataArrayEa.pop();				
+		    drawArcSegIn(true,true);
+		    if(eaD<=saD)
+		    drawArcSegIn(false,true);
+	    }				
+	    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+	    {
+		    xDataArrayEa.pop();				
+		    if(y!=0)
+			    drawArcSegIn(false,true);
+		    if(eaD<=saD)
+		        drawArcSegIn(true,true);
+	    }
+	    else
+	    {
+		    if(saD>=180 && saD<360)
+			    xDataArraySa.pop();
+		    else
+			    xDataArrayEa.pop();
+    		
+
+		    drawArcSegIn(true,true);
+		    if(y!=0)
+		    {
+			    divX1=xc-x;
+			    drawArcSegIn(false,true);
+		    }
+	    }
+
+	    //Left and Right portion of the ellipse ellipse constutuing the arc.
+	    while(y!=0)  
+	    {
+		    y--;   
+		    if((b2*(x+0.5)*(x+0.5) + a2*y*y - a2*b2)<=0)   
+ 			    x++;
+     
+		    divY1=yc+y;
+		    divY2=yc-y;
+		    divWidthOrg=2*x+1;
+		    divWidth1=divWidthOrg;
+		    divWidth2=divWidthOrg;
+		    divWidth3=divWidthOrg;
+		    divWidth4=divWidthOrg;
+		    divX1=xc-x;
+			
+		    if(saD>=0 && saD<180 && eaD>=0 && eaD<180)
+		    {
+			    drawArcSegIn(true);
+			    if(eaD<=saD)
+			    drawArcSegIn(false);
+		    }				
+		    else if(saD>=180 && saD<360 && eaD>=180 && eaD<=360)
+		    {
+			    if(y!=0)
+				    drawArcSegIn(false);
+			    if(eaD<=saD)
+				    drawArcSegIn(true);
+		    }
+		    else
+		    {
+			    drawArcSegIn(true);
+			    if(y!=0)
+			    {
+				    divX1=xc-x;
+				    drawArcSegIn(false);
+			    }	
+		    }
+ 	    }
+
+ 	    arcDiv.innerHTML=iHtml.join("");
+ 	    return arcDiv;
+
+        //Internal function: Arc segment for left and right portion of the ellipse constutuing the arc.
+	    function drawArcSegIn(isUpperHalf,valueOnly)
+	    {
+		    var divY;
+		    var xDataArray1,xDataArray1;
+		    var divWidthFirst=divWidthOrg;
+		    var divWidthSecond=divWidthOrg;
+		    var drawFirst=false;
+		    var drawSecond=false;
+		    var xIn;
+    		
+		    if(isUpperHalf)
+		    {
+			    var draw1=false; //upper half
+			    var draw3=false; //upper half second
+			    divY=divY1;
+			    xDataArray1=xDataArraySa;
+			    xDataArray2=xDataArrayEa;
+			    saDvar=saD;
+			    eaDvar=eaD;
+		    }
+		    else
+		    {
+			    var draw2=false; //lower half
+			    var draw4=false; //lower half second
+			    divY=divY2;
+			    xDataArray2=xDataArraySa;
+			    xDataArray1=xDataArrayEa;
+			    saDvar=360-eaD;
+			    eaDvar=360-saD;
+		    }
+		    if(eaDvar>saDvar)
+		    {
+			    if(xDataArray2[divY]!=null && divX1+divWidthOrg>=xDataArray2[divY].xMin && divX1<=xDataArray2[divY].xMin)
+			    {
+				    eaX=xDataArray2[divY].xMin;
+				    if(xDataArray1[divY]!=null && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+				    {
+					    saX=xDataArray1[divY].xMax+1;
+					    divWidthFirst=saX-eaX;
+				    }
+				    else
+				    {
+					    divWidthFirst=divX1+divWidthOrg-eaX;
+				    }
+				    divX1=eaX;
+				    drawFirst=true;
+			    }
+			    else if(xDataArray1[divY]!=null && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+			    {
+				    saX=xDataArray1[divY].xMax+1;
+				    divWidthFirst=saX-divX1;
+				    drawFirst=true;
+			    }
+			    else if(eaDvar>90 && saDvar<90)
+			    {
+				    drawFirst=true;
+			    }
+		    }
+		    else //saDvar>eaDvar
+		    {
+			    if(xDataArray1[divY]!=null && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+			    {
+				    saX=xDataArray1[divY].xMax+1;
+				    divWidthFirst=saX-divX1;
+				    drawFirst=true;
+			    }
+			    else if(eaDvar<90 && saDvar<90)
+			    {
+				    drawFirst=true;
+			    }
+    	
+			    if(xDataArray2[divY]!=null && divX1+divWidthOrg>=xDataArray2[divY].xMin && divX1<=xDataArray2[divY].xMin)
+			    {
+				    divX2=xDataArray2[divY].xMin;
+				    divWidthSecond=divWidthOrg-xDataArray2[divY].xMin+divX1;
+				    drawSecond=true;
+			    }
+			    else if(eaDvar>90 && saDvar>90)
+			    {
+				    divX2=divX1;
+				    divWidthSecond=divWidthOrg;
+				    drawSecond=true;
+			    }
+		    }
+    		
+		    if(isUpperHalf)
+		    {
+			    if(drawFirst)
+				    draw1=true;
+    			
+			    if(drawSecond)
+				    draw3=true;
+    				
+			    divWidth1=divWidthFirst;
+			    divWidth3=divWidthSecond;	
+		    }
+		    else
+		    {
+			    if(drawFirst)
+				    draw2=true;
+    			
+			    if(drawSecond)
+				    draw4=true;
+    				
+			    divWidth2=divWidthFirst;
+			    divWidth4=divWidthSecond;	
+		    }
+    		
+		    if(saD>=0 && saD<180 && eaD>=0 && eaD<180 && saD>eaD)
+		    {
+			    draw2=true;
+		    }				
+		    else if(saD>=180 && saD<360 && eaD>=180 && eaD<360 && saD>eaD)
+		    {
+			    draw1=true;
+		    }
+     
+            //Start: Only for drawArc (not in fillArc)        
+            if(draw1)
+            {
+	            if(xArray[divY1-yc]!=null && divX1!=null)
+	            {
+	                if(xc+xArray[divY1-yc]<=divX1+divWidth1)
+	                {
+	                    if(divWidth1>divX1+divWidth1-xc-xArray[divY1-yc])
+	                    {
+	                        divX1i=xc+xArray[divY1-yc];
+	                        divWidth1i=divX1+divWidth1-xc-xArray[divY1-yc];
+	                    }
+	                }
+	                else
+	                divX1i=null;
+    	            
+	                if(divX1<=xc-xArray[divY1-yc]+1)
+	                {
+	                    if(divWidth1>xc-xArray[divY1-yc]-divX1+1)
+                            divWidth1=xc-xArray[divY1-yc]-divX1+1;
+	                }
+	                else if(divWidth1>=divX1+divWidth1-xc-xArray[divY1-yc]+1)
+	                divX1=null;
+		        }
+		    }
+            
+            if(draw3)
+            {
+	            if(xArray[divY1-yc]!=null && divX2!=null)
+	            {
+                    if(xc+xArray[divY1-yc]<=divX2+divWidth3)
+	                {
+	                    if(divWidth3>divX2+divWidth3-xc-xArray[divY1-yc])
+	                    {
+	                        divX2i=xc+xArray[divY1-yc];
+	                        divWidth3i=divX2+divWidth3-xc-xArray[divY1-yc];
+	                    }
+	                }
+	                else
+	                divX2i=null;
+    	            
+	                if(divX2<=xc-xArray[divY1-yc]+1)
+	                {
+	                    if(divWidth3>xc-xArray[divY1-yc]-divX2+1)
+                            divWidth3=xc-xArray[divY1-yc]-divX2+1;
+	                }
+	                else if(divWidth3>=divX2+divWidth3-xc-xArray[divY1-yc]+1)
+	                divX2=null;
+	            }
+	        }
+
+            //Lower Half    
+            if(draw2)
+            {
+	            if(xArray[divY1-yc]!=null && divX1!=null)
+	            {
+	                if(xc+xArray[divY1-yc]<=divX1+divWidth2)
+	                {
+	                    if(divWidth2>divX1+divWidth2-xc-xArray[divY1-yc])
+	                    {
+	                        divX1i=xc+xArray[divY1-yc];
+	                        divWidth2i=divX1+divWidth2-xc-xArray[divY1-yc];
+	                    }
+	                }
+	                else
+	                divX1i=null;
+    	            
+	                if(divX1<=xc-xArray[divY1-yc]+1)
+	                {
+	                    if(divWidth2>xc-xArray[divY1-yc]-divX1+1)
+                            divWidth2=xc-xArray[divY1-yc]-divX1+1;
+	                }
+	                else if(divWidth2>=divX1+divWidth2-xc-xArray[divY1-yc]+1)
+	                divX1=null;
+		        }
+		    }
+    		
+            if(draw4)
+            {
+	            if(xArray[divY1-yc]!=null && divX2!=null)
+	            {
+                    if(xc+xArray[divY1-yc]<=divX2+divWidth4)
+	                {
+	                    if(divWidth4>divX2+divWidth4-xc-xArray[divY1-yc])
+	                    {
+	                        divX2i=xc+xArray[divY1-yc];
+	                        divWidth4i=divX2+divWidth4-xc-xArray[divY1-yc];
+	                    }
+	                }
+	                else
+	                divX2i=null;
+    	            
+	                if(divX2<=xc-xArray[divY1-yc]+1)
+	                {
+	                    if(divWidth4>xc-xArray[divY1-yc]-divX2+1)
+                            divWidth4=xc-xArray[divY1-yc]-divX2+1;
+	                }
+	                else if(divWidth4>=divX2+divWidth4-xc-xArray[divY1-yc]+1)
+	                divX2=null;
+	            }
+	        }
+            //End: Only for drawArc (not in fillArc)
+            		
+		    if(divX2==null)
+		    divX2="";
+		    if(divX1==null)
+		    divX1="";
+    		
+    		
+		    if(!valueOnly)
+		    {
+			    if(isUpperHalf)
+			    {
+				    if(x!=xpU || divX1pU!=divX1 || divX1pUi!=divX1i || divX2pU!=divX2 || divX2pUi!=divX2i || divWidth1!=divWidth1p || divWidth3!=divWidth3p || divWidth1i!=divWidth1pi || divWidth3i!=divWidth3pi)
+				    {
+					    divHeight=ypU-y;
+					    if(draw3p)
+					    {
+						    if(divX2pU!=null && divX2pU!="")							
+	    					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2pU + "px;top:" + (divY1+1) + "px;width:" + divWidth3p + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    	    					
+    					    if(divX2pUi!=null && divX2pUi!="")
+	    					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2pUi + "px;top:" + (divY1+1) + "px;width:" + divWidth3pi + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					    }
+
+					    if(draw1p)
+					    {
+						    if(divX1pU!=null && divX1pU!="")
+		    		            iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1pU + "px;top:" + (divY1+1) + "px;width:" + divWidth1p + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+
+						    if(divX1pUi!=null && divX1pUi!="")
+		    		            iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1pUi + "px;top:" + (divY1+1) + "px;width:" + divWidth1pi + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					    }
+    					
+					    if(draw1p||draw3p)	
+					    {
+						    divX1pU=divX1;
+					        divX1pUi=divX1i;
+    					    
+						    draw1p=draw1;
+						    draw3p=draw3;
+    						
+						    xpU=x;
+						    ypU=y;
+    					
+						    divWidth1p=divWidth1;
+						    divWidth3p=divWidth3;
+    						
+						    divX2pU=divX2;
+						    divX2pUi=divX2i;
+    						
+						    divWidth1pi=divWidth1i;
+						    divWidth3pi=divWidth3i;
+					    }
+				    }
+			    }	
+			    else
+			    {
+				    if(x!=xpD || divX1pD!=divX1 ||divX1pDi!=divX1i || divX2pD!=divX2 || divWidth2!=divWidth2p || divWidth2i!=divWidth2pi || divWidth4!=divWidth4p || divWidth4i!=divWidth4pi)
+				    {
+					    divHeight=ypD-y;
+					    if(draw4p)
+					    {
+						    if(divX2pD!=null && divX2pD!="")
+							    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2pD + "px;top:" + (divY2-divHeight) + "px;width:" + divWidth4p + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    						
+						    if(divX2pDi!=null && divX2pDi!="")
+							    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2pDi + "px;top:" + (divY2-divHeight) + "px;width:" + divWidth4pi + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					    }
+					    if(draw2p)
+					    {
+						    if(divX1pD!=null && divX1pD!="") 
+							    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1pD + "px;top:" + (divY2-divHeight) + "px;width:" + divWidth2p + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+    						
+						    if(divX1pDi!=null && divX1pDi!="") 
+							    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1pDi + "px;top:" + (divY2-divHeight) + "px;width:" + divWidth2pi + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					    }
+					    if(draw2p||draw4p)
+					    {
+						    divX1pD=divX1;
+					        divX1pDi=divX1i;
+    					    
+						    draw2p=draw2;
+						    draw4p=draw4;
+
+						    xpD=x;
+						    ypD=y;
+    					
+						    divWidth2p=divWidth2;
+						    divWidth4p=divWidth4;
+    						
+						    divX2pD=divX2;
+						    divX2pDi=divX2i;
+    						
+						    divWidth2pi=divWidth2i;
+						    divWidth4pi=divWidth4i;
+					    }
+				    }
+			    }			
+		    }
+    		
+		    //To get only values; used for first y value before loop.
+		    if(valueOnly)
+		    {
+			    if(isUpperHalf)
+			    {
+				    draw1p=draw1;
+				    draw3p=draw3;
+    				
+				    if(draw1p)
+				    {
+				        divX1pU=divX1;
+				        divX1pUi=divX1i;
+				    }
+    				
+				    if(draw3p)
+				    {
+					    divX2pU=divX2;
+					    divX2pUi=divX2i;
+				    }
+    				
+				    if(draw1p||draw3p)
+				    {
+				        ypU=y;
+				        xpU=x;
+				    }
+				    else
+				    {
+				        ypU=0;
+				        xpU=0;
+				    }
+    				
+				    divWidth1p=divWidth1;
+				    divWidth3p=divWidth3;
+				    divWidth1pi=divWidth1i;
+				    divWidth3pi=divWidth3i;
+
+			    }
+			    else
+			    {
+				    draw2p=draw2;
+				    draw4p=draw4;
+
+				    if(draw2p)
+				    {
+					    divX1pD=divX1;
+					    divX1pDi=divX1i;
+				    }
+    				
+				    if(draw4p)
+				    {
+					    divX2pD=divX2;
+					    divX2pDi=divX2i;
+				    }
+    				
+				    if(draw2p||draw4p)
+				    {
+				        ypD=y;
+				        xpD=x;
+				    }
+				    else
+				    {
+				        ypD=0;
+				        xpD=0;
+				    }
+    				
+				    divWidth2p=divWidth2;
+				    divWidth4p=divWidth4;
+				    divWidth2pi=divWidth2i;
+				    divWidth4pi=divWidth4i;
+			    }
+		    }
+    		
+		    if(!isUpperHalf)
+		    {
+			    draw2p=draw2;
+			    draw4p=draw4;
+		    }
+		    else
+		    {
+			    draw1p=draw1;
+			    draw3p=draw3;
+		    }
+    		
+		    if(y==1 && !isUpperHalf)
+		    {
+			    divHeight=ypD-y+1;
+			    if(draw4)
+			    {
+			        if(divX2!="")
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2 + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth4 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					
+			        if(divX2i!=null)
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2i + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth4i + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+			    if(draw2)
+			    {
+			        if(divX1!="")
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1 + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth2 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					
+				    if(divX1i!=null)
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1i + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth2i + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";						
+			    }
+		    }
+		
+		    if(y==0 && isUpperHalf)
+		    {			
+			    divHeight=ypU-y+1;
+			    if(draw3)
+			    {
+			        if(divX2!="")
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2 + "px;top:" + divY1 + "px;width:" + divWidth3 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					
+			        if(divX2i!=null)
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2i + "px;top:" + divY1 + "px;width:" + divWidth3i + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+
+			    if(draw1)
+			    {
+                    if(divX1!="")
+    			        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1 + "px;top:" + divY1 + "px;width:" + divWidth1 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+				    
+                    if(divX1i!=null)
+	    		        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1i + "px;top:" + divY1 + "px;width:" + divWidth1i + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+		    }		
+	    }
+    	
+	    //Internal function: Arc segment for upper and lower portion of the ellipse constutuing the arc.
+	    function drawArcSegOut(isUpperHalf)
+	    {
+		    var divY;
+		    var xDataArray1,xDataArray1;
+		    var divWidthFirst=divWidthOrg;
+		    var divWidthSecond=divWidthOrg;
+		    var drawFirst=false;
+		    var drawSecond=false;
+    		
+		    if(isUpperHalf)
+		    {
+			    var draw1=false; //upper half
+			    var draw3=false; //upper half second
+			    divY=divY1;
+			    xDataArray1=xDataArraySa;
+			    xDataArray2=xDataArrayEa;
+			    saDvar=saD;
+			    eaDvar=eaD;
+		    }
+		    else
+		    {
+			    var draw2=false; //lower half
+			    var draw4=false; //lower half second
+			    divY=divY2;
+			    xDataArray2=xDataArraySa;
+			    xDataArray1=xDataArrayEa;
+			    saDvar=360-eaD;
+			    eaDvar=360-saD;
+		    }
+		    if(eaDvar>saDvar)
+		    {
+			    if(xDataArray2[divY]!=null && divX1+divWidthOrg>=xDataArray2[divY].xMin && divX1<=xDataArray2[divY].xMin)
+			    {
+				    eaX=xDataArray2[divY].xMin;
+				    if(xDataArray1[divY] && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+				    {
+					    saX=xDataArray1[divY].xMax+1;
+					    divWidthFirst=saX-eaX;
+				    }
+				    else
+				    {
+					    divWidthFirst=divX1+divWidthOrg-eaX;
+				    }
+				    divX1=eaX;
+				    drawFirst=true;
+			    }
+			    else if(xDataArray1[divY]!=null && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+			    {
+				    saX=xDataArray1[divY].xMax+1;
+				    divWidthFirst=saX-divX1;
+				    drawFirst=true;
+			    }
+			    else if(eaDvar>90 && saDvar<90)
+			    {
+				    drawFirst=true;
+			    }
+		    }
+		    else //saDvar>eaDvar
+		    {
+			    if(xDataArray1[divY]!=null && divX1+divWidthOrg>=xDataArray1[divY].xMax+1 && divX1<=xDataArray1[divY].xMax+1)
+			    {
+				    saX=xDataArray1[divY].xMax+1;
+				    divWidthFirst=saX-divX1;
+				    drawFirst=true;
+			    }
+			    else if(eaDvar<90 && saDvar<90)
+			    {
+				    drawFirst=true;
+			    }
+    	
+			    if(xDataArray2[divY]!=null && divX1+divWidthOrg>=xDataArray2[divY].xMin && divX1<=xDataArray2[divY].xMin)
+			    {
+				    divX2=xDataArray2[divY].xMin;
+				    divWidthSecond=divWidthOrg-xDataArray2[divY].xMin+divX1;
+				    drawSecond=true;
+			    }
+			    else if(eaDvar>90 && saDvar>90)
+			    {
+				    divX2=divX1;
+				    divWidthSecond=divWidthOrg;
+				    drawSecond=true;
+			    }
+		    }
+    		
+		    if(isUpperHalf)
+		    {
+			    if(drawFirst)
+				    draw1=true;
+    			
+			    if(drawSecond)
+				    draw3=true;
+    				
+			    divWidth1=divWidthFirst;
+			    divWidth3=divWidthSecond;	
+		    }
+		    else
+		    {
+			    if(drawFirst)
+				    draw2=true;
+    			
+			    if(drawSecond)
+				    draw4=true;
+    				
+			    divWidth2=divWidthFirst;
+			    divWidth4=divWidthSecond;	
+		    }
+    		
+		    if(saD>=0 && saD<180 && eaD>=0 && eaD<180 && saD>eaD)
+		    {
+			    draw2=true;
+		    }				
+		    else if(saD>=180 && saD<360 && eaD>=180 && eaD<360 && saD>eaD)
+		    {
+			    draw1=true;
+		    }
+    		
+            //Start: Only for drawArc (not in fillArc)    
+            if(draw1)
+            {
+            
+	            if(xArray[divY1-yc] && divX1!=null)
+	            {
+	                if(xc+xArray[divY1-yc]<=divX1+divWidth1)
+	                {
+	                    if(divWidth1>divX1+divWidth1-xc-xArray[divY1-yc])
+	                    {
+	                        divX1i=xc+xArray[divY1-yc];
+	                        divWidth1i=divX1+divWidth1-xc-xArray[divY1-yc];
+	                    }
+	                }
+	                else
+	                divX1i="X";
+    	            
+	                if(divX1<xc-xArray[divY1-yc]+1)
+	                {
+	                    if(divWidth1>xc-xArray[divY1-yc]-divX1+1)
+                            divWidth1=xc-xArray[divY1-yc]-divX1+1;
+	                }
+	                else if(divWidth1>=divX1+divWidth1-xc-xArray[divY1-yc]+1)
+	                divX1="X";
+		        }
+    		    
+		    }
+            
+            if(draw3)
+            {
+	            if(xArray[divY1-yc] && divX2!=null)
+	            {
+                    if(xc+xArray[divY1-yc]<=divX2+divWidth3)
+	                {
+	                    if(divWidth3>divX2+divWidth3-xc-xArray[divY1-yc])
+	                    {
+	                        divX2i=xc+xArray[divY1-yc];
+	                        divWidth3i=divX2+divWidth3-xc-xArray[divY1-yc];
+	                    }
+	                }
+	                else
+	                divX2i="X";
+    	            
+	                if(divX2<=xc-xArray[divY1-yc]+1)
+	                {
+	                    if(divWidth3>xc-xArray[divY1-yc]-divX2+1)
+                            divWidth3=xc-xArray[divY1-yc]-divX2+1;
+	                }
+	                else if(divWidth3>=divX2+divWidth3-xc-xArray[divY1-yc]+1)
+	                divX2="X";
+	            }
+	        }
+
+            //Lower Half    
+            if(draw2)
+            {
+	            if(xArray[divY1-yc] && divX1!=null)
+	            {
+	                if(xc+xArray[divY1-yc]<=divX1+divWidth2)
+	                {
+	                    if(divWidth2>divX1+divWidth2-xc-xArrayI[divY1-yc])
+	                    {
+	                        divX1i=xc+xArray[divY1-yc];
+	                        divWidth2i=divX1+divWidth2-xc-xArray[divY1-yc];
+	                    }
+	                }
+	                else
+	                divX1i="X";
+    	            
+	                if(divX1<=xc-xArray[divY1-yc]+1)
+	                {
+	                    if(divWidth2>xc-xArray[divY1-yc]-divX1+1)
+                            divWidth2=xc-xArray[divY1-yc]-divX1+1;
+	                }
+	                else if(divWidth2>=divX1+divWidth2-xc-xArray[divY1-yc]+1)
+	                divX1="X";
+		        }
+		    }
+    		
+            if(draw4)
+            {
+	            if(xArrayI[divY1-yc] && divX2!=null)
+	            {
+                    if(xc+xArray[divY1-yc]<=divX2+divWidth4)
+	                {
+	                    if(divWidth4>divX2+divWidth4-xc-xArray[divY1-yc])
+	                    {
+	                        divX2i=xc+xArray[divY1-yc];
+	                        divWidth4i=divX2+divWidth4-xc-xArray[divY1-yc];
+	                    }
+	                }
+	                else
+	                divX2i="X";
+    	            
+	                if(divX2<=xc-xArray[divY1-yc]+1)
+	                {
+	                    if(divWidth4>xc-xArray[divY1-yc]-divX2+1)
+                            divWidth4=xc-xArray[divY1-yc]-divX2+1;
+	                }
+	                else if(divWidth4>=divX2+divWidth4-xc-xArray[divY1-yc]+1)
+	                divX2="X";
+	            }
+	        }
+            //End: Only for drawArc (not in fillArc)    
+
+		    if(divX2==null)
+		    divX2="X";
+		    if(divX1==null)
+		    divX1="X";
+    		
+	        if(divX2i==null)
+		    divX2i="X";
+		    if(divX1i==null)
+		    divX1i="X";
+    		
+		    if(isUpperHalf)
+		    {
+			    divHeight=1;
+			    if(draw3)
+			    {
+				    if(divX2!="X")
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2 + "px;top:" + divY1 + "px;width:" + divWidth3 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					
+				    if(divX2i!="X")
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2i + "px;top:" + divY1 + "px;width:" + divWidth3i + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+
+			    if(draw1)
+			    {
+				    if(divX1!="X")
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1 + "px;top:" + divY1 + "px;width:" + divWidth1 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+
+				    if(divX1i!="X")
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1i + "px;top:" + divY1 + "px;width:" + divWidth1i + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+		    }	
+		    else
+		    {
+			    divHeight=1;
+			    if(draw4)
+			    {
+				    if(divX2!="X")
+				        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2 + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth4 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					
+				    if(divX2i!="X")
+				        iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX2i + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth4i + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+			    if(draw2)
+			    {
+				    if(divX1!="X") 
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1 + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth2 + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+					
+				    if(divX1i!="X") 
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:" + divX1i + "px;top:" + (divY2+1-divHeight) + "px;width:" + divWidth2i + "px;height:" + divHeight + "px;background-color:" + hexColor + "\"></DIV>";
+			    }
+		    }			
+	    }
+    }
+
+    //Draw polyline connecting to the specified points.
+    function drawPolyline(pen,points)
+    {
+        //Check arguments for null values
+	    if(!pen || !points)
+		    return false;
+
+	    var polylineDiv=canvasDiv.appendChild(document.createElement("div"));
+
+	    for(var i=1;i<points.length;i++)
+	    {
+		    polylineDiv.appendChild(this.drawLine(pen,points[i-1],points[i]));
+	    }
+	    
+	    return polylineDiv;
+    }
+
+    //Draw polygon connecting to the specified points.	
+    function drawPolygon(pen,points)
+    {
+        //Check arguments for null values
+	    if(!pen || !points)
+		    return false;
+
+	    var polylineDiv=canvasDiv.appendChild(document.createElement("div"));
+
+	    var i;	
+	    for(i=1;i<points.length;i++)
+	    {
+		    polylineDiv.appendChild(this.drawLine(pen,points[i-1],points[i]));
+	    }
+	    polylineDiv.appendChild(this.drawLine(pen,points[i-1],points[0]));
+    }
+
+    //Draw polygon filled with specified color and connecting to the specified points.	
+	function fillPolygon(color,points)
+	{
+	    //Check arguments for null values
+		if(!color || !points)
+		return false;
+
+		var phPoints=new Array();
+		var i;
+		
+		for(i=0;i<points.length;i++)
+		{
+			phPoints[i]=logicalToPhysicalPoint(points[i]);
+		}
+		
+	    var polygonDiv=canvasDiv.appendChild(document.createElement("div"));
+		var iHtml=new Array();
+		
+		var hexColor=color.getHex(); 
+
+		var xDataArrays=new Array();
+		var yMin=phPoints[0].y;
+		var yMax=phPoints[0].y;
+		
+		var newPoints=new Array();
+		var l,m,n;
+		var pointsCount;
+
+		pointsCount=phPoints.length;
+		
+		//Remove duplicate consecutive points
+		for(i=0;i<phPoints.length;i++)
+		{
+			if(i!=0)
+			    m=i-1;
+			else
+			    m=pointsCount-1;
+				    
+			if(!(phPoints[m].x==phPoints[i].x && phPoints[m].y==phPoints[i].y))
+			{
+		        newPoints[newPoints.length]=phPoints[i];
+			}
+		}
+		phPoints=newPoints;
+		newPoints=new Array();
+		
+		pointsCount=phPoints.length;
+		
+		//For consecutive horizontal points
+		for(i=0;i<phPoints.length;i++)
+		{
+			if(i!=0)
+			    m=i-1;
+			else
+			    m=pointsCount-1;
+			    
+			if(i!=pointsCount-1)
+			    n=i+1;
+			else
+			    n=0;
+		  	
+			if(!(phPoints[i].y==phPoints[n].y && phPoints[i].y==phPoints[m].y))
+			{
+		        newPoints[newPoints.length]=phPoints[i];
+			}
+			else
+			{
+			    //For consecutive horizontal points, just draw horizontal lines
+				if(phPoints[m].x<=phPoints[i].x)
+				{
+					iHtml[iHtml.length]="<DIV style=\"position:absolute;height:1px;overflow:hidden;left:";
+					iHtml[iHtml.length]=phPoints[m].x;
+					iHtml[iHtml.length]="px;top:";
+					iHtml[iHtml.length]=phPoints[i].y;
+					iHtml[iHtml.length]="px;width:";
+					iHtml[iHtml.length]=phPoints[i].x-phPoints[m].x;
+					iHtml[iHtml.length]="px;background-color:";
+					iHtml[iHtml.length]=hexColor;
+					iHtml[iHtml.length]="\"></DIV>";
+				}
+				else
+				{
+					iHtml[iHtml.length]="<DIV style=\"position:absolute;height:1px;overflow:hidden;left:";
+					iHtml[iHtml.length]=phPoints[i].x;
+					iHtml[iHtml.length]="px;top:";
+					iHtml[iHtml.length]=phPoints[i].y;
+					iHtml[iHtml.length]="px;width:";
+					iHtml[iHtml.length]=phPoints[m].x-phPoints[i].x;
+					iHtml[iHtml.length]="px;background-color:";
+					iHtml[iHtml.length]=hexColor;
+					iHtml[iHtml.length]="\"></DIV>";
+				}
+			}
+		}
+		phPoints=newPoints;
+		
+		for(i=1;i<phPoints.length;i++)
+		{
+			if(yMin>phPoints[i-1].y)
+			{
+				yMin=phPoints[i-1].y;
+			}
+			if(yMax<phPoints[i-1].y)
+			{
+				yMax=phPoints[i-1].y;
+			}
+			
+            //Get the pixel arrays for the lines connecting polygon vertices.
+			xDataArrays[i-1]=getLinePixels(phPoints[i-1],phPoints[i]);
+			
+			//For verices, keep only one point and not two overlapping points
+			if(i<phPoints.length-1)
+			{
+				if((phPoints[i-1].y<phPoints[i].y && phPoints[i].y<phPoints[i+1].y) || (phPoints[i-1].y>phPoints[i].y && phPoints[i].y>phPoints[i+1].y))
+				{
+					xDataArrays[i-1][phPoints[i].y]=null;	
+				}
+			}
+			else
+			{
+				if((phPoints[i-1].y<phPoints[i].y && phPoints[i].y<phPoints[0].y) || (phPoints[i-1].y>phPoints[i].y && phPoints[i].y>phPoints[0].y))
+				{
+					xDataArrays[i-1][phPoints[i].y]=null;
+				}
+			}
+		}
+		
+		if(yMin>phPoints[i-1].y)
+		{
+			yMin=phPoints[i-1].y;
+		}
+		if(yMax<phPoints[i-1].y)
+		{
+			yMax=phPoints[i-1].y;
+		}
+			
+		xDataArrays[i-1]=getLinePixels(phPoints[i-1],phPoints[0]);
+		if((phPoints[i-1].y<phPoints[0].y && phPoints[0].y<phPoints[1].y) || (phPoints[i-1].y>phPoints[0].y && phPoints[0].y>phPoints[1].y))
+		{
+			xDataArrays[i-1][phPoints[0].y]=null;
+		}
+					
+		var y;
+		var divStyle="";
+		var j;
+		pointsCount=phPoints.length;
+		var xDataArray;
+		var xMin,xMax;
+		var curX,curY,curWidth;
+		
+		for(y=yMin;y<=yMax;y++)
+		{
+			j=0;
+			var allXDataArray=new Array();
+			
+			for(i=0;i<pointsCount;i++)
+			{
+				xDataArray=xDataArrays[i];
+				if(i!=0)
+				    m=i-1;
+				else
+				    m=pointsCount-1;
+				    
+				if(i!=1 && i!=0)
+				    l=i-2;
+				else if(i==0)
+				    l=pointsCount-2;    
+				else
+				    l=pointsCount-1;    
+				    
+				if(i!=pointsCount-1)
+				    n=i+1;
+				else
+				    n=0;
+				        
+				if((y==phPoints[i].y && y==phPoints[m].y && y<phPoints[l].y && y<phPoints[n].y && xDataArray[y]) || (y==phPoints[i].y && y==phPoints[m].y && y>phPoints[l].y && y>phPoints[n].y && xDataArray[y]))
+				{
+					allXDataArray[j]= xDataArray[y];
+					j++;
+				}
+				if(xDataArray[y])
+				{
+					allXDataArray[j]= xDataArray[y];
+					j++;
+				}
+			}
+            
+            //Sorting based on xMin, uses sortXDataArray function
+			allXDataArray.sort(sortXDataArray);
+			
+			curY=y;
+			for(i=0;i<allXDataArray.length;i+=2)
+			{
+				if(allXDataArray[i+1])
+				{
+					curX=allXDataArray[i].xMin;
+					if(allXDataArray[i+1].xMax>allXDataArray[i].xMax)
+						curWidth=allXDataArray[i+1].xMax-allXDataArray[i].xMin+1;
+					else
+						curWidth=allXDataArray[i].xMax-allXDataArray[i].xMin+1;
+				}
+				else
+				{
+					curX=allXDataArray[allXDataArray.length-1].xMin;
+					curWidth=allXDataArray[allXDataArray.length-1].xMax-allXDataArray[allXDataArray.length-1].xMin+1;
+				}
+				
+				iHtml[iHtml.length]="<DIV style=\"position:absolute;height:1px;overflow:hidden;left:";
+				iHtml[iHtml.length]=curX;
+				iHtml[iHtml.length]="px;top:";
+				iHtml[iHtml.length]=curY;
+				iHtml[iHtml.length]="px;width:";
+				iHtml[iHtml.length]=curWidth;
+				iHtml[iHtml.length]="px;background-color:";
+				iHtml[iHtml.length]=hexColor;
+				iHtml[iHtml.length]="\"></DIV>";
+			}
+		}
+		
+	 	polygonDiv.innerHTML=iHtml.join("");
+	 	return polygonDiv;
+
+        //Internal function: sorting based on xMin
+		function sortXDataArray(a,b)
+		{
+			return a.xMin - b.xMin;
+		}
+	}
+
+    //Draw cubic bezier curve with specified 4 points
+	function drawBezier(pen,points)
+	{
+		//Check arguments for null values
+		if(!pen || !points)
+			return false;
+		
+		var phPoints=new Array();
+		var i;
+		for(i=0;i<points.length;i++)
+		{
+			phPoints[i]=logicalToPhysicalPoint(points[i]);
+		}
+
+        //If no of points more than 4, take only first four points.
+		if(phPoints.length>4)
+		{
+			phPoints=new Array(phPoints[0],phPoints[1],phPoints[2],phPoints[3]);
+		}
+		else if(phPoints.length<4)
+		{
+			return false;
+		}
+			
+		var bezierDiv=canvasDiv.appendChild(document.createElement("div"));
+        var iHtml=new Array();
+        
+		var xMin=phPoints[0].x;
+		var xMax=phPoints[0].x;
+		
+		for(i=1;i<phPoints.length;i++)
+		{
+			if(xMin>phPoints[i-1].x)
+			{
+				xMin=phPoints[i-1].x;
+			}
+			if(xMax<phPoints[i-1].x)
+			{
+				xMax=phPoints[i-1].x;
+			}
+		}
+		
+		var p1x,p2x,p3x,p4x,p1y,p2y,p3y,p4y;
+		p1x=phPoints[0].x;
+		p1y=phPoints[0].y;
+
+		p2x=phPoints[1].x;
+		p2y=phPoints[1].y;
+
+		p3x=phPoints[2].x;
+		p3y=phPoints[2].y;
+
+		p4x=phPoints[3].x;
+		p4y=phPoints[3].y;
+
+		var x,y,xB,t;
+		
+		var xl=p1x-1;
+		var yl=p1y-1;
+		var xp,yp;
+		t=0;
+		var f=1;
+		var penWidth=parseInt(pen.width);
+		var hexColor=pen.color.getHex();
+		var divWidth=penWidth;
+		var divHeight=penWidth;
+		xp=p1x;
+		yp=p1y;
+		var yStart=false;
+		var xStart=false;
+		var k=1.1;
+		//Array to hold all points on the bezier curve
+		var curvePoints=new Array();
+		
+		var y1,y2,x1,x2;
+		y1=yp;
+		y2=yp;
+		x1=xp;
+		x2=xp;
+
+		while(t<=1)
+		{
+			x=0;
+			y=0;
+			x=(1-t)*(1-t)*(1-t)*p1x + 3*(1-t)*(1-t)*t*p2x + 3*(1-t)*t*t*p3x + t*t*t*p4x;
+			y=(1-t)*(1-t)*(1-t)*p1y + 3*(1-t)*(1-t)*t*p2y + 3*(1-t)*t*t*p3y + t*t*t*p4y;
+			x=Math.round(x);
+			y=Math.round(y);
+
+			if(x!=xl || y!=yl)
+			{
+				if(x-xl>1 || y-yl>1 || xl-x>1 || yl-y>1)
+				{
+					t-=f;
+					f=f/k;
+				}
+				else
+				{
+				    curvePoints[curvePoints.length]=new jsPoint(x,y);  
+					xl=x;
+					yl=y;
+				}
+			}
+			else
+			{
+				t-=f;
+				f=f*k;
+			}
+			t+=f;
+		}
+		
+		var isEliminated=new Array();
+		for(var i=0;i<curvePoints.length;i++)
+		{
+		    var next=false;
+		    x=curvePoints[i].x;
+		    y=curvePoints[i].y;
+		    
+		    //Eliminate extra points disturbing continuity/smoothness
+		    if(i!=0 && i+1<curvePoints.length)
+		    {
+		    if(Math.abs(curvePoints[i-1].x-curvePoints[i+1].x)==1 && Math.abs(curvePoints[i-1].y-curvePoints[i+1].y)==1)
+		        {
+		            if(!isEliminated[i-1])
+		            {
+		                next=true;
+		                isEliminated[i]=true;
+		            }
+		        }
+		    }
+		    
+		    //Divs optimization
+		    if(!next)
+		    {
+	    	    if(y==yp && !xStart)
+				{
+					yStart=true;
+				}
+				if(x==xp && !yStart)
+				{
+					xStart=true;
+				}
+				
+				if(x!=xp && !yStart)
+				{
+					if(y2==y1)
+					{
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+						iHtml[iHtml.length]=xp;
+						iHtml[iHtml.length]="px;top:";
+						iHtml[iHtml.length]=y1;
+						iHtml[iHtml.length]="px;width:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;height:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;background-color:";
+						iHtml[iHtml.length]=hexColor;
+						iHtml[iHtml.length]="\"></DIV>";
+					}	
+					else
+					{
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+					    iHtml[iHtml.length]=xp;
+					    iHtml[iHtml.length]="px;top:";
+					    iHtml[iHtml.length]=y1;
+					    iHtml[iHtml.length]="px;width:";
+					    iHtml[iHtml.length]=penWidth;
+					    iHtml[iHtml.length]="px;height:";
+					    iHtml[iHtml.length]=y2-y1+penWidth;
+					    iHtml[iHtml.length]="px;background-color:";
+					    iHtml[iHtml.length]=hexColor;
+					    iHtml[iHtml.length]="\"></DIV>";
+					}
+					
+					xp=x;
+					yp=y;
+					y1=yp;
+					y2=yp;
+					
+					xStart=false;
+				}
+				
+				if(y!=yp && !xStart )
+				{
+					if(x2==x1)
+					{
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+						iHtml[iHtml.length]=x1;
+						iHtml[iHtml.length]="px;top:";
+						iHtml[iHtml.length]=yp;
+						iHtml[iHtml.length]="px;width:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;height:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;background-color:";
+						iHtml[iHtml.length]=hexColor;
+						iHtml[iHtml.length]="\"></DIV>";
+					}	
+					else
+					{
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+						iHtml[iHtml.length]=x1;
+						iHtml[iHtml.length]="px;top:";
+						iHtml[iHtml.length]=yp;
+						iHtml[iHtml.length]="px;width:";
+						iHtml[iHtml.length]=x2-x1+penWidth;
+						iHtml[iHtml.length]="px;height:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;background-color:";
+						iHtml[iHtml.length]=hexColor;
+						iHtml[iHtml.length]="\"></DIV>";
+					}	
+
+					xp=x;
+					yp=y;
+					x1=xp;
+					x2=xp;
+					
+					yStart=false;
+				}
+				
+				if(xStart && !yStart)
+				{
+					if(y<=y1)
+					y1=y;
+				
+					if(y>y2)
+					y2=y;
+				}
+				else
+				{
+					y1=y;
+					y2=y;
+				}
+				
+				if(yStart && !xStart)
+				{
+					if(x<=x1)
+					x1=x;
+				
+					if(x>x2)
+					x2=x;
+				}
+				else
+				{
+					x1=x;
+					x2=x;
+				}
+				
+				if(i==curvePoints.length-1) //last step in the loop
+				{
+					if(!xStart)
+					{
+						if(x2==x1)
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=x1;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=yp;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;height:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+						else
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=x1;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=yp;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=x2-x1+penWidth;
+							iHtml[iHtml.length]="px;height:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+					}
+					if(!yStart)
+					{
+						if(y2==y1)
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=xp;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=y1;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;height:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+						else
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=xp;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=y1;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=x2-x1+penWidth;
+							iHtml[iHtml.length]="px;height:";
+							iHtml[iHtml.length]=y2-y1+penWidth;
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+					}
+				}
+			}		
+		}
+        
+        bezierDiv.innerHTML=iHtml.join("");
+        return bezierDiv;
+	}
+
+    //Draw general (poly) bezier curve with specified points
+	function drawPolyBezier(pen,points)
+	{
+		//Check arguments for null values
+		if(!pen || !points)
+			return false;
+		
+		if(points.length<2)
+		{
+			return false;
+		}
+		
+		var phPoints=new Array();
+		for(var i=0;i<points.length;i++)
+		{
+			phPoints[i]=logicalToPhysicalPoint(points[i]);
+		}
+	
+	    var bezierDiv=canvasDiv.appendChild(document.createElement("div"));
+        var iHtml=new Array();		
+			
+		var cfx=new Array();
+		var cfy=new Array();
+
+		var n=phPoints.length-1;
+		for(var i=0;i<=n;i++)
+		{
+			cfx[i]= phPoints[i].x*fact(n)/(fact(i)*fact(n-i));
+			cfy[i]= phPoints[i].y*fact(n)/(fact(i)*fact(n-i));
+		}
+		
+		var xl=phPoints[0].x-1;
+		var yl=phPoints[0].y-1;
+		var xp,yp;
+		t=0;
+		var f=1;
+		var penWidth=parseInt(pen.width);
+		var hexColor=pen.color.getHex();
+		var divWidth=penWidth;
+		var divHeight=penWidth;
+		xp=phPoints[0].x;
+		yp=phPoints[0].y;
+		var yStart=false;
+		var xStart=false;
+		var divCount=0;
+		var res;
+		var fct=0;
+		var x;
+		var y;
+		var j;
+		var xd,yd;
+		var k=1.1;
+		//Array to hold all points on the bezier curve
+		var curvePoints=new Array();
+		
+		var y1,y2,x1,x2;
+		y1=yp;
+		y2=yp;
+		x1=xp;
+		x2=xp;
+        
+		while(t<=1)
+		{
+			x=0;
+			y=0;
+            
+			for(var i=0;i<=n;i++)
+			{
+				fct=Math.pow(1-t,n-i)*Math.pow(t,i);
+				x= x + cfx[i]*fct;
+				y= y + cfy[i]*fct;
+			}
+			var xd;
+			var yd;
+			xd=x;
+			yd=y;
+			x=Math.round(x);
+			y=Math.round(y);
+			
+			if(x!=xl || y!=yl)
+			{
+			    if(x-xl >1 || y-yl>1 || xl-x>1 || yl-y>1)
+				{
+				    t-=f;
+				    f=f/k;
+				}
+				else
+				{
+				    curvePoints[curvePoints.length]=new jsPoint(x,y);  
+					xl=x;
+					yl=y;
+				}
+			}
+			else
+			{
+			    t-=f;
+				f=f*k;
+			}
+			t+=f;
+	    }
+        		
+		var isEliminated=new Array();
+		for(var i=0;i<curvePoints.length;i++)
+		{
+		    var next=false;
+		    x=curvePoints[i].x;
+		    y=curvePoints[i].y;
+		    
+		    //Eliminate extra points disturbing continuity/smoothness
+		    if(i!=0 && i+1<curvePoints.length)
+		    {
+		        if(Math.abs(curvePoints[i-1].x-curvePoints[i+1].x)==1 && Math.abs(curvePoints[i-1].y-curvePoints[i+1].y)==1)
+		        {
+		            if(!isEliminated[i-1])
+		            {
+		                next=true;
+		                isEliminated[i]=true;
+		            }
+		        }
+		    }
+		    
+		    //Divs optimization		    
+		    if(!next)
+		    {
+	    	    if(y==yp && !xStart)
+				{
+					yStart=true;
+				}
+				if(x==xp && !yStart)
+				{
+					xStart=true;
+				}
+				
+				if(x!=xp && !yStart)
+				{
+					if(y2==y1)
+					{
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+						iHtml[iHtml.length]=xp;
+						iHtml[iHtml.length]="px;top:";
+						iHtml[iHtml.length]=y1;
+						iHtml[iHtml.length]="px;width:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;height:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;background-color:";
+						iHtml[iHtml.length]=hexColor;
+						iHtml[iHtml.length]="\"></DIV>";
+					}	
+					else
+					{
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+					    iHtml[iHtml.length]=xp;
+					    iHtml[iHtml.length]="px;top:";
+					    iHtml[iHtml.length]=y1;
+					    iHtml[iHtml.length]="px;width:";
+					    iHtml[iHtml.length]=penWidth;
+					    iHtml[iHtml.length]="px;height:";
+					    iHtml[iHtml.length]=y2-y1+penWidth;
+					    iHtml[iHtml.length]="px;background-color:";
+					    iHtml[iHtml.length]=hexColor;
+					    iHtml[iHtml.length]="\"></DIV>";
+					}    
+
+					xp=x;
+					yp=y;
+					y1=yp;
+					y2=yp;
+					
+					xStart=false;
+				}
+				
+				if(y!=yp && !xStart )
+				{
+					if(x2==x1)
+					{
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+						iHtml[iHtml.length]=x1;
+						iHtml[iHtml.length]="px;top:";
+						iHtml[iHtml.length]=yp;
+						iHtml[iHtml.length]="px;width:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;height:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;background-color:";
+						iHtml[iHtml.length]=hexColor;
+						iHtml[iHtml.length]="\"></DIV>";
+					}	
+					else
+					{
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+						iHtml[iHtml.length]=x1;
+						iHtml[iHtml.length]="px;top:";
+						iHtml[iHtml.length]=yp;
+						iHtml[iHtml.length]="px;width:";
+						iHtml[iHtml.length]=x2-x1+penWidth;
+						iHtml[iHtml.length]="px;height:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;background-color:";
+						iHtml[iHtml.length]=hexColor;
+						iHtml[iHtml.length]="\"></DIV>";
+					}	
+
+					xp=x;
+					yp=y;
+					x1=xp;
+					x2=xp;
+					
+					yStart=false;
+				}
+				
+				if(xStart && !yStart)
+				{
+					if(y<=y1)
+					y1=y;
+				
+					if(y>y2)
+					y2=y;
+				}
+				else
+				{
+					y1=y;
+					y2=y;
+				}
+				
+				if(yStart && !xStart)
+				{
+					if(x<=x1)
+					x1=x;
+				
+					if(x>x2)
+					x2=x;
+				}
+				else
+				{
+					x1=x;
+					x2=x;
+				}
+				
+				if(i==curvePoints.length-1) //last step in the loop
+				{
+					if(!xStart)
+					{
+						if(x2==x1)
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=x1;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=yp;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;height:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+						else
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=x1;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=yp;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=x2-x1+penWidth;
+							iHtml[iHtml.length]="px;height:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+					}
+					if(!yStart)
+					{
+						if(y2==y1)
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=xp;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=y1;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;height:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+						else
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=xp;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=y1;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=x2-x1+penWidth;
+							iHtml[iHtml.length]="px;height:";
+							iHtml[iHtml.length]=y2-y1+penWidth;
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+					}
+				}
+			}		
+		}
+
+        bezierDiv.innerHTML=iHtml.join("");
+        return bezierDiv;
+        
+        //Internal factorial function
+		function fact(n)
+		{
+			var res = 1;
+			for(var i=1;i<= n;i++)
+        	{
+        		res =res * i;
+    		}
+	    	return res;
+		}
+	}
+
+    //Draw closed curve passing through the give points with specified tension
+    //This method just calls drawCurve method with parameter isClosed=true
+    function drawClosedCurve(pen,points,tension) 
+	{
+		return this.drawCurve(pen,points,tension,true); 
+	}
+
+    //Draw curve passing through the give points with specified tension
+	function drawCurve(pen,points,tension,isClosed) 
+	{
+		if(!pen || !points)
+			return false;
+			
+		if(!tension)
+		{
+			tension=0;
+		}
+		if(!isClosed)
+		{
+			isClosed=false;
+		}
+
+		var phPoints=new Array();
+		for(var i=0;i<points.length;i++)
+		{
+			phPoints[i]=logicalToPhysicalPoint(points[i]);
+		}
+		
+		var newPoints=new Array();
+
+   		//Remove duplicate consecutive points (ToDo: neccessity of this step is to be confirmed)		
+        if(!isClosed || !(phPoints[0].x==phPoints[phPoints.length-1].x && phPoints[0].y==phPoints[phPoints.length-1].y))
+        {
+            newPoints[newPoints.length]=phPoints[0];  
+        }  
+
+		for(var i=1;i<phPoints.length;i++)
+		{
+		    if(!(phPoints[i].x==phPoints[i-1].x && phPoints[i].y==phPoints[i-1].y))
+		    {
+		        newPoints[newPoints.length]=phPoints[i];  
+		    }   
+		}
+        phPoints=newPoints;
+        
+        if(phPoints.length<2)
+		{
+			return false;
+		}
+		else if(phPoints.length==2)
+		{
+		    //For 2 points just draw a line connecting them.
+			return this.drawLine(pen,phPoints[0],phPoints[1],"physical");
+		}
+
+	    var curveDiv=canvasDiv.appendChild(document.createElement("div"));
+        var iHtml=new Array();
+        //Array to hold points on the curve
+		var curvePoints=new Array();
+		
+		var n=phPoints.length-1;
+		//Call drawCurveSeg method in loop to get points in curvePoints 
+		//array for segment (connecting 2 points) of the curve. 
+		if(!isClosed) //for open curve
+		{	
+			for(var i=0;i<=n-1;i++)
+			{
+				if(i==0)
+				{
+					drawCurveSeg(new Array(phPoints[0],phPoints[0],phPoints[1],phPoints[2]),tension,curvePoints);
+				}
+				else if(i==n-1)
+				{
+					drawCurveSeg(new Array(phPoints[n-2],phPoints[n-1],phPoints[n],phPoints[n]),tension,curvePoints);
+				}
+				else
+				{
+					drawCurveSeg(new Array(phPoints[i-1],phPoints[i],phPoints[i+1],phPoints[i+2]),tension,curvePoints);
+				}
+			}
+			//Actual drawing using points data in curvePoints array
+			drawAllCurvePoints(pen,curvePoints,iHtml);
+		}
+		else //for closed curve
+		{
+			for(var i=0;i<=n-1;i++)
+			{
+				if(i==0)
+				{
+					drawCurveSeg(new Array(phPoints[n],phPoints[0],phPoints[1],phPoints[2]),tension,curvePoints);
+				}
+				else if(i==n-1)
+				{
+					drawCurveSeg(new Array(phPoints[n-2],phPoints[n-1],phPoints[n],phPoints[0]),tension,curvePoints);
+				}
+				else
+				{
+					drawCurveSeg(new Array(phPoints[i-1],phPoints[i],phPoints[i+1],phPoints[i+2]),tension,curvePoints);
+				}
+			}
+			drawCurveSeg(new Array(phPoints[n-1],phPoints[n],phPoints[0],phPoints[1]),tension,curvePoints);
+			//Actual drawing using points data in curvePoints array
+			drawAllCurvePoints(pen,curvePoints,iHtml);
+		}
+		        
+		curveDiv.innerHTML=iHtml.join("");
+		return curveDiv;
+	}
+
+    //Private function used by drawCurve method to get curve points 
+    //(in curvePoints array) for a single curve segment (connecting 2 points)
+	function drawCurveSeg(segPoints,tension,curvePoints)
+	{
+		var x=0;
+		var y=0;
+		var xl=segPoints[1].x-1;
+		var yl=segPoints[1].y-1;
+
+		var	t=0;
+		var f=1;
+		var k=1.1;
+
+		var m1x=(1-tension)*(segPoints[2].x-segPoints[0].x)/2;
+		var m2x=(1-tension)*(segPoints[3].x-segPoints[1].x)/2;
+
+		var m1y=(1-tension)*(segPoints[2].y-segPoints[0].y)/2;
+		var m2y=(1-tension)*(segPoints[3].y-segPoints[1].y)/2;
+		
+		while(t<=1)
+		{
+			x=0;
+			y=0;
+
+			x= (2*t*t*t-3*t*t+1)*segPoints[1].x + (t*t*t-2*t*t+t)*m1x + (-2*t*t*t+3*t*t)*segPoints[2].x + (t*t*t-t*t)*m2x;
+			y= (2*t*t*t-3*t*t+1)*segPoints[1].y + (t*t*t-2*t*t+t)*m1y + (-2*t*t*t+3*t*t)*segPoints[2].y + (t*t*t-t*t)*m2y;
+				
+			x=Math.round(x);
+			y=Math.round(y);
+
+			if(x!=xl || y!=yl)
+			{
+				if(x-xl>1 || y-yl>1 || xl-x>1 || yl-y>1)
+				{
+					t-=f;
+					f=f/k;
+				}
+				else
+				{
+	                curvePoints[curvePoints.length]=new jsPoint(x,y); 
+					xl=x;
+					yl=y;
+	                if(t+f>1)
+	                    t=1-f;
+				}
+			}
+			else
+			{
+				f=f*k;
+			}
+			t+=f;
+		}
+	}
+		
+	//Private function used by drawCurve method to draw actual curve
+	//using and processing points data in curvePoints array
+	function drawAllCurvePoints(pen,curvePoints,iHtml)
+	{
+	var xp=curvePoints[0].x;
+	var yp=curvePoints[0].y;
+
+	var yStart=false;
+	var xStart=false;
+
+	var x1,x2,y1,y2;
+	x1=xp;
+	x2=xp;
+	y1=yp;
+	y2=yp;
+
+				
+	var penWidth=parseInt(pen.width);
+	var hexColor=pen.color.getHex();
+	var divWidth=penWidth;
+	var divHeight=penWidth;
+
+	var isEliminated=new Array();
+	for(var i=0;i<curvePoints.length;i++)
+	{
+	    var next=false;
+	    x=curvePoints[i].x;
+	    y=curvePoints[i].y;
+	    
+	    //Eliminate extra points disturbing continuity/smoothness
+	    if(i!=0 && i+1<curvePoints.length)
+	    {
+		    if(Math.abs(curvePoints[i-1].x-curvePoints[i+1].x)==1 && Math.abs(curvePoints[i-1].y-curvePoints[i+1].y)==1)
+	        {
+	            if(!isEliminated[i-1])
+	            {
+	                next=true;
+	                isEliminated[i]=true;
+	            }
+	        }
+	    }
+
+        //Divs optimization	    
+	    if(!next)
+	    {
+	    	    if(y==yp && !xStart)
+				{
+					yStart=true;
+				}
+				if(x==xp && !yStart)
+				{
+					xStart=true;
+				}
+				
+				if(x!=xp && !yStart)
+				{
+					if(y2==y1)
+					{
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:"
+						iHtml[iHtml.length]=xp;
+						iHtml[iHtml.length]="px;top:";
+						iHtml[iHtml.length]=y1;
+						iHtml[iHtml.length]="px;width:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;height:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;background-color:";
+						iHtml[iHtml.length]=hexColor;
+						iHtml[iHtml.length]="\"></DIV>";
+					}	
+					else
+					{
+					    iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+					    iHtml[iHtml.length]=xp;
+					    iHtml[iHtml.length]="px;top:";
+					    iHtml[iHtml.length]=y1;
+					    iHtml[iHtml.length]="px;width:";
+					    iHtml[iHtml.length]=penWidth;
+					    iHtml[iHtml.length]="px;height:";
+					    iHtml[iHtml.length]=y2-y1+penWidth;
+					    iHtml[iHtml.length]="px;background-color:";
+					    iHtml[iHtml.length]=hexColor;
+					    iHtml[iHtml.length]="\"></DIV>";
+					}    
+
+					xp=x;
+					yp=y;
+					y1=yp;
+					y2=yp;
+					
+					xStart=false;
+				}
+				
+				if(y!=yp && !xStart )
+				{
+					if(x2==x1)
+					{
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+						iHtml[iHtml.length]=x1;
+						iHtml[iHtml.length]="px;top:";
+						iHtml[iHtml.length]=yp;
+						iHtml[iHtml.length]="px;width:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;height:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;background-color:";
+						iHtml[iHtml.length]=hexColor;
+						iHtml[iHtml.length]="\"></DIV>";
+					}	
+					else
+					{
+						iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+						iHtml[iHtml.length]=x1;
+						iHtml[iHtml.length]="px;top:";
+						iHtml[iHtml.length]=yp;
+						iHtml[iHtml.length]="px;width:";
+						iHtml[iHtml.length]=x2-x1+penWidth;
+						iHtml[iHtml.length]="px;height:";
+						iHtml[iHtml.length]=penWidth;
+						iHtml[iHtml.length]="px;background-color:";
+						iHtml[iHtml.length]=hexColor;
+						iHtml[iHtml.length]="\"></DIV>";
+					}
+					xp=x;
+					yp=y;
+					x1=xp;
+					x2=xp;
+					
+					yStart=false;
+				}
+				
+				if(xStart && !yStart)
+				{
+					if(y<=y1)
+					y1=y;
+				
+					if(y>y2)
+					y2=y;
+				}
+				else
+				{
+					y1=y;
+					y2=y;
+				}
+				
+				if(yStart && !xStart)
+				{
+					if(x<=x1)
+					x1=x;
+				
+					if(x>x2)
+					x2=x;
+				}
+				else
+				{
+					x1=x;
+					x2=x;
+				}
+				
+				if(i==curvePoints.length-1) //last step in the loop
+				{
+					if(!xStart)
+					{
+						if(x2==x1)
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=x1;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=yp;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;height:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+						else
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:"; 
+							iHtml[iHtml.length]=x1; 
+							iHtml[iHtml.length]="px;top:"; 
+							iHtml[iHtml.length]=yp;
+							iHtml[iHtml.length]="px;width:"; 
+							iHtml[iHtml.length]=x2-x1+penWidth; 
+							iHtml[iHtml.length]="px;height:"; 
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;background-color:"; 
+							iHtml[iHtml.length]=hexColor; 
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+					}
+					if(!yStart)
+					{
+						if(y2==y1)
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=xp;
+							iHtml[iHtml.length]="px;top:"; 
+							iHtml[iHtml.length]=y1;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;height:"; 
+							iHtml[iHtml.length]=penWidth;
+							iHtml[iHtml.length]="px;background-color:"; 
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+						else
+						{
+							iHtml[iHtml.length]="<DIV style=\"position:absolute;overflow:hidden;left:";
+							iHtml[iHtml.length]=xp;
+							iHtml[iHtml.length]="px;top:";
+							iHtml[iHtml.length]=y1;
+							iHtml[iHtml.length]="px;width:";
+							iHtml[iHtml.length]=x2-x1+penWidth;
+							iHtml[iHtml.length]="px;height:"; 
+							iHtml[iHtml.length]=y2-y1+penWidth; 
+							iHtml[iHtml.length]="px;background-color:";
+							iHtml[iHtml.length]=hexColor;
+							iHtml[iHtml.length]="\"></DIV>";
+						}	
+					}
+				}
+			}	
+		}		
+	}
+		
+	//Draw color filled closed curve passing through the specified points 
+	//with specified tension
+	function fillClosedCurve(color,points,tension)
+	{
+		if(!color || !points)
+			return false;
+			
+		if(!tension)
+		{
+			tension=0;
+		}
+		
+		var phPoints=new Array();
+		for(var i=0;i<points.length;i++)
+		{
+			phPoints[i]=logicalToPhysicalPoint(points[i]);
+		}
+		
+		//Remove duplicate consecutive points (ToDo: neccessity of this step is to be confirmed)
+		var newPoints=new Array();
+	    if(!(phPoints[0].x==phPoints[phPoints.length-1].x && phPoints[0].y==phPoints[phPoints.length-1].y))
+	    {
+	        newPoints[newPoints.length]=phPoints[0];  
+	    }   
+
+		for(var i=1;i<phPoints.length;i++)
+		{
+		    if(!(phPoints[i].x==phPoints[i-1].x && phPoints[i].y==phPoints[i-1].y))
+		    {
+		        newPoints[newPoints.length]=phPoints[i];  
+		    }   
+		}
+        phPoints=newPoints;
+        
+        if(phPoints.length<2)
+		{
+			return false;
+		}
+		else if(phPoints.length==2)
+		{
+		    //For 2 points just draw a line connecting them.
+			return this.drawLine(pen,phPoints[0],phPoints[1],"physical");
+		}
+		        
+	    var curveDiv=canvasDiv.appendChild(document.createElement("div"));
+		var iHtml=new Array();
+		
+		var hexColor=color.getHex();
+	
+ 		var xDataArray=new Array();
+ 		//Array to hold points on the curve
+		var curvePoints=new Array();
+
+		var yArray=new Array();
+		var yMin;
+		var yMax;
+		var n=phPoints.length-1;
+		var i;	
+
+		//Call drawCurveSeg method in loop to get points in curvePoints 
+		//array for segment (connecting 2 points) of the curve. 
+		for(var i=0;i<=n-1;i++)
+		{
+			if(i==0)
+			{
+				getCurveSegPixels(new Array(phPoints[n],phPoints[0],phPoints[1],phPoints[2]),tension,curvePoints);
+			}
+			else if(i==n-1)
+			{
+				getCurveSegPixels(new Array(phPoints[n-2],phPoints[n-1],phPoints[n],phPoints[0]),tension,curvePoints);
+			}
+			else
+			{
+				getCurveSegPixels(new Array(phPoints[i-1],phPoints[i],phPoints[i+1],phPoints[i+2]),tension,curvePoints);
+			}
+		}
+
+		getCurveSegPixels(new Array(phPoints[n-1],phPoints[n],phPoints[0],phPoints[1]),tension,curvePoints);
+		
+		//getAllCurvePointsArray function processes the points data from curvePoints
+		//xDataArray is also populated by the fuction
+		var allPointsResult=getAllCurvePointsArray(xDataArray,yArray,curvePoints);
+		
+		yMin=allPointsResult[0];
+		yMax=allPointsResult[1];
+		
+		var y;
+		var k;
+		var divStyle="";
+		var j;
+		var pointsCount=phPoints.length;
+		var curX,curY,curWidth;
+		
+		//Draw the actual filled curve by drawing div rectangles
+		for(y=yMin;y<=yMax;y++)
+		{
+			j=0;
+			var allXDataArray=xDataArray[y];
+			//Sort allXDataArray based on xMin using sortXDataArray function
+			allXDataArray.sort(sortXDataArray);
+			
+			curY=y;
+			
+			for(i=0;i<allXDataArray.length;i+=2)
+			{
+				if(allXDataArray[i+1])
+				{
+					curX=allXDataArray[i].xMin;
+					if(allXDataArray[i+1].xMax>allXDataArray[i].xMax)
+						curWidth=allXDataArray[i+1].xMax-allXDataArray[i].xMin+1;
+					else
+						curWidth=allXDataArray[i].xMax-allXDataArray[i].xMin+1;
+				}
+				else
+				{
+					curX=allXDataArray[allXDataArray.length-1].xMin;
+					curWidth=allXDataArray[allXDataArray.length-1].xMax-allXDataArray[allXDataArray.length-1].xMin+1;
+				}
+				
+				iHtml[iHtml.length]="<DIV style=\"position:absolute;height:1px;overflow:hidden;left:";
+				iHtml[iHtml.length]=curX;
+				iHtml[iHtml.length]="px;top:";
+				iHtml[iHtml.length]=curY;
+				iHtml[iHtml.length]="px;width:";
+				iHtml[iHtml.length]=curWidth;
+				iHtml[iHtml.length]="px;background-color:";
+				iHtml[iHtml.length]=hexColor;
+				iHtml[iHtml.length]="\"></DIV>";
+			}
+		}
+		
+		curveDiv.innerHTML=iHtml.join("");
+		return curveDiv;
+
+        //Internal sort function for allXDataArray array
+		function sortXDataArray(a,b)
+		{
+			return a.xMin - b.xMin;
+		}
+	}
+
+    //Private function used by fillClosedCurve method to get curve points 
+    //(in curvePoints array) for a single curve segment (connecting 2 points)
+	function getCurveSegPixels(segPoints,tension,curvePoints)
+	{
+		var x=0;
+		var y=0;
+		var xl=segPoints[1].x-1;
+		var yl=segPoints[1].y-1;
+		var	t=0;
+		var f=1;
+		var k=1.1;
+		var penWidth=1;
+		var divWidth=1;
+		var divHeight=1;
+
+		var m1x=(1-tension)*(segPoints[2].x-segPoints[0].x)/2;
+		var m2x=(1-tension)*(segPoints[3].x-segPoints[1].x)/2;
+
+		var m1y=(1-tension)*(segPoints[2].y-segPoints[0].y)/2;
+		var m2y=(1-tension)*(segPoints[3].y-segPoints[1].y)/2;
+		
+		while(t<=1)
+		{
+			x=0;
+			y=0;
+
+			x= (2*t*t*t-3*t*t+1)*segPoints[1].x + (t*t*t-2*t*t+t)*m1x + (-2*t*t*t+3*t*t)*segPoints[2].x + (t*t*t-t*t)*m2x;
+			y= (2*t*t*t-3*t*t+1)*segPoints[1].y + (t*t*t-2*t*t+t)*m1y + (-2*t*t*t+3*t*t)*segPoints[2].y + (t*t*t-t*t)*m2y;
+				
+			x=Math.round(x);
+			y=Math.round(y);
+		
+			if(x!=xl || y!=yl)
+			{
+				if(x-xl>1 || y-yl>1 || xl-x>1 || yl-y>1)
+				{
+					t-=f;
+					f=f/k;
+				}
+				else
+				{
+	                curvePoints[curvePoints.length]=new jsPoint(x,y);  
+					xl=x;
+					yl=y;
+					if(t+f>1)
+	                    t=1-f;
+				}
+			}
+			else
+			{
+				f=f*k;
+			}
+			t+=f;
+		}
+    }
+	
+	//Private function that processes the points data from curvePoints
+	//xDataArray is also populated by the fuction
+	function getAllCurvePointsArray(xDataArray,yArray,curvePoints)
+	{
+		function xData()
+		{
+			this.xMax=0;
+			this.xMin=0;
+			this.i=0;
+		}
+		
+		var isEliminated=new Array();
+		var yMin;
+		var yMax;
+		var lastY;
+		var firstY;
+		var isFirst=true;
+		var xDataArrayLast;
+		var iLast=-1;
+		var yTop1,yTop2;
+
+		for(var i=0;i<curvePoints.length;i++)
+		{
+		    var next=false;
+		    x=curvePoints[i].x;
+		    y=curvePoints[i].y;
+
+   		    //Eliminate extra points disturbing continuity/smoothness
+		    if(i!=0 && i+1<curvePoints.length)
+		    {
+    		    if((curvePoints[i-1].x-curvePoints[i+1].x==1 || curvePoints[i+1].x-curvePoints[i-1].x==1) && (curvePoints[i-1].y-curvePoints[i+1].y==1 || curvePoints[i+1].y-curvePoints[i-1].y==1))
+		        {
+		            if(!isEliminated[i-1])
+		            {
+		                next=true;
+		                isEliminated[i]=true;
+		            }
+		        }
+		    }
+		    
+		    //Divs optimization
+		    if(!next)
+		    {
+		    	if(!firstY)
+		    		firstY=y;
+		    		
+		    	if(!yMin)
+		    		yMin=y;
+		    	if(!yMax)
+		    		yMax=y;
+	
+		    	if(y<yMin)
+		    		yMin=y;
+		    	if(y>yMax)
+		    		yMax=y;
+
+				if(!xDataArray[y])
+				{
+					xDataArray[y]=new Array();
+					xDataArray[y][0]=new xData();
+					xDataArray[y][0].xMin=x;
+					xDataArray[y][0].xMax=x;
+					xDataArray[y][0].i=i;
+				}
+				else
+				{
+					xDataArrayLast=xDataArray[y][xDataArray[y].length-1];
+					if(i-xDataArrayLast.i==1)
+					{
+						if(xDataArrayLast.xMin>x)
+							xDataArrayLast.xMin=x;
+						if(xDataArrayLast.xMax<x)
+							xDataArrayLast.xMax=x;
+							
+						xDataArrayLast.i=i;
+					}
+					else
+					{
+						xDataArray[y][xDataArray[y].length]=new xData();
+						xDataArray[y][xDataArray[y].length-1].xMin=x;
+						xDataArray[y][xDataArray[y].length-1].xMax=x;
+						xDataArray[y][xDataArray[y].length-1].i=i;
+					}	
+				}
+
+				yTop1=yArray[yArray.length-1];
+				yTop2=yArray[yArray.length-2];	
+				
+				if(yTop1 && yTop2) 
+				{
+					if((yTop1 > y && yTop2 < yTop1) || (yTop1 < y && yTop2 > yTop1))
+					{
+						xDataArray[yTop1][xDataArray[yTop1].length]=xDataArray[yTop1][xDataArray[yTop1].length-1];
+					}
+				}
+				
+				if(!yArray[0])
+				{
+					yArray[0]=y;
+				}	
+				else if(yArray[yArray.length-1]!=y)
+				{
+					yArray[yArray.length]=y;
+				}
+				
+				lastY=y;
+			}
+		}
+			
+		yTop1=yArray[0];
+		yTop2=yTop1;
+		var i=1;
+		while(yTop1==yTop2)
+		{
+		    yTop2=yArray[yArray.length-i];	
+		    i++;
+		}
+			
+		if(yTop1 && yTop2)
+		{
+			if((yTop1 > yArray[1] && yTop2 < yTop1) || (yTop1 < yArray[1] && yTop2 > yTop1))
+			{
+				xDataArray[yTop1][xDataArray[yTop1].length]=xDataArray[yTop1][xDataArray[yTop1].length-1];
+			}
+		}
+		
+		if(firstY==lastY)
+		{
+		    var firstXDataA=xDataArray[firstY][0];
+		    var lastXDataA=xDataArray[lastY][xDataArray[lastY].length-1];
+    		 	
+		    if(lastXDataA.xMax>firstXDataA.xMax)
+			    xDataArray[firstY][0].xMax=lastXDataA.xMax;
+    			
+		    if(lastXDataA.xMin<firstXDataA.xMin)
+			    xDataArray[firstY][0].xMin=lastXDataA.xMin;
+    			
+		    if(xDataArray[lastY].length>1)
+			    xDataArray[lastY].pop();
+		    else
+			    xDataArray.pop();
+		}
+		
+		return new Array(yMin,yMax);	
+	}
+		
+	//Draw text string at specified point with specified color,font,width, alignment & rotation	
+	// rotation should be text like "rotate(-90deg)".
+    function drawText(text,point,font,color,width,align,rotation)
+    {
+		//Check arguments for null values        
+    	if(!text || !point)
+			return false;
+			
+		phPoint=logicalToPhysicalPoint(point);
+		
+		if(width!=null)
+   		    width=Math.round(width*scale) + "px";
+   		
+        var textDiv=canvasDiv.appendChild(document.createElement("div"));
+
+        textDiv.style.position="absolute";
+        textDiv.style.left=phPoint.x + "px";
+        textDiv.style.top=phPoint.y + "px";
+        
+        if(color)
+	        textDiv.style.color=color.getHex();
+                
+        //set font
+        if(font)
+        {
+        	if(font.family)
+            	textDiv.style.fontFamily=font.family;
+
+	        if(font.weight)
+    	        textDiv.style.fontWeight=font.weight;
+        
+        	if(font.size)
+            	textDiv.style.fontSize=font.size;
+        
+	        if(font.style)
+    	        textDiv.style.fontStyle=font.style;
+        
+        	if(font.variant)
+            	textDiv.style.fontVariant=font.variant;
+		}
+		
+        if(width)
+            textDiv.style.width=width;
+
+        if(align) 
+            textDiv.style.textAlign=align;
+        
+        if(rotation) 
+        	textDiv.style.transform = rotation;
+
+        textDiv.innerHTML=text;
+        
+        return textDiv;
+    }
+	
+	//Draw image at specified point with specified width & height
+    function drawImage(url,point,width,height)
+    {
+        if(!url || !point)
+            return false;
+             
+        phPoint=logicalToPhysicalPoint(point);
+      
+        if(width!=null)
+            width=Math.round(width*scale) + "px";
+            
+        if(height!=null)   
+            height=Math.round(height*scale) + "px";
+
+        var imgDiv=canvasDiv.appendChild(document.createElement("div"));
+
+        imgDiv.style.position="absolute";
+        imgDiv.style.left=phPoint.x + "px";
+        imgDiv.style.top=phPoint.y + "px";
+        //create and set img tag/element
+        var img=imgDiv.appendChild(document.createElement("img"));
+         
+        img.src=url;
+        
+        if(width!=null)
+        {
+            img.style.width=width;
+            imgDiv.style.width=width;
+        }
+          
+        if(height!=null)
+        {
+            img.style.height=height;
+            imgDiv.style.height=height;
+        }
+        
+        return imgDiv;
+    }
+    
+    //Clear the canvas div element
+    function clear()
+    {
+    	canvasDiv.innerHTML="";
+    }
+}

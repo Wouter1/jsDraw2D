@@ -4932,8 +4932,9 @@ function jsGraphics(canvasDivElement)
 		return new Array(yMin,yMax);	
 	}
 		
-	//Draw text string at specified point with specified color,font,width & alignment	
-    function drawText(text,point,font,color,width,align)
+	//Draw text string at specified point with specified color,font,width, alignment & rotation	
+	// rotation should be text like "rotate(-90deg)".
+    function drawText(text,point,font,color,width,align,rotation)
     {
 		//Check arguments for null values        
     	if(!text || !point)
@@ -4977,6 +4978,9 @@ function jsGraphics(canvasDivElement)
 
         if(align) 
             textDiv.style.textAlign=align;
+        
+        if(rotation) 
+        	textDiv.style.transform = rotation;
 
         textDiv.innerHTML=text;
         
